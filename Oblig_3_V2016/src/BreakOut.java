@@ -1,5 +1,11 @@
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -18,7 +24,13 @@ public class BreakOut extends Application{
     	}
     }
     
+    EventHandler<ActionEvent> evenHandler = e -> {
+    	
+    };
     
+    Timeline animation = new Timeline(new KeyFrame(Duration.millis(40), evenHandler));
+    animation.setCycleCount(Timeline.INDEFINITE);
+    animation.play();
     
     Scene scene = new Scene(pane, 950, 750);
     scene.setFill(Color.RED);
