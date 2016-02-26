@@ -2,7 +2,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -10,6 +9,7 @@ public class BreakOut extends Application{
   @Override 
   public void start(Stage primaryStage) {
     Pane pane = new Pane();
+
     Rectangle[][] rectangles = new Rectangle[8][8];
     for(int y = 0; y < 8; y++){
     	for(int x = 0; x < 8; x++){
@@ -18,7 +18,7 @@ public class BreakOut extends Application{
     	}
     }
     
-
+    
     
     Scene scene = new Scene(pane, 950, 750);
     scene.setFill(Color.RED);
