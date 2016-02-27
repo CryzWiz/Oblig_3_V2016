@@ -9,7 +9,9 @@ import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Sphere;
 
 public class BreakOut extends Application{
   @Override 
@@ -24,15 +26,20 @@ public class BreakOut extends Application{
     	}
     }
     
+    Circle circle = new Circle(400, 500, 20);
+    circle.setFill(Color.BLUE);
+    pane.getChildren().add(circle);
+    
     EventHandler<ActionEvent> evenHandler = e -> {
-    	
+    	circle.setTranslateX(circle.getTranslateX()+5);
+    	circle.setTranslateY(circle.getTranslateY()-3);
     };
     
     Timeline animation = new Timeline(new KeyFrame(Duration.millis(40), evenHandler));
     animation.setCycleCount(Timeline.INDEFINITE);
     animation.play();
     
-    Scene scene = new Scene(pane, 950, 750);
+    Scene scene = new Scene(pane, 950, 600);
     scene.setFill(Color.RED);
     primaryStage.setTitle("BreakOut"); 
     primaryStage.setScene(scene); 
