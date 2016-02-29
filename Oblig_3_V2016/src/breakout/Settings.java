@@ -29,6 +29,7 @@ public interface Settings {
 			  WALL_PADDING_TOP + WALL_PADDING_BOTTOM +
 			  BRICK_ROWS * (BRICK_HEIGHT + BRICK_PADDING_V) - BRICK_PADDING_V;
 	  public static final int PADDLE_Y_OFFSET = 560;
+	  public static final int PADDLE_X_OFFSET = 400;
 	  public static final int PADDLE_HEIGHT = 10;
-	  public static final int PADDLE_WIDTH = 60;
+	  public static final int PADDLE_WIDTH = 200;
 }
