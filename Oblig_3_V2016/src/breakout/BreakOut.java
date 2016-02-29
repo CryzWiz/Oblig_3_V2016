@@ -61,7 +61,7 @@ public class BreakOut extends Application implements Settings{
 	    @Override
 	    public void handle(MouseEvent mouseEvent) {
 	       racket.setpadX(mouseEvent.getX());
-	       System.out.println(mouseEvent.getX());
+	       System.out.println(racket.getpadX());
 
 	    }
 	});

@@ -21,5 +21,8 @@ public class Racket implements Settings{
 	public void setpadX(double Xvalue){
 		dx = Xvalue;
 	}
+	public double getpadX(){
+		return dx;
+	}
 
 }
