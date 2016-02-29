@@ -9,8 +9,6 @@ public class Racket implements Settings{
 	double dy;
 	
 	Racket() {
-		dx = BreakOut.BALL_START_DX;
-		dy = BreakOut.BALL_START_DY;
 		pad = new Rectangle(PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
 	    pad.setFill(Color.GRAY);
 	}
@@ -20,9 +18,13 @@ public class Racket implements Settings{
 	}
 	public void setpadX(double Xvalue){
 		dx = Xvalue;
+		move(dx);
 	}
 	public double getpadX(){
 		return dx;
+	}
+	public void move(double dx){
+		pad.setTranslateX(dx - 500);
 	}
 
 }
