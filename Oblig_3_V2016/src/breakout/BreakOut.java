@@ -23,6 +23,9 @@ public class BreakOut extends Application implements Settings{
     Room room = new Room(scene, BACKGROUND_COLOR);
     Ball ball = new Ball();
     Circle circle = ball.getCircle();
+    Racket racket = new Racket();
+    Rectangle pad = racket.getpad();
+    
     
     Brick[][] bricks = new Brick[BRICK_ROWS][BRICK_COLS];
     for(int y = 0; y < BRICK_ROWS; y++){
@@ -49,8 +52,7 @@ public class BreakOut extends Application implements Settings{
 	    	}
     	}
     }
-    Rectangle pad = new Rectangle(PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
-    pad.setFill(Color.GRAY);
+    
     
     pane.getChildren().add(pad);
     pane.getChildren().add(circle);

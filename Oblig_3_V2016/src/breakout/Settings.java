@@ -32,4 +32,5 @@ public interface Settings {
 	  public static final int PADDLE_X_OFFSET = BALL_START_X - 100;
 	  public static final int PADDLE_HEIGHT = 10;
 	  public static final int PADDLE_WIDTH = 200;
+	  public static final Color PADDLE_COLOR = Color.GRAY;
 }
