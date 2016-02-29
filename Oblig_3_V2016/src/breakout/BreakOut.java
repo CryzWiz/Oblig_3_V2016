@@ -49,7 +49,7 @@ public class BreakOut extends Application implements Settings{
     	}
     }
     Rectangle pad = new Rectangle(PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
-    pad.setFill(Color.RED);
+    pad.setFill(Color.GRAY);
     
     pane.getChildren().add(pad);
     pane.getChildren().add(circle);
