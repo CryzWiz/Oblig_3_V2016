@@ -21,29 +21,41 @@ public class Brick implements Settings {
 	
 	public void destroy(){
 		rectangle.setDisable(true);
+		rectangle.setVisible(false);
 	}
 	
 	public void collision(Ball ball){
+		if(rectangle.isDisabled())
+			return;
 		switch(getBallDirection(ball.getX(), ball.getY())){
 		case 1: //Collision from top
-			if(ball.dy > 0 && ball.getBoundsBottom() > getBoundsTop() && isWithinSpaceH(ball))
+			if(ball.dy > 0 && ball.getBoundsBottom() > getBoundsTop() && isWithinSpaceH(ball)){
 				ball.bounceY();
+				destroy();
+			}
 			break;
 		case 3: //Left
-			if(ball.dx > 0 && ball.getBoundsRight() > getBoundsLeft()&& isWithinSpaceV(ball))
+			if(ball.dx > 0 && ball.getBoundsRight() > getBoundsLeft()&& isWithinSpaceV(ball)){
 				ball.bounceX();
+				destroy();
+			}
 			break;
 		case 5: //Right
-			if(ball.dx < 0 && ball.getBoundsLeft() < getBoundsRight()&& isWithinSpaceV(ball))
+			if(ball.dx < 0 && ball.getBoundsLeft() < getBoundsRight()&& isWithinSpaceV(ball)){
 				ball.bounceX();
+				destroy();
+			}
 			break;
 		case 7:
-			if(ball.dy < 0 && ball.getBoundsTop() < getBoundsBottom()&& isWithinSpaceH(ball))
+			if(ball.dy < 0 && ball.getBoundsTop() < getBoundsBottom()&& isWithinSpaceH(ball)){
 				ball.bounceY();
+				destroy();
+			}
 			break;
 		case 4:
 			ball.bounceX();
 			ball.bounceY();
+			destroy();
 			break;
 		}
 	}
@@ -77,16 +89,16 @@ public class Brick implements Settings {
 	}
 	
 	public int getBallDirection(int x, int y){
-		int hPosition = 0;
-		int vPosition = 0;
+		int hPosition = 1;
+		int vPosition = 1;
 		if(x < rectangle.getTranslateX())
-			hPosition = -1;
+			hPosition = 0;
 		else if(x > rectangle.getTranslateX() + rectangle.getWidth())
-			hPosition = 1;
+			hPosition = 2;
 		if(y < rectangle.getTranslateY())
-			vPosition = -1;
+			vPosition = 0;
 		else if(y > rectangle.getTranslateY() + rectangle.getHeight())
-			vPosition = 1;
+			vPosition = 2;
 		return 3 * vPosition + hPosition;
 	}
 	
