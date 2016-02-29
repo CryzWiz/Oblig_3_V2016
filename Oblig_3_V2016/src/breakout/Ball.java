@@ -87,9 +87,12 @@ public class Ball {
 		bounceY();
 		setSpeedPolar(getSpeed(), 2*reflectionAngle - getDirectionAngle());
 	}
-	public void bounceOffPoint(int x, int y){
-		if(getDistanceSquared(x, y) < circle.getRadius())
+	public boolean bounceOffPoint(int x, int y){
+		if(getDistanceSquared(x, y) < Math.pow(circle.getRadius(), 2)){
 			bounce(Math.atan2(y - getY(), x - getX()));
+			return true;
+		}
+		return false;
 	}
 	public void accelerate(int x, int y){
 		dx = x;

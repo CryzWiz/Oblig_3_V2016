@@ -28,6 +28,7 @@ public class Brick implements Settings {
 		if(rectangle.isDisabled())
 			return;
 		switch(getBallDirection(ball.getX(), ball.getY())){
+		//Edge collisions:
 		case 1: //Collision from top
 			if(ball.dy > 0 && ball.getBoundsBottom() > getBoundsTop() && isWithinSpaceH(ball)){
 				ball.bounceY();
@@ -50,6 +51,31 @@ public class Brick implements Settings {
 			if(ball.dy < 0 && ball.getBoundsTop() < getBoundsBottom()&& isWithinSpaceH(ball)){
 				ball.bounceY();
 				destroy();
+			}
+			break;
+		//Corner Collisions:
+		case 0: //Top-Left
+			if(ball.dx > 0 || ball.dy > 0){
+				if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop()))
+					destroy();
+			}
+			break;
+		case 2: //Top-Right
+			if(ball.dx < 0 || ball.dy > 0){
+				if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop()))
+					destroy();
+			}
+			break;
+		case 6: //Bottom-Left
+			if(ball.dx > 0 || ball.dy < 0){
+				if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom()))
+					destroy();
+			}
+			break;
+		case 8: //Bottom-Right
+			if(ball.dx < 0 || ball.dy < 0){
+				if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom()))
+					destroy();
 			}
 			break;
 		case 4:
