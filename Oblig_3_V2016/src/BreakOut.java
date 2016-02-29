@@ -27,7 +27,7 @@ public class BreakOut extends Application{
 	    		rectangles[y][x].setFill(Color.YELLOW);
 	    	}
 	    	else{
-	    		rectangles[9][x].setFill(Color.RED);
+	    		rectangles[y][x].setFill(Color.RED);
 	    	}
 		  }
 	  }
