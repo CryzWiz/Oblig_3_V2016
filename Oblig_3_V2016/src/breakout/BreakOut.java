@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
@@ -33,6 +34,18 @@ public class BreakOut extends Application implements Settings{
     		rect.setFill(BRICK_COLOR);
     		pane.getChildren().add(rect);
     		rectangles[y][x]= rect;
+    		if(y < 3){
+	    		rectangles[y][x].setFill(Color.BLUE);
+	    	}
+	    	else if(y < 6){
+	    		rectangles[y][x].setFill(Color.GREEN);
+	    	}
+	    	else if(y < 9){
+	    		rectangles[y][x].setFill(Color.YELLOW);
+	    	}
+	    	else{
+	    		rectangles[y][x].setFill(Color.RED);
+	    	}
     	}
     }
 
