@@ -48,7 +48,14 @@ public class BreakOut extends Application implements Settings{
 	    	}
     	}
     }
+    private GRect paddle;
 
+    public void createPaddle(){
+    	paddle = new GRect(0,560,PADDLE_WIDTH,PADDLE_HEIGHT);
+    	paddle.setFilled(true);
+    	paddle.setFillColor(Color.BLACK);
+    	add(paddle);
+    }
     pane.getChildren().add(circle);
 
     EventHandler<ActionEvent> evenHandler = e -> {
@@ -64,8 +71,6 @@ public class BreakOut extends Application implements Settings{
     primaryStage.setScene(scene); 
     primaryStage.show(); 
   }
-
-
 
 
    /**
