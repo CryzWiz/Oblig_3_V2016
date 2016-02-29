@@ -1,5 +1,6 @@
-import javafx.scene.paint.Color;
+package breakout;
 
+import javafx.scene.paint.Color;
 
 public interface Settings {
 	 public static final Color BACKGROUND_COLOR = Color.BLACK;
