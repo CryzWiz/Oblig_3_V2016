@@ -4,46 +4,46 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Ball {
-	private Circle ball;
+	private Circle circle;
 	int dx, dy;
 	
 	Ball(){
 		dx = BreakOut.BALL_START_DX;
 		dy = BreakOut.BALL_START_DY;
-		ball = new Circle(0, 0, BreakOut.BALL_RADIUS, BreakOut.BALL_COLOR);
+		circle = new Circle(0, 0, BreakOut.BALL_RADIUS, BreakOut.BALL_COLOR);
 		reset();
 	}
 	
 	Ball(int dx, int dy, int r, Color c){
 		this.dx = dx;
 		this.dy = dy;
-		ball = new Circle(0, 0, r, c);
+		circle = new Circle(0, 0, r, c);
 		reset();
 	}
 	Ball(int x, int y, int dx, int dy, int r, Color c){
 		this.dx = dx;
 		this.dy = dy;
-		ball = new Circle(0, 0, r, c);
-		ball.setTranslateX(x);
-		ball.setTranslateY(y);
+		circle = new Circle(0, 0, r, c);
+		circle.setTranslateX(x);
+		circle.setTranslateY(y);
 	}
 	
 	public void reset(){
-		ball.setTranslateX(BreakOut.BALL_START_X);
-		ball.setTranslateY(BreakOut.BALL_START_Y);
+		circle.setTranslateX(BreakOut.BALL_START_X);
+		circle.setTranslateY(BreakOut.BALL_START_Y);
 	}
 	
 	public int getX(){
-		return (int)ball.getTranslateX();
+		return (int)circle.getTranslateX();
 	}
 	public int getY(){
-		return (int)ball.getTranslateY();
+		return (int)circle.getTranslateY();
 	}
 	public int getRadius(){
-		return (int)ball.getRadius();
+		return (int)circle.getRadius();
 	}
 	public Circle getCircle(){
-		return ball;
+		return circle;
 	}
 	
 	public void bounceX(){
@@ -52,9 +52,17 @@ public class Ball {
 	public void bounceY(){
 		dy *= -1;
 	}
+	public void accelerate(int x, int y){
+		dx = x;
+		dy = y;
+	}
+	public void move(int x, int y){
+		circle.setTranslateX(circle.getTranslateX() + x);
+		circle.setTranslateY(circle.getTranslateY() + y);
+	}
 	
 	public void tick(){
-		ball.setTranslateX(ball.getTranslateX() + dx);
-		ball.setTranslateY(ball.getTranslateY() + dy);
+		circle.setTranslateX(circle.getTranslateX() + dx);
+		circle.setTranslateY(circle.getTranslateY() + dy);
 	}
 }

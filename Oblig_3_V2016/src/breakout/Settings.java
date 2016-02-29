@@ -3,8 +3,8 @@ package breakout;
 import javafx.scene.paint.Color;
 
 public interface Settings {
-	 public static final Color BACKGROUND_COLOR = Color.BLACK;
-	  public static final Color BRICK_COLOR = Color.DARKCYAN;
+	  //public static final Color BRICK_COLOR = Color.DARKCYAN;
+	  public static final Color BACKGROUND_COLOR = Color.BLACK;
 	  public static final Color BALL_COLOR = Color.YELLOWGREEN;
 	  public static final int MILLIS_PER_FRAME = 40;
 	  public static final int BALL_START_X = 400;
@@ -12,9 +12,9 @@ public interface Settings {
 	  public static final int BALL_START_DX = 13;
 	  public static final int BALL_START_DY = -11;
 	  public static final int BALL_RADIUS = 10;
-	  public static final int BRICK_WIDTH = 100;
+	  public static final int BRICK_WIDTH = 60;
 	  public static final int BRICK_HEIGHT = 20;
-	  public static final int BRICK_PADDING_H = 3;
+	  public static final int BRICK_PADDING_H = 1;
 	  public static final int BRICK_PADDING_V = 3;
 	  public static final int BRICK_ROWS = 10;
 	  public static final int BRICK_COLS = 15;

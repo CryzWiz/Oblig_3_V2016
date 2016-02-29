@@ -31,7 +31,7 @@ public class BreakOut extends Application implements Settings{
     				y * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP,
     				BRICK_WIDTH,
     				BRICK_HEIGHT);
-    		rect.setFill(BRICK_COLOR);
+    		//rect.setFill(BRICK_COLOR);
     		pane.getChildren().add(rect);
     		rectangles[y][x]= rect;
     		if(y < 3){
