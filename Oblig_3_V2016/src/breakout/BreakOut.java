@@ -48,7 +48,10 @@ public class BreakOut extends Application implements Settings{
 	    	}
     	}
     }
-
+    Rectangle pad = new Rectangle(PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
+    pad.setFill(Color.GRAY);
+    
+    pane.getChildren().add(pad);
     pane.getChildren().add(circle);
 
     EventHandler<ActionEvent> evenHandler = e -> {
@@ -61,11 +64,10 @@ public class BreakOut extends Application implements Settings{
     animation.play();
     
     primaryStage.setTitle("BreakOut"); 
+    primaryStage.setResizable(false);
     primaryStage.setScene(scene); 
     primaryStage.show(); 
   }
-
-
 
 
    /**
