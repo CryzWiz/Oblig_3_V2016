@@ -6,7 +6,7 @@ import javafx.scene.shape.Rectangle;
 public class Racket implements Settings{
 	private Rectangle pad;
 	double dx;
-	double dy;
+	double dy = PADDLE_Y_OFFSET;
 	
 	Racket() {
 		pad = new Rectangle(PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -24,7 +24,7 @@ public class Racket implements Settings{
 		return dx;
 	}
 	public void move(double dx){
-		pad.setTranslateX(dx - 500);
+		pad.setTranslateX((getpadX() - 500) + 100);
 	}
 
 }
