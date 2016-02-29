@@ -6,11 +6,11 @@ public interface Settings {
 	  //public static final Color BRICK_COLOR = Color.DARKCYAN;
 	  public static final Color BACKGROUND_COLOR = Color.BLACK;
 	  public static final Color BALL_COLOR = Color.YELLOWGREEN;
-	  public static final int MILLIS_PER_FRAME = 40;
+	  public static final int MILLIS_PER_FRAME = 5;
 	  public static final int BALL_START_X = 400;
 	  public static final int BALL_START_Y = 500;
-	  public static final int BALL_START_DX = 13;
-	  public static final int BALL_START_DY = -11;
+	  public static final int BALL_START_DX = 1;
+	  public static final int BALL_START_DY = -1;
 	  public static final int BALL_RADIUS = 10;
 	  public static final int BRICK_WIDTH = 60;
 	  public static final int BRICK_HEIGHT = 20;

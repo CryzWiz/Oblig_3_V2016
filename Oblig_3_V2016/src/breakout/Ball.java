@@ -5,7 +5,7 @@ import javafx.scene.shape.Circle;
 
 public class Ball {
 	private Circle circle;
-	int dx, dy;
+	int dx, dy; //Convert int to double????
 	
 	Ball(){
 		dx = BreakOut.BALL_START_DX;
@@ -45,12 +45,51 @@ public class Ball {
 	public Circle getCircle(){
 		return circle;
 	}
+	public int getBoundsLeft(){
+		return (int)(circle.getTranslateX() - circle.getRadius());
+	}
+	public int getBoundsRight(){
+		return (int)(circle.getTranslateX() + circle.getRadius());
+	}
+	public int getBoundsTop(){
+		return (int)(circle.getTranslateY() - circle.getRadius());
+	}
+	public int getBoundsBottom(){
+		return (int)(circle.getTranslateY() + circle.getRadius());
+	}
+	public double getDirectionAngle(){
+		return Math.atan2(dy, dx);
+	}
+	public double getSpeed(){
+		return Math.sqrt(dx*dx + dy*dy);
+	}
+	public double getDistanceSquared(int x, int y){
+		return Math.pow(x - getX(), 2) + Math.pow(y - getY(), 2);
+	}
+	
+	public void setSpeedCoords(int x, int y){
+		dx = x;
+		dy = y;
+	}
+	public void setSpeedPolar(double speed, double rad){
+		dx = (int)(speed * Math.cos(rad));
+		dy = (int)(speed * Math.sin(rad));
+	}
 	
 	public void bounceX(){
 		dx *= -1;
 	}
 	public void bounceY(){
 		dy *= -1;
+	}
+	public void bounce(double reflectionAngle){
+		bounceX();
+		bounceY();
+		setSpeedPolar(getSpeed(), 2*reflectionAngle - getDirectionAngle());
+	}
+	public void bounceOffPoint(int x, int y){
+		if(getDistanceSquared(x, y) < circle.getRadius())
+			bounce(Math.atan2(y - getY(), x - getX()));
 	}
 	public void accelerate(int x, int y){
 		dx = x;
