@@ -64,6 +64,7 @@ public class BreakOut extends Application implements Settings{
     animation.play();
     
     primaryStage.setTitle("BreakOut"); 
+    primaryStage.setResizable(false);
     primaryStage.setScene(scene); 
     primaryStage.show(); 
   }
