@@ -17,21 +17,21 @@ public class BreakOut extends Application{
 		  for(int x = 0; x < 10; x++){
 	    	rectangles[y][x]= new Rectangle(x*(100+3), y*(20+3), 100, 20);
 	    	pane.getChildren().add(rectangles[y][x]);
+	    	if(y < 3){
+	    		rectangles[y][x].setFill(Color.BLUE);
+	    	}
+	    	else if(y < 6){
+	    		rectangles[y][x].setFill(Color.GREEN);
+	    	}
+	    	else if(y < 9){
+	    		rectangles[y][x].setFill(Color.YELLOW);
+	    	}
+	    	else{
+	    		rectangles[9][x].setFill(Color.RED);
+	    	}
 		  }
 	  }
-	  for(int x = 0; x < 10; x++){
-	    rectangles[0][x].setFill(Color.BLUE);
-	    rectangles[1][x].setFill(Color.BLUE);
-	    rectangles[2][x].setFill(Color.BLUE);
-	    rectangles[3][x].setFill(Color.GREEN);
-	    rectangles[4][x].setFill(Color.GREEN);
-	    rectangles[5][x].setFill(Color.GREEN);
-	    rectangles[6][x].setFill(Color.YELLOW);
-	    rectangles[7][x].setFill(Color.YELLOW);
-	    rectangles[8][x].setFill(Color.YELLOW);
-	    rectangles[9][x].setFill(Color.RED);
-	    
-	    }
+	  
 
     
     Scene scene = new Scene(pane, 1030, 830);
