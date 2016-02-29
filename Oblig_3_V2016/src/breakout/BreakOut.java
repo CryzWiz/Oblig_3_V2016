@@ -23,7 +23,7 @@ public class BreakOut extends Application implements Settings{
     Ball ball = new Ball();
     Circle circle = ball.getCircle();
     
-    Rectangle[][] rectangles = new Rectangle[8][8];
+    Rectangle[][] rectangles = new Rectangle[BRICK_ROWS][BRICK_COLS];
     for(int y = 0; y < BRICK_ROWS; y++){
     	for(int x = 0; x < BRICK_COLS; x++){
     		Rectangle rect = new Rectangle(

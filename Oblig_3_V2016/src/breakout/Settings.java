@@ -16,8 +16,8 @@ public interface Settings {
 	  public static final int BRICK_HEIGHT = 20;
 	  public static final int BRICK_PADDING_H = 3;
 	  public static final int BRICK_PADDING_V = 3;
-	  public static final int BRICK_ROWS = 8;
-	  public static final int BRICK_COLS = 8;
+	  public static final int BRICK_ROWS = 10;
+	  public static final int BRICK_COLS = 15;
 	  public static final int WALL_PADDING_LEFT = BRICK_WIDTH;
 	  public static final int WALL_PADDING_RIGHT = BRICK_WIDTH;
 	  public static final int WALL_PADDING_TOP = BRICK_WIDTH;
