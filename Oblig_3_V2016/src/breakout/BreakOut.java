@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,28 +24,28 @@ public class BreakOut extends Application implements Settings{
     Ball ball = new Ball();
     Circle circle = ball.getCircle();
     
-    Rectangle[][] rectangles = new Rectangle[BRICK_ROWS][BRICK_COLS];
+    Brick[][] bricks = new Brick[BRICK_ROWS][BRICK_COLS];
     for(int y = 0; y < BRICK_ROWS; y++){
     	for(int x = 0; x < BRICK_COLS; x++){
-    		Rectangle rect = new Rectangle(
+    		Brick brick = new Brick(
     				x * (BRICK_WIDTH + BRICK_PADDING_H) + WALL_PADDING_LEFT,
     				y * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP,
     				BRICK_WIDTH,
     				BRICK_HEIGHT);
     		//rect.setFill(BRICK_COLOR);
-    		pane.getChildren().add(rect);
-    		rectangles[y][x]= rect;
+    		pane.getChildren().add(brick.getRectangle());
+    		bricks[y][x]= brick;
     		if(y < 3){
-	    		rectangles[y][x].setFill(Color.BLUE);
+	    		bricks[y][x].setFill(Color.BLUE);
 	    	}
 	    	else if(y < 6){
-	    		rectangles[y][x].setFill(Color.GREEN);
+	    		bricks[y][x].setFill(Color.GREEN);
 	    	}
 	    	else if(y < 9){
-	    		rectangles[y][x].setFill(Color.YELLOW);
+	    		bricks[y][x].setFill(Color.YELLOW);
 	    	}
 	    	else{
-	    		rectangles[y][x].setFill(Color.RED);
+	    		bricks[y][x].setFill(Color.RED);
 	    	}
     	}
     }
@@ -53,13 +54,22 @@ public class BreakOut extends Application implements Settings{
     
     pane.getChildren().add(pad);
     pane.getChildren().add(circle);
+    
+    /*EventHandler<MouseEvent> mouseHandler = m -> {
+    	racket.mouse(m.getSceneX());
+    };*/
 
-    EventHandler<ActionEvent> evenHandler = e -> {
+    EventHandler<ActionEvent> eventHandler = e -> {
+    	for(Brick[] brickCol : bricks){
+    		for(Brick brick : brickCol){
+    			brick.collision(ball);
+    		}
+    	}
     	room.collision(ball);
     	ball.tick();
     };
     
-    Timeline animation = new Timeline(new KeyFrame(Duration.millis(MILLIS_PER_FRAME), evenHandler));
+    Timeline animation = new Timeline(new KeyFrame(Duration.millis(MILLIS_PER_FRAME), eventHandler));
     animation.setCycleCount(Timeline.INDEFINITE);
     animation.play();
     
