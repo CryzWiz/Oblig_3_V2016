@@ -57,9 +57,14 @@ public class BreakOut extends Application implements Settings{
     pane.getChildren().add(pad);
     pane.getChildren().add(circle);
     
-    /*EventHandler<MouseEvent> mouseHandler = m -> {
-    	racket.mouse(m.getSceneX());
-    };*/
+    scene.addEventFilter(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() {
+	    @Override
+	    public void handle(MouseEvent mouseEvent) {
+	       racket.setpadX(mouseEvent.getX());
+	       System.out.println(mouseEvent.getX());
+
+	    }
+	});
 
     EventHandler<ActionEvent> eventHandler = e -> {
     	for(Brick[] brickCol : bricks){

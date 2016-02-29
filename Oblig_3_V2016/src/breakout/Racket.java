@@ -5,7 +5,8 @@ import javafx.scene.shape.Rectangle;
 
 public class Racket implements Settings{
 	private Rectangle pad;
-	int dx, dy;
+	double dx;
+	double dy;
 	
 	Racket() {
 		dx = BreakOut.BALL_START_DX;
@@ -17,4 +18,8 @@ public class Racket implements Settings{
 	public Rectangle getpad(){
 		return pad;
 	}
+	public void setpadX(double Xvalue){
+		dx = Xvalue;
+	}
+
 }
