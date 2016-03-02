@@ -26,7 +26,6 @@ public class BreakOut extends Application implements Settings{
     Racket racket = new Racket();
     Rectangle pad = racket.getpad();
     
-    
     Brick[][] bricks = new Brick[BRICK_ROWS][BRICK_COLS];
     for(int y = 0; y < BRICK_ROWS; y++){
     	for(int x = 0; x < BRICK_COLS; x++){
@@ -53,7 +52,6 @@ public class BreakOut extends Application implements Settings{
     	}
     }
     
-    
     pane.getChildren().add(pad);
     pane.getChildren().add(circle);
     
@@ -61,7 +59,6 @@ public class BreakOut extends Application implements Settings{
 	    @Override
 	    public void handle(MouseEvent mouseEvent) {
 	       racket.setpadX(mouseEvent.getX());
-
 	    }
 	});
 
@@ -84,7 +81,6 @@ public class BreakOut extends Application implements Settings{
     primaryStage.setScene(scene); 
     primaryStage.show(); 
   }
-
 
    /**
    * The main method is only needed for the IDE with limited
