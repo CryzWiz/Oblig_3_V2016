@@ -22,7 +22,7 @@ public class Racket implements Settings{
 		return dx;
 	}
 	public void move(double dx){
-		pad.setTranslateX((getpadX() - 500) + 100);
+		pad.setTranslateX((getpadX() - PADDLE_X_OFFSET) - (PADDLE_WIDTH / 2));
 	}
 
 }
