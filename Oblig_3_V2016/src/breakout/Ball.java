@@ -5,7 +5,7 @@ import javafx.scene.shape.Circle;
 
 public class Ball {
 	private Circle circle;
-	int dx, dy; //Convert int to double????
+	double dx, dy; //Convert int to double????
 	
 	Ball(){
 		dx = BreakOut.BALL_START_DX;
@@ -67,13 +67,13 @@ public class Ball {
 		return Math.pow(x - getX(), 2) + Math.pow(y - getY(), 2);
 	}
 	
-	public void setSpeedCoords(int x, int y){
+	public void setSpeedCoords(double x, double y){
 		dx = x;
 		dy = y;
 	}
 	public void setSpeedPolar(double speed, double rad){
-		dx = (int)(speed * Math.cos(rad));
-		dy = (int)(speed * Math.sin(rad));
+		dx = speed * Math.cos(rad);
+		dy = speed * Math.sin(rad);
 	}
 	
 	public void bounceX(){
@@ -94,11 +94,11 @@ public class Ball {
 		}
 		return false;
 	}
-	public void accelerate(int x, int y){
+	public void accelerate(double x, double y){
 		dx = x;
 		dy = y;
 	}
-	public void move(int x, int y){
+	public void move(double x, double y){
 		circle.setTranslateX(circle.getTranslateX() + x);
 		circle.setTranslateY(circle.getTranslateY() + y);
 	}
