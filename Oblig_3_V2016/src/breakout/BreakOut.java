@@ -68,6 +68,7 @@ public class BreakOut extends Application implements Settings{
     			brick.collision(ball);
     		}
     	}
+    	racket.collision(ball);
     	room.collision(ball);
     	ball.tick();
     };
