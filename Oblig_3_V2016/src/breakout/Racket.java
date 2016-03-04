@@ -1,6 +1,4 @@
 package breakout;
-
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Racket implements Settings{
@@ -10,7 +8,7 @@ public class Racket implements Settings{
 	
 	Racket() {
 		pad = new Rectangle(PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
-	    pad.setFill(Color.GRAY);
+	    pad.setFill(PADDLE_COLOR);
 	}
 	
 	public Rectangle getpad(){
@@ -24,7 +22,7 @@ public class Racket implements Settings{
 		return dx;
 	}
 	public void move(double dx){
-		pad.setTranslateX((getpadX() - 500) + 100);
+		pad.setTranslateX((getpadX() - PADDLE_X_OFFSET) - (PADDLE_WIDTH / 2));
 	}
 
 }

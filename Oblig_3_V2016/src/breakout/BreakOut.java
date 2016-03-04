@@ -26,8 +26,6 @@ public class BreakOut extends Application implements Settings{
     Racket racket = new Racket();
     Rectangle pad = racket.getpad();
     
-
-    
 //    BrickManager manager = new BrickManager(BRICK_ROWS, BRICK_COLS); 
     BrickManager manager = new BrickManager(BRICK_ROWS, BRICK_COLS, Color.PALETURQUOISE, Color.GREENYELLOW, Color.GRAY, Color.RED);
     Brick[][] bricks = manager.getBricks();
@@ -37,8 +35,6 @@ public class BreakOut extends Application implements Settings{
 			pane.getChildren().add(bricks[row][col].getRectangle());
 		}
 	  }
-    
-
 
     pane.getChildren().add(pad);
     pane.getChildren().add(circle);
@@ -46,8 +42,12 @@ public class BreakOut extends Application implements Settings{
     scene.addEventFilter(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() {
 	    @Override
 	    public void handle(MouseEvent mouseEvent) {
+
 	       racket.setpadX(mouseEvent.getX());
 	       //System.out.println(racket.getpadX());
+
+	       racket.setpadX(mouseEvent.getX());
+
 	    }
 	});
 
