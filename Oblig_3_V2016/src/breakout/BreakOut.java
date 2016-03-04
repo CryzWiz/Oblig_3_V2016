@@ -26,40 +26,28 @@ public class BreakOut extends Application implements Settings{
     Racket racket = new Racket();
     Rectangle pad = racket.getpad();
     
-    Brick[][] bricks = new Brick[BRICK_ROWS][BRICK_COLS];
-    for(int y = 0; y < BRICK_ROWS; y++){
-    	for(int x = 0; x < BRICK_COLS; x++){
-    		Brick brick = new Brick(
-    				x * (BRICK_WIDTH + BRICK_PADDING_H) + WALL_PADDING_LEFT,
-    				y * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP,
-    				BRICK_WIDTH,
-    				BRICK_HEIGHT);
-    		//rect.setFill(BRICK_COLOR);
-    		pane.getChildren().add(brick.getRectangle());
-    		bricks[y][x]= brick;
-    		if(y < 3){
-	    		bricks[y][x].setFill(Color.BLUE);
-	    	}
-	    	else if(y < 6){
-	    		bricks[y][x].setFill(Color.GREEN);
-	    	}
-	    	else if(y < 9){
-	    		bricks[y][x].setFill(Color.YELLOW);
-	    	}
-	    	else{
-	    		bricks[y][x].setFill(Color.RED);
-	    	}
-    	}
-    }
-    
+//    BrickManager manager = new BrickManager(BRICK_ROWS, BRICK_COLS); 
+    BrickManager manager = new BrickManager(BRICK_ROWS, BRICK_COLS, Color.PALETURQUOISE, Color.GREENYELLOW, Color.GRAY, Color.RED);
+    Brick[][] bricks = manager.getBricks();
+
+	  for(int row = 0; row < BRICK_ROWS; row++){
+		for(int col = 0; col < BRICK_COLS; col++){
+			pane.getChildren().add(bricks[row][col].getRectangle());
+		}
+	  }
+
     pane.getChildren().add(pad);
     pane.getChildren().add(circle);
     
     scene.addEventFilter(MouseEvent.MOUSE_MOVED, new EventHandler<MouseEvent>() {
 	    @Override
 	    public void handle(MouseEvent mouseEvent) {
+
 	       racket.setpadX(mouseEvent.getX());
 	       //System.out.println(racket.getpadX());
+
+	       racket.setpadX(mouseEvent.getX());
+
 	    }
 	});
 
