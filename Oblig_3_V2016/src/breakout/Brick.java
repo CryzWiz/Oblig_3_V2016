@@ -6,6 +6,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Brick implements Settings {
 	private Rectangle rectangle;
+	private boolean isDestroyed = false;
 
 	public Brick(int posX, int posY, Color c) {
 		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT, c);
@@ -22,6 +23,11 @@ public class Brick implements Settings {
 	public void destroy(){
 		rectangle.setDisable(true);
 		rectangle.setVisible(false);
+		isDestroyed = true;
+	}
+	
+	public boolean isDestroyed() {
+		return isDestroyed;
 	}
 	
 	public void collision(Ball ball){
