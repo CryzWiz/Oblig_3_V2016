@@ -3,22 +3,23 @@ package breakout;
 import javafx.scene.paint.Color;
 
 public class BrickManager implements Settings {
-	Brick[][] bricks;
+	private Brick[][] bricks;
+	private int numberOfRows;
+	private int numberOfCols;
 	
 	public BrickManager() { 
-		createBricks(BRICK_ROWS, BRICK_COLS);
-		setBrickColors(Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED);
+		this(BRICK_ROWS, BRICK_COLS, Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED);
 	}
 
 	public BrickManager(int numberOfRows, int numberOfCols) { 
-		createBricks(numberOfRows, numberOfCols);
-		setBrickColors(Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED);
-
+		this(numberOfRows, numberOfCols, Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED);
 	}
+	
 	public BrickManager(int numberOfRows, int numberOfCols, Color colorTop, Color colorMid1, Color colorMid2, Color colorBottom) { 
 		createBricks(numberOfRows, numberOfCols);
 		setBrickColors(colorTop, colorMid1, colorMid2, colorBottom);
-
+		this.numberOfRows = numberOfRows;
+		this.numberOfCols = numberOfCols;
 	}
 	
 	public void createBricks(int numberOfRows, int numberOfCols) {
@@ -56,7 +57,16 @@ public class BrickManager implements Settings {
 	    	}
 	    }
 	}
-	
+//	public void destroyRandomBricks() {
+//	int numberOfBricksToRemove = (int)(((numberOfRows * numberOfCols) / 100.0) * 20);
+//
+//	
+//	for(int i = 0; i <= numberOfBricksToRemove; i++) {
+//		int randomRow = (int)(Math.random() * numberOfRows);
+//		int randomCol = (int)(Math.random() * numberOfCols);
+////		bricks[randomRow][randomCol].destroy();
+//	}
+//}
 
 	public Brick[][] getBricks() {
 		return bricks;
