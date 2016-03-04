@@ -70,11 +70,7 @@ public class BrickManager implements Settings {
 		}
 		
 	}
-//	for(int i = 0; i <= numberOfBricksToRemove; i++) {
-//		int randomRow = (int)(Math.random() * numberOfRows);
-//		int randomCol = (int)(Math.random() * numberOfCols);
-//		bricks[randomRow][randomCol].destroy();
-//	}
+
 }
 
 	public Brick[][] getBricks() {
