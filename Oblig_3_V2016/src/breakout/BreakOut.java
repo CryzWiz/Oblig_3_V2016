@@ -27,12 +27,13 @@ public class BreakOut extends Application implements Settings{
     Rectangle pad = racket.getpad();
     
     
-    BrickManager manager = new BrickManager(BRICK_ROWS, BRICK_COLS); 
+//    BrickManager manager = new BrickManager(BRICK_ROWS, BRICK_COLS); 
+    BrickManager manager = new BrickManager(BRICK_ROWS, BRICK_COLS, Color.PALETURQUOISE, Color.GREENYELLOW, Color.GRAY, Color.RED);
     Brick[][] bricks = manager.getBricks();
     
-	  for(int y = 0; y < BRICK_ROWS; y++){
-		for(int x = 0; x < BRICK_COLS; x++){
-			pane.getChildren().add(bricks[y][x].getRectangle());
+	  for(int row = 0; row < BRICK_ROWS; row++){
+		for(int col = 0; col < BRICK_COLS; col++){
+			pane.getChildren().add(bricks[row][col].getRectangle());
 		}
 	  }
     
