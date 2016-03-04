@@ -61,11 +61,20 @@ public class BrickManager implements Settings {
 	public void destroyRandomBricks() {
 	int numberOfBricksToRemove = (int)(((numberOfRows * numberOfCols) / 100.0) * 20);
 	
-	for(int i = 0; i <= numberOfBricksToRemove; i++) {
+	while(numberOfBricksToRemove > 0) {
 		int randomRow = (int)(Math.random() * numberOfRows);
 		int randomCol = (int)(Math.random() * numberOfCols);
-		bricks[randomRow][randomCol].destroy();
+		if(!bricks[randomRow][randomCol].isDestroyed()) {
+			bricks[randomRow][randomCol].destroy();
+			numberOfBricksToRemove--;
+		}
+		
 	}
+//	for(int i = 0; i <= numberOfBricksToRemove; i++) {
+//		int randomRow = (int)(Math.random() * numberOfRows);
+//		int randomCol = (int)(Math.random() * numberOfCols);
+//		bricks[randomRow][randomCol].destroy();
+//	}
 }
 
 	public Brick[][] getBricks() {
