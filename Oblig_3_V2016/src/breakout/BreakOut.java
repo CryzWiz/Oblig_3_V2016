@@ -38,10 +38,14 @@ public class BreakOut extends Application implements Settings{
 		panes.get(1).getChildren().add(gameOver);
 
 		//Main Menu Pane
-		VBox box = new VBox(new Button("Start"));
+		Text menuText = new Text("Click to Start");
+		menuText.setFill(TEXT_COLOR_GAMEOVER);
+		menuText.setFont(Font.font(FONT_SIZE_GAMEOVER));
+		panes.add(new VBox());
+		panes.get(2).getChildren().add(menuText);
+		/*VBox box = new VBox(new Button("Start"));
 		panes.add(box);
-		box.setBackground(new Background(new BackgroundFill(BACKGROUND_COLOR, null, null)));
-		//panes.get(2).getChildren().add(new Button("Start Game"));
+		box.setBackground(new Background(new BackgroundFill(BACKGROUND_COLOR, null, null)));*/
 
 		GameManager gManager = new GameManager(
 				scene,
