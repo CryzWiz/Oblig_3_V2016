@@ -10,57 +10,70 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class BreakOut extends Application implements Settings{
 
-  @Override 
-  public void start(Stage primaryStage) {
-    ArrayList<Pane> panes = new ArrayList<>();
-    panes.add(new Pane());
-    panes.add(new StackPane());
-    Text gameOver = new Text("GAME OVER!");
-    gameOver.setFill(TEXT_COLOR_GAMEOVER);
-    gameOver.setFont(Font.font(FONT_SIZE_GAMEOVER));
+	@Override 
+	public void start(Stage primaryStage) {
+		ArrayList<Pane> panes = new ArrayList<>();
 
-    Scene scene = new Scene(panes.get(0), WIDTH, HEIGHT);
-    panes.get(1).getChildren().add(gameOver);
+		//Game Scene (Pane)
+		panes.add(new Pane());
+		Scene scene = new Scene(panes.get(0), WIDTH, HEIGHT);
 
-    GameManager gManager = new GameManager(
-        scene,
-        panes,
-        new BrickManager(panes.get(0)),
-        new Racket(panes.get(0)),
-        new Ball(panes.get(0)),
-        new Room(scene));
+		//Game Over Pane
+		panes.add(new StackPane());
+		Text gameOver = new Text("GAME OVER!");
+		gameOver.setFill(TEXT_COLOR_GAMEOVER);
+		gameOver.setFont(Font.font(FONT_SIZE_GAMEOVER));
+		panes.get(1).getChildren().add(gameOver);
 
-    scene.addEventFilter(MouseEvent.ANY, new EventHandler<MouseEvent>() {
-      @Override
-      public void handle(MouseEvent mouseEvent) {
-        gManager.onMouseEvent(mouseEvent);
-      }
-    });
-    
-    EventHandler<ActionEvent> eventHandler = e -> {
-      gManager.tick();
-    };
+		//Main Menu Pane
+		VBox box = new VBox(new Button("Start"));
+		panes.add(box);
+		box.setBackground(new Background(new BackgroundFill(BACKGROUND_COLOR, null, null)));
+		//panes.get(2).getChildren().add(new Button("Start Game"));
 
-    Timeline animation = new Timeline(new KeyFrame(Duration.millis(MILLIS_PER_FRAME), eventHandler));
-    animation.setCycleCount(Timeline.INDEFINITE);
-    animation.play();
+		GameManager gManager = new GameManager(
+				scene,
+				panes,
+				new BrickManager(panes.get(0)),
+				new Racket(panes.get(0)),
+				new Ball(panes.get(0)),
+				new Room(scene));
 
-    primaryStage.setTitle("BreakOut"); 
-    primaryStage.setResizable(false);
-    primaryStage.setScene(scene);
-    primaryStage.show(); 
-  }
+		scene.addEventFilter(MouseEvent.ANY, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				gManager.onMouseEvent(mouseEvent);
+			}
+		});
 
-  public static void main(String[] args) {
-    Application.launch(args);
-  }
+		EventHandler<ActionEvent> eventHandler = e -> {
+			gManager.tick();
+		};
+
+		Timeline animation = new Timeline(new KeyFrame(Duration.millis(MILLIS_PER_FRAME), eventHandler));
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.play();
+
+		primaryStage.setTitle("BreakOut"); 
+		primaryStage.setResizable(false);
+		primaryStage.setScene(scene);
+		primaryStage.show(); 
+	}
+
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
 
 }

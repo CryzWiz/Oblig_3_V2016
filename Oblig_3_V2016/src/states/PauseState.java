@@ -2,10 +2,10 @@ package states;
 
 public class PauseState extends ScreenState {
 
-  public PauseState() {}
+	public PauseState() {}
 
-  @Override
-  public void onSpacePressed(){
-    root.newState(new PlayState());
-  }
+	@Override
+	public void onSpacePressed(){
+		root.newState(new PlayState());
+	}
 }
