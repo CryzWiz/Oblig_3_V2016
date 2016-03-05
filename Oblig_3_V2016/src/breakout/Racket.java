@@ -1,4 +1,5 @@
 package breakout;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public class Racket implements Settings{
@@ -6,9 +7,10 @@ public class Racket implements Settings{
 	double dx;
 	double dy = PADDLE_Y_OFFSET;
 	
-	Racket() {
+	Racket(Pane pane) {
 		pad = new Rectangle(PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
 	    pad.setFill(PADDLE_COLOR);
+	    pane.getChildren().add(pad);
 	}
 	
 	public Rectangle getpad(){
