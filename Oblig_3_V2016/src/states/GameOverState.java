@@ -13,8 +13,14 @@ public class GameOverState extends ScreenState {
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 			root.newState(new PlayState());
 			ball.reset();
+			bManager.reset();
 		}
 	}
+	
+	@Override
+	public void onEscPressed(){
+		System.exit(0);
+	};
 
 	@Override
 	public void tick(){

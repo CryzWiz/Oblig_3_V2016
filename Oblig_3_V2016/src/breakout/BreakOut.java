@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -85,17 +87,19 @@ public class BreakOut extends Application implements Settings{
 		StackPane fg = new StackPane(mg, pauseText);
 		mg.setOpacity(0.7);
 		StackPane gamePane = new StackPane(bg, fg);
+		gamePane.setBackground(new Background(new BackgroundFill(BACKGROUND_COLOR, null, null)));
 		panes.add(gamePane);
 
 		//Game Over Pane
 		panes.add(new StackPane(endText));
 
 		//Main Menu Pane
-		//Button newGame = new Button("New Game");
-		VBox buttonBox = new VBox(menuText/*, newGame*/);
-		
+		Button newGame = new Button("New Game");
+		newGame.setBackground(new Background(new BackgroundFill(BACKGROUND_COLOR, null, null)));
+		VBox buttonBox = new VBox(menuText, newGame);
 		buttonBox.setAlignment(Pos.CENTER);
-		panes.add(new StackPane(buttonBox));
+		buttonBox.setStyle("-fx-background: #000000");
+		panes.add(buttonBox);
 		
 	}
 

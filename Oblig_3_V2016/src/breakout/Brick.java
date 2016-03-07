@@ -25,6 +25,12 @@ public class Brick implements Settings {
 		rectangle.setVisible(false);
 		isDestroyed = true;
 	}
+	
+	public void reset(){
+		rectangle.setDisable(false);
+		rectangle.setVisible(true);
+		isDestroyed = false;
+	}
 
 	public boolean isDestroyed() {
 		return isDestroyed;

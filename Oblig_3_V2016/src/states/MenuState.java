@@ -18,6 +18,8 @@ public class MenuState extends ScreenState {
 
 	@Override
 	public void onEnterPressed(){
-
+		root.newState(new PlayState());
+		bManager.reset();
+		ball.reset();
 	}
 }

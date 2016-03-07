@@ -6,11 +6,21 @@ public class PauseState extends ScreenState {
 
 	public PauseState(){
 		root.setPane(panes.get(0));
-			((Pane)panes.get(0).getChildren().get(1)).setOpacity(1);
+		((Pane)panes.get(0).getChildren().get(1)).setOpacity(1);
 	}
 
 	@Override
 	public void onSpacePressed(){
 		root.newState(new PlayState());
+	}
+	
+	@Override
+	public void onEnterPressed(){
+		root.newState(new PlayState());
+	}
+	
+	@Override
+	public void onEscPressed(){
+		root.newState(new MenuState());
 	}
 }

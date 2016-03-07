@@ -76,6 +76,15 @@ public class BrickManager implements Settings {
 		}
 
 	}
+	
+	public void reset(){
+		for(Brick[] col : bricks){
+			for(Brick brick : col){
+				brick.reset();
+			}
+		}
+		destroyRandomBricks();
+	}
 
 	public Brick[][] getBricks() {
 		return bricks;

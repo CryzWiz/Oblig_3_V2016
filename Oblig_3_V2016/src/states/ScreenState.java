@@ -27,13 +27,17 @@ public abstract class ScreenState {
 		ball = b;
 		room = ro;
 	}
+	
+	public void onUpPressed(){
+		
+	}
 
 	public void onEscPressed(){
 
 	}
 
 	public void onSpacePressed(){
-
+		//Nothing
 	}
 
 	public void onEnterPressed(){

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import states.*;
 
 public class GameManager implements StateUser {
@@ -24,6 +25,7 @@ public class GameManager implements StateUser {
 
 	public void setPane(Pane pane){
 		scene.setRoot(pane);
+		scene.setFill(Color.BLACK);
 	}
 
 	public void onMouseEvent(MouseEvent m){
@@ -41,6 +43,9 @@ public class GameManager implements StateUser {
 					break;
 				case ENTER:
 					state.onEnterPressed();
+					break;
+				case UP:
+					state.onUpPressed();
 					break;
 			default:
 				break;
