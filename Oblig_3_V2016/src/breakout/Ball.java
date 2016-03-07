@@ -8,7 +8,7 @@ public class Ball implements Settings {
 	private Circle circle;
 	double dx, dy; //Convert int to double????
 
-	Ball(Pane pane){
+	public Ball(Pane pane){
 		this(pane, BALL_START_DX, BALL_START_DY, BALL_RADIUS, BALL_COLOR);
 	}
 	Ball(Pane pane, int dx, int dy, int r, Color c){

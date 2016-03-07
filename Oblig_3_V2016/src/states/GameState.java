@@ -1,31 +1,29 @@
 package states;
 
-import java.util.ArrayList;
-
 import breakout.Ball;
 import breakout.BrickManager;
 import breakout.Racket;
 import breakout.Room;
+import breakout.ScreenManager;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
-public abstract class ScreenState {
+public abstract class GameState {
 	protected static StateUser root;
-	protected static ArrayList<Pane> panes;
+	protected static ScreenManager sManager;
 	protected static BrickManager bManager;
 	protected static Racket racket;
 	protected static Ball ball;
 	protected static Room room;
 
-	public ScreenState() {}
+	public GameState() {}
 
-	public static void setStatics(StateUser root, ArrayList<Pane> p, BrickManager bm, Racket ra, Ball b, Room ro){
-		ScreenState.root = root;
-		panes = p;
-		bManager = bm;
-		racket = ra;
-		ball = b;
-		room = ro;
+	public static void setStatics(StateUser root, ScreenManager sm){
+		GameState.root = root;
+		sManager = sm;
+		bManager = new BrickManager(sm.getPlayLayer());
+		racket = new Racket(sm.getPlayLayer());
+		ball = new Ball(sm.getPlayLayer());
+		room = new Room(sm.getScene());
 	}
 	
 	public void onUpPressed(){

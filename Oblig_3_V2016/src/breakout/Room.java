@@ -7,7 +7,6 @@ public class Room implements Settings{
 
 	public Room(Scene s){
 		room = s;
-		room.setFill(BACKGROUND_COLOR);
 	}
 
 	public boolean collision(Ball ball){

@@ -1,5 +1,7 @@
 package breakout;
 
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 
 public interface Settings {
@@ -8,6 +10,7 @@ public interface Settings {
 	Color PADDLE_COLOR = Color.GRAY;
 	Color TEXT_COLOR_GAMEOVER = Color.GREEN;
 
+	Background BACKGROUND = new Background(new BackgroundFill(BACKGROUND_COLOR, null, null));
 	/*Color BRICK_COLOR_LAYER1 = Color.BLUE;
       Color BRICK_COLOR_LAYER2 = Color.GREEN;
       Color BRICK_COLOR_LAYER3 = Color.YELLOW;

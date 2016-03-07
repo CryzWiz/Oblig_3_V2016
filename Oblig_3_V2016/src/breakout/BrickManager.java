@@ -72,9 +72,7 @@ public class BrickManager implements Settings {
 				bricks[randomRow][randomCol].destroy();
 				numberOfBricksToRemove--;
 			}
-
 		}
-
 	}
 	
 	public void reset(){

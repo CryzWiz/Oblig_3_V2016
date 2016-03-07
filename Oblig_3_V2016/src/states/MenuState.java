@@ -2,23 +2,24 @@ package states;
 
 import javafx.scene.input.MouseEvent;
 
-public class MenuState extends ScreenState {
+public class MenuState extends GameState {
 
 	public MenuState(){
-		root.setPane(panes.get(2));
+		sManager.setMenuScreen();
 	}
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
-			root.newState(new PlayState());
+			root.play();
+			bManager.reset();
 			ball.reset();
 		}
 	}
 
 	@Override
 	public void onEnterPressed(){
-		root.newState(new PlayState());
+		root.play();
 		bManager.reset();
 		ball.reset();
 	}

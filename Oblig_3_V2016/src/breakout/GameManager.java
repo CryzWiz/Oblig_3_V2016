@@ -1,31 +1,15 @@
 package breakout;
 
-import java.util.ArrayList;
-
-import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import states.*;
 
 public class GameManager implements StateUser {
-	ScreenState state;
-	Scene scene;
+	GameState state;
 
-	public GameManager(Scene s, ArrayList<Pane> panes, BrickManager m, Racket ra, Ball b, Room ro) {
-		scene = s;
-		ScreenState.setStatics(this, panes, m, ra, b, ro);
+	public GameManager(ScreenManager sm) {
+		GameState.setStatics(this, sm);
 		state = new MenuState();
-	}
-
-	public void newState(ScreenState state){
-		this.state = state;
-	}
-
-	public void setPane(Pane pane){
-		scene.setRoot(pane);
-		scene.setFill(Color.BLACK);
 	}
 
 	public void onMouseEvent(MouseEvent m){
@@ -55,5 +39,25 @@ public class GameManager implements StateUser {
 
 	public void tick(){
 		state.tick();
+	}
+
+	@Override
+	public void play() {
+		state = new PlayState();
+	}
+
+	@Override
+	public void pause() {
+		state = new PauseState();
+	}
+
+	@Override
+	public void gameOver() {
+		state = new GameOverState();
+	}
+
+	@Override
+	public void menu() {
+		state = new MenuState();
 	}
 }
