@@ -52,4 +52,7 @@ public class GameManager {
 	public void menu() {
 		state = new MenuState();
 	}
+	public void exit(){
+		System.exit(0);
+	}
 }

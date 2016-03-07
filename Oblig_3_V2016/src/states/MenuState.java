@@ -23,4 +23,9 @@ public class MenuState extends GameState {
 		bManager.reset();
 		ball.reset();
 	}
+	
+	@Override
+	public void onEscPressed(){
+		game.exit();
+	}
 }
