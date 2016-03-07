@@ -4,7 +4,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Racket implements Settings{
 	private Rectangle pad;
-	double dx;
+	static double dx;
 	double dy = PADDLE_Y_OFFSET;
 
 	Racket(Pane pane) {

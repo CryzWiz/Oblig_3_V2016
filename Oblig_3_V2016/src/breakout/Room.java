@@ -15,6 +15,8 @@ public class Room implements Settings{
 			ball.bounceX();
 		if(collideTop(ball))
 			ball.bounceY();
+		if(collideRacket(ball))
+			ball.bounceY();
 		else if(collideBot(ball)){
 			if(BOUNCE_ON_BOT)
 				ball.bounceY();
@@ -23,7 +25,13 @@ public class Room implements Settings{
 		}
 		return false;
 	}
-
+	public boolean collideRacket(Ball ball){
+		if(ball.getY() > PADDLE_Y_OFFSET)
+			if(ball.getX() < (Racket.dx + (PADDLE_WIDTH / 2)) && 
+					ball.getX() > (Racket.dx - (PADDLE_WIDTH / 2)))
+				return true;
+		return false;
+	}
 	public boolean collideLeft(Ball ball){
 		if(ball.getX() < ball.getRadius() && ball.dx < 0)
 			return true;
