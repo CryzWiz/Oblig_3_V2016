@@ -1,17 +1,23 @@
 package states;
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 public class PlayState extends ScreenState {
 
 	public PlayState(){
 		root.setPane(panes.get(0));
-		ball.reset();
+		((Pane)panes.get(0).getChildren().get(1)).setOpacity(0);
 	}
 
 	@Override
 	public void onSpacePressed(){
 		root.newState(new PauseState());
+	}
+	
+	@Override
+	public void onEscPressed(){
+		root.newState(new MenuState());
 	}
 
 	@Override
