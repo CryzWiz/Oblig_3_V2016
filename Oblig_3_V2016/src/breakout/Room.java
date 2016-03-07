@@ -1,23 +1,29 @@
 package breakout;
 
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 
-public class Room {
+public class Room implements Settings{
 	Scene room;
 
-	public Room(Scene s, Color c){
+	public Room(Scene s){
 		room = s;
-	    room.setFill(c);
+		room.setFill(BACKGROUND_COLOR);
 	}
-	
-	public void collision(Ball ball){
+
+	public boolean collision(Ball ball){
 		if(collideLeft(ball) || collideRight(ball))
 			ball.bounceX();
-		if(collideTop(ball) || collideBot(ball))
+		if(collideTop(ball))
 			ball.bounceY();
+		else if(collideBot(ball)){
+			if(BOUNCE_ON_BOT)
+				ball.bounceY();
+			else
+				return true;
+		}
+		return false;
 	}
-	
+
 	public boolean collideLeft(Ball ball){
 		if(ball.getX() < ball.getRadius() && ball.dx < 0)
 			return true;

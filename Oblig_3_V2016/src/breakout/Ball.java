@@ -1,38 +1,35 @@
 package breakout;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class Ball {
+public class Ball implements Settings {
 	private Circle circle;
 	double dx, dy; //Convert int to double????
-	
-	Ball(){
-		dx = BreakOut.BALL_START_DX;
-		dy = BreakOut.BALL_START_DY;
-		circle = new Circle(0, 0, BreakOut.BALL_RADIUS, BreakOut.BALL_COLOR);
-		reset();
+
+	Ball(Pane pane){
+		this(pane, BALL_START_DX, BALL_START_DY, BALL_RADIUS, BALL_COLOR);
 	}
-	
-	Ball(int dx, int dy, int r, Color c){
-		this.dx = dx;
-		this.dy = dy;
-		circle = new Circle(0, 0, r, c);
-		reset();
+	Ball(Pane pane, int dx, int dy, int r, Color c){
+		this(pane, BALL_START_X, BALL_START_Y, BALL_START_DX, BALL_START_DY, BALL_RADIUS, BALL_COLOR);
 	}
-	Ball(int x, int y, int dx, int dy, int r, Color c){
+	Ball(Pane pane, int x, int y, int dx, int dy, int r, Color c){
 		this.dx = dx;
 		this.dy = dy;
 		circle = new Circle(0, 0, r, c);
 		circle.setTranslateX(x);
 		circle.setTranslateY(y);
+		pane.getChildren().add(circle);
 	}
-	
+
 	public void reset(){
-		circle.setTranslateX(BreakOut.BALL_START_X);
-		circle.setTranslateY(BreakOut.BALL_START_Y);
+		circle.setTranslateX(BALL_START_X);
+		circle.setTranslateY(BALL_START_Y);
+		dx = BALL_START_DX;
+		dy = BALL_START_DY;
 	}
-	
+
 	public int getX(){
 		return (int)circle.getTranslateX();
 	}
@@ -66,7 +63,13 @@ public class Ball {
 	public double getDistanceSquared(int x, int y){
 		return Math.pow(x - getX(), 2) + Math.pow(y - getY(), 2);
 	}
-	
+	public double getPrevX(){
+		return circle.getTranslateX() - dx;
+	}
+	public double getPrevY(){
+		return circle.getTranslateY() - dy;
+	}
+
 	public void setSpeedCoords(double x, double y){
 		dx = x;
 		dy = y;
@@ -75,7 +78,7 @@ public class Ball {
 		dx = speed * Math.cos(rad);
 		dy = speed * Math.sin(rad);
 	}
-	
+
 	public void bounceX(){
 		dx *= -1;
 	}
@@ -102,7 +105,7 @@ public class Ball {
 		circle.setTranslateX(circle.getTranslateX() + x);
 		circle.setTranslateY(circle.getTranslateY() + y);
 	}
-	
+
 	public void tick(){
 		circle.setTranslateX(circle.getTranslateX() + dx);
 		circle.setTranslateY(circle.getTranslateY() + dy);

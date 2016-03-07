@@ -6,24 +6,30 @@ import javafx.scene.shape.Rectangle;
 
 public class Brick implements Settings {
 	private Rectangle rectangle;
+	private boolean isDestroyed = false;
 
 	public Brick(int posX, int posY, Color c) {
 		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT, c);
 		rectangle.setTranslateX(posX);
 		rectangle.setTranslateY(posY);
 	}
-	
+
 	public Brick(int posX, int posY, int width, int height) {
 		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT);
 		rectangle.setTranslateX(posX);
 		rectangle.setTranslateY(posY);
 	}
-	
+
 	public void destroy(){
 		rectangle.setDisable(true);
 		rectangle.setVisible(false);
+		isDestroyed = true;
 	}
-	
+
+	public boolean isDestroyed() {
+		return isDestroyed;
+	}
+
 	public void collision(Ball ball){
 		if(rectangle.isDisabled())
 			return;
@@ -53,7 +59,7 @@ public class Brick implements Settings {
 				destroy();
 			}
 			break;
-		//Corner Collisions:
+			//Corner Collisions:
 		case 0: //Top-Left
 			if(ball.dx > 0 || ball.dy > 0){
 				if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop()))
@@ -81,11 +87,40 @@ public class Brick implements Settings {
 		case 4:
 			ball.bounceX();
 			ball.bounceY();
+			if(ball.dx < 0){
+				if(ball.dy < 0){
+					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop())){
+						destroy();
+						break;
+					}
+				} else {
+					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom())){
+						destroy();
+						break;
+					}
+				}
+			} else {
+				if(ball.dy < 0){
+					if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop())){
+						destroy();
+						break;
+					}
+				} else {
+					if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom())){
+						destroy();
+						break;
+					}
+				}
+			}
+			if(Math.abs(ball.dx) > Math.abs(ball.dy))
+				ball.bounceY();
+			else
+				ball.bounceX();
 			destroy();
 			break;
 		}
 	}
-	
+
 	public Rectangle getRectangle(){
 		return rectangle;
 	}
@@ -100,7 +135,7 @@ public class Brick implements Settings {
 			return true;
 		return false;
 	}
-	
+
 	public int getBoundsLeft(){
 		return (int)(rectangle.getTranslateX());
 	}
@@ -113,21 +148,21 @@ public class Brick implements Settings {
 	public int getBoundsBottom(){
 		return (int)(rectangle.getTranslateY() + rectangle.getHeight());
 	}
-	
-	public int getBallDirection(int x, int y){
+
+	public int getBallDirection(double x, double y){
 		int hPosition = 1;
 		int vPosition = 1;
-		if(x < rectangle.getTranslateX())
+		if(x < getBoundsLeft())
 			hPosition = 0;
-		else if(x > rectangle.getTranslateX() + rectangle.getWidth())
+		else if(x > getBoundsRight())
 			hPosition = 2;
-		if(y < rectangle.getTranslateY())
+		if(y < getBoundsTop())
 			vPosition = 0;
-		else if(y > rectangle.getTranslateY() + rectangle.getHeight())
+		else if(y > getBoundsBottom())
 			vPosition = 2;
 		return 3 * vPosition + hPosition;
 	}
-	
+
 	public void setFill(Paint value){
 		rectangle.setFill(value);
 	}
