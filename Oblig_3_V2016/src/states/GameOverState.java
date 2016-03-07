@@ -2,19 +2,25 @@ package states;
 
 import javafx.scene.input.MouseEvent;
 
-public class GameOverState extends ScreenState {
+public class GameOverState extends GameState {
 
 	public GameOverState(){
-		root.setPane(panes.get(1));
+		sManager.setGameOverScreen();
 	}
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
-			root.newState(new PlayState());
+			game.play();
 			ball.reset();
+			bManager.reset();
 		}
 	}
+	
+	@Override
+	public void onEscPressed(){
+		System.exit(0);
+	};
 
 	@Override
 	public void tick(){

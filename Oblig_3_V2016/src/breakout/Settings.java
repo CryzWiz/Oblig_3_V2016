@@ -1,5 +1,7 @@
 package breakout;
 
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 
 public interface Settings {
@@ -8,6 +10,7 @@ public interface Settings {
 	Color PADDLE_COLOR = Color.GRAY;
 	Color TEXT_COLOR_GAMEOVER = Color.GREEN;
 
+	Background BACKGROUND = new Background(new BackgroundFill(BACKGROUND_COLOR, null, null));
 	/*Color BRICK_COLOR_LAYER1 = Color.BLUE;
       Color BRICK_COLOR_LAYER2 = Color.GREEN;
       Color BRICK_COLOR_LAYER3 = Color.YELLOW;
@@ -29,11 +32,11 @@ public interface Settings {
 	int BALL_START_DX = 3;
 	int BALL_START_DY = -3;
 	int BALL_RADIUS = 10;
-
-	int PADDLE_Y_OFFSET = BALL_START_Y;
-	int PADDLE_X_OFFSET = BALL_START_X - 100;
+	
 	int PADDLE_HEIGHT = 10;
 	int PADDLE_WIDTH = 200;
+	int PADDLE_Y_OFFSET = BALL_START_Y;
+	int PADDLE_X_OFFSET = BALL_START_X - (PADDLE_WIDTH / 2);
 
 	int BRICK_WIDTH = 60;
 	int BRICK_HEIGHT = 20;

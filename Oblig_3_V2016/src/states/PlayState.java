@@ -1,23 +1,21 @@
 package states;
 
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 
-public class PlayState extends ScreenState {
+public class PlayState extends GameState {
 
 	public PlayState(){
-		root.setPane(panes.get(0));
-		((Pane)panes.get(0).getChildren().get(1)).setOpacity(0);
+		sManager.setPlayScreen();
 	}
 
 	@Override
 	public void onSpacePressed(){
-		root.newState(new PauseState());
+		game.pause();
 	}
 	
 	@Override
 	public void onEscPressed(){
-		root.newState(new MenuState());
+		game.menu();
 	}
 
 	@Override
@@ -32,7 +30,7 @@ public class PlayState extends ScreenState {
 		ball.tick();
 		bManager.collision(ball);
 		if(room.collision(ball)){
-			root.newState(new GameOverState());
+			game.gameOver();
 		}
 	}
 }

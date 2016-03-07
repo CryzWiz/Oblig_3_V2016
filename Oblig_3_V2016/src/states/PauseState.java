@@ -1,16 +1,23 @@
 package states;
 
-import javafx.scene.layout.Pane;
-
-public class PauseState extends ScreenState {
+public class PauseState extends GameState {
 
 	public PauseState(){
-		root.setPane(panes.get(0));
-			((Pane)panes.get(0).getChildren().get(1)).setOpacity(1);
+		sManager.setPauseScreen();
 	}
 
 	@Override
 	public void onSpacePressed(){
-		root.newState(new PlayState());
+		game.play();
+	}
+	
+	@Override
+	public void onEnterPressed(){
+		game.play();
+	}
+	
+	@Override
+	public void onEscPressed(){
+		game.menu();
 	}
 }
