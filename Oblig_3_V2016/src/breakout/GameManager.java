@@ -4,7 +4,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import states.*;
 
-public class GameManager implements StateUser {
+public class GameManager {
 	GameState state;
 
 	public GameManager(ScreenManager sm) {
@@ -15,7 +15,6 @@ public class GameManager implements StateUser {
 	public void onMouseEvent(MouseEvent m){
 		state.onMouseEvent(m);
 	}
-	
 	public void onKeyEvent(KeyEvent k){
 		if(k.getEventType() == KeyEvent.KEY_PRESSED){
 			switch(k.getCode()){
@@ -41,22 +40,15 @@ public class GameManager implements StateUser {
 		state.tick();
 	}
 
-	@Override
 	public void play() {
 		state = new PlayState();
 	}
-
-	@Override
 	public void pause() {
 		state = new PauseState();
 	}
-
-	@Override
 	public void gameOver() {
 		state = new GameOverState();
 	}
-
-	@Override
 	public void menu() {
 		state = new MenuState();
 	}

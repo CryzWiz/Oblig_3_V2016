@@ -10,12 +10,12 @@ public class PlayState extends GameState {
 
 	@Override
 	public void onSpacePressed(){
-		root.pause();
+		game.pause();
 	}
 	
 	@Override
 	public void onEscPressed(){
-		root.menu();
+		game.menu();
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class PlayState extends GameState {
 		ball.tick();
 		bManager.collision(ball);
 		if(room.collision(ball)){
-			root.gameOver();
+			game.gameOver();
 		}
 	}
 }

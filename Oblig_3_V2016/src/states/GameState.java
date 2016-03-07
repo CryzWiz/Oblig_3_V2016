@@ -2,13 +2,14 @@ package states;
 
 import breakout.Ball;
 import breakout.BrickManager;
+import breakout.GameManager;
 import breakout.Racket;
 import breakout.Room;
 import breakout.ScreenManager;
 import javafx.scene.input.MouseEvent;
 
 public abstract class GameState {
-	protected static StateUser root;
+	protected static GameManager game;
 	protected static ScreenManager sManager;
 	protected static BrickManager bManager;
 	protected static Racket racket;
@@ -17,8 +18,8 @@ public abstract class GameState {
 
 	public GameState() {}
 
-	public static void setStatics(StateUser root, ScreenManager sm){
-		GameState.root = root;
+	public static void setStatics(GameManager root, ScreenManager sm){
+		GameState.game = root;
 		sManager = sm;
 		bManager = new BrickManager(sm.getPlayLayer());
 		racket = new Racket(sm.getPlayLayer());

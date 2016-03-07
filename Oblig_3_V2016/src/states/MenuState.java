@@ -11,7 +11,7 @@ public class MenuState extends GameState {
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
-			root.play();
+			game.play();
 			bManager.reset();
 			ball.reset();
 		}
@@ -19,7 +19,7 @@ public class MenuState extends GameState {
 
 	@Override
 	public void onEnterPressed(){
-		root.play();
+		game.play();
 		bManager.reset();
 		ball.reset();
 	}
