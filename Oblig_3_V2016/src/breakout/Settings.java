@@ -29,11 +29,11 @@ public interface Settings {
 	int BALL_START_DX = 3;
 	int BALL_START_DY = -3;
 	int BALL_RADIUS = 10;
-
-	int PADDLE_Y_OFFSET = BALL_START_Y;
-	int PADDLE_X_OFFSET = BALL_START_X - 100;
+	
 	int PADDLE_HEIGHT = 10;
 	int PADDLE_WIDTH = 200;
+	int PADDLE_Y_OFFSET = BALL_START_Y;
+	int PADDLE_X_OFFSET = BALL_START_X - (PADDLE_WIDTH / 2);
 
 	int BRICK_WIDTH = 60;
 	int BRICK_HEIGHT = 20;
