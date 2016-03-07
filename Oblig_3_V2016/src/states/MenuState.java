@@ -10,8 +10,10 @@ public class MenuState extends ScreenState {
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
-		if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
+		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 			root.newState(new PlayState());
+			ball.reset();
+		}
 	}
 
 	@Override
