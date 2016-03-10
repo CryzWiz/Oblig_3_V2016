@@ -19,7 +19,7 @@ public class BrickManager implements Settings {
 		setBrickColors(colorTop, colorMid1, colorMid2, colorBottom);
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
-		destroyRandomBricks();
+		destroyRandomBricks(20);
 		for(int row = 0; row < BRICK_ROWS; row++){
 			for(int col = 0; col < BRICK_COLS; col++){
 				pane.getChildren().add(bricks[row][col].getRectangle());
@@ -62,7 +62,7 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
-	public void destroyRandomBricks() {
+	public void destroyRandomBricks(int percentBricksToRemove) {
 		int numberOfBricksToRemove = (int)(((numberOfRows * numberOfCols) / 100.0) * 20);
 
 		while(numberOfBricksToRemove > 0) {
@@ -81,7 +81,7 @@ public class BrickManager implements Settings {
 				brick.reset();
 			}
 		}
-		destroyRandomBricks();
+		destroyRandomBricks(20);
 	}
 
 	public Brick[][] getBricks() {
