@@ -99,4 +99,8 @@ public class BrickManager implements Settings {
 		//Use brick.collision(ball); on a limited amount of bricks.
 		//Tip: Use ball.getBounds...(); as the hard limits of possibilities.
 	}
+	
+	public Brick getBrick(int row, int col) {
+		return bricks[row][col];
+	}
 }
