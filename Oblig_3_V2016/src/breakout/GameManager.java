@@ -52,4 +52,8 @@ public class GameManager {
 	public void menu() {
 		state = new MenuState();
 	}
+	
+	public void victory() {
+		state = new VictoryState();
+	}
 }

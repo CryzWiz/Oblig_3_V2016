@@ -111,4 +111,11 @@ public class BrickManager implements Settings {
 	public boolean levelComplete() {
 		return ((bricksLeft > 0) ? false: true);
 	}
+	
+	public void tick(GameManager gManager, Ball ball) {
+		collision(ball);
+		if(levelComplete()) {
+			gManager.victory();
+		}
+	}
 }
