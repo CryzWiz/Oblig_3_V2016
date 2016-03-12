@@ -19,11 +19,10 @@ public class GameOverState extends GameState {
 	
 	@Override
 	public void onEscPressed(){
-		System.exit(0);
+		game.exit();
 	};
 
 	@Override
 	public void tick(){
-		//root.newState(new PlayState());
 	}
 }

@@ -44,7 +44,7 @@ public class ScreenManager implements Settings {
 		gameScreen = new StackPane(playLayer, pauseLayer);
 		gameScreen.setBackground(BACKGROUND);
 
-		//Game Over Pane
+		//GameOver Pane
 		endScreen = new StackPane(endText);
 		endScreen.setBackground(BACKGROUND);
 		
