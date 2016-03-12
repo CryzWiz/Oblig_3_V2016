@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 public class VictoryState extends GameState {
 
 	public VictoryState(){
-		sManager.setVictoryScreen(); // Must be changed to VICTORY
+		sManager.setVictoryScreen();
 	}
 
 	@Override

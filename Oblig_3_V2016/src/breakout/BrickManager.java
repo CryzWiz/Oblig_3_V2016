@@ -21,7 +21,7 @@ public class BrickManager implements Settings {
 		setBrickColors(colorTop, colorMid1, colorMid2, colorBottom);
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
-		destroyRandomBricks(20);
+		destroyRandomBricks(PERCENT_BRICKS_TO_REMOVE);
 		for(int row = 0; row < BRICK_ROWS; row++){
 			for(int col = 0; col < BRICK_COLS; col++){
 				pane.getChildren().add(bricks[row][col].getRectangle());
@@ -85,7 +85,7 @@ public class BrickManager implements Settings {
 			}
 		}
 		bricksLeft = numberOfRows * numberOfCols;
-		destroyRandomBricks(98);  // ------------------------------- MUST BE CHANGED, only set for testint purpose
+		destroyRandomBricks(PERCENT_BRICKS_TO_REMOVE);  
 		
 	}
 
@@ -104,7 +104,6 @@ public class BrickManager implements Settings {
 				}
 			}
 		}
-		System.out.println(bricksLeft); // --------------------------- REMOVE! Only for testing
 		//Where ball meets brick
 		//Use brick.collision(ball); on a limited amount of bricks.
 		//Tip: Use ball.getBounds...(); as the hard limits of possibilities.
