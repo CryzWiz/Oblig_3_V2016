@@ -84,7 +84,9 @@ public class BrickManager implements Settings {
 				brick.reset();
 			}
 		}
-		destroyRandomBricks(20);
+		bricksLeft = numberOfRows * numberOfCols;
+		destroyRandomBricks(98);  // ------------------------------- MUST BE CHANGED, only set for testint purpose
+		
 	}
 
 	public Brick[][] getBricks() {
@@ -95,10 +97,14 @@ public class BrickManager implements Settings {
 		//Old brick collision
 		for(Brick[] brickCol : bricks){
 			for(Brick brick : brickCol){
-				brick.collision(ball);
-				bricksLeft--;
+				if (!brick.isDestroyed()) {
+					brick.collision(ball);
+					if(brick.isDestroyed())
+						bricksLeft--;
+				}
 			}
 		}
+		System.out.println(bricksLeft); // --------------------------- REMOVE! Only for testing
 		//Where ball meets brick
 		//Use brick.collision(ball); on a limited amount of bricks.
 		//Tip: Use ball.getBounds...(); as the hard limits of possibilities.
