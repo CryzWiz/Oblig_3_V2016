@@ -56,7 +56,7 @@ public class GameManager {
 	public void victory() {
 		state = new VictoryState();
 	}
-		public void exit(){
+	public void exit(){
 		System.exit(0);
 	}
 }
