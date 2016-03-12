@@ -17,6 +17,7 @@ public class ScreenManager implements Settings {
 	private Pane playLayer; //Play is just part of the gameScreen, thus not named as a "screen"
 	private Pane pauseLayer; //Pause is just part of the gameScreen, thus not named as a "screen"
 	private Pane endScreen;
+	private Pane victoryScreen;
 
 	public ScreenManager(){
 		//Texts
@@ -30,6 +31,9 @@ public class ScreenManager implements Settings {
 		Text menuText = new Text("Click to Start");
 		menuText.setFill(TEXT_COLOR_GAMEOVER);
 		menuText.setFont(font);
+		Text victoryText = new Text("Victory!");
+		victoryText.setFill(TEXT_COLOR_GAMEOVER);
+		victoryText.setFont(font);
 
 		//Game Pane
 		playLayer = new Pane();
@@ -43,6 +47,10 @@ public class ScreenManager implements Settings {
 		//Game Over Pane
 		endScreen = new StackPane(endText);
 		endScreen.setBackground(BACKGROUND);
+		
+		//Victory Pane
+		victoryScreen = new StackPane(victoryText);
+		victoryScreen.setBackground(BACKGROUND);
 
 		//Main Menu Pane
 		Button newGame = new Button("New Game");
@@ -86,5 +94,8 @@ public class ScreenManager implements Settings {
 	}
 	public void setGameOverScreen(){
 		scene.setRoot(endScreen);
+	}
+	public void setVictoryScreen(){
+		scene.setRoot(victoryScreen);
 	}
 }
