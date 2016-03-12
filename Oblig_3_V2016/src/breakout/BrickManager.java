@@ -107,4 +107,8 @@ public class BrickManager implements Settings {
 	public Brick getBrick(int row, int col) {
 		return bricks[row][col];
 	}
+	
+	public boolean levelComplete() {
+		return ((bricksLeft > 0) ? false: true);
+	}
 }
