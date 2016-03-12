@@ -28,7 +28,7 @@ public class PlayState extends GameState {
 	@Override
 	public void tick(){
 		ball.tick();
-		bManager.collision(ball);
+		bManager.tick(game, ball);
 		if(room.collision(ball)){
 			game.gameOver();
 		}
