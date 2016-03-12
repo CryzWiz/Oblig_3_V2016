@@ -65,7 +65,7 @@ public class BrickManager implements Settings {
 		}
 	}
 	public void destroyRandomBricks(int percentBricksToRemove) {
-		int numberOfBricksToRemove = (int)(((numberOfRows * numberOfCols) / 100.0) * 20);
+		int numberOfBricksToRemove = (int)(((numberOfRows * numberOfCols) / 100.0) * percentBricksToRemove);
 
 		while(numberOfBricksToRemove > 0) {
 			int randomRow = (int)(Math.random() * numberOfRows);
