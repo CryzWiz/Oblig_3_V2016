@@ -7,6 +7,7 @@ public class BrickManager implements Settings {
 	private Brick[][] bricks;
 	private int numberOfRows;
 	private int numberOfCols;
+	private int bricksLeft;
 
 	public BrickManager(Pane pane) { 
 		this(pane, BRICK_ROWS, BRICK_COLS);
@@ -16,6 +17,7 @@ public class BrickManager implements Settings {
 	}
 	public BrickManager(Pane pane, int numberOfRows, int numberOfCols, Color colorTop, Color colorMid1, Color colorMid2, Color colorBottom) { 
 		createBricks(numberOfRows, numberOfCols);
+		bricksLeft = numberOfRows * numberOfCols;
 		setBrickColors(colorTop, colorMid1, colorMid2, colorBottom);
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
@@ -71,6 +73,7 @@ public class BrickManager implements Settings {
 			if(!bricks[randomRow][randomCol].isDestroyed()) {
 				bricks[randomRow][randomCol].destroy();
 				numberOfBricksToRemove--;
+				bricksLeft--;
 			}
 		}
 	}
@@ -93,6 +96,7 @@ public class BrickManager implements Settings {
 		for(Brick[] brickCol : bricks){
 			for(Brick brick : brickCol){
 				brick.collision(ball);
+				bricksLeft--;
 			}
 		}
 		//Where ball meets brick
