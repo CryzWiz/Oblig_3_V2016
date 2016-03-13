@@ -23,13 +23,13 @@ public interface Settings {
 
 	boolean BOUNCE_ON_BOT = false;
 
-	int MILLIS_PER_FRAME =10; //Lower speed + higher framerate = same look, more precision, higher CPU load
+	int MILLIS_PER_FRAME = 40; //Lower speed + higher framerate = same look, more precision, higher CPU load
 
 	int FONT_SIZE_GAMEOVER = 48;
 
 	int BALL_START_X = 400;
 	int BALL_START_Y = 500;
-	int BALL_START_DX = 3;
+	int BALL_START_DX = 1;
 	int BALL_START_DY = -3;
 	int BALL_RADIUS = 10;
 	

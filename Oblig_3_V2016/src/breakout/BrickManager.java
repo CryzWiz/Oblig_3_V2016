@@ -92,7 +92,7 @@ public class BrickManager implements Settings {
 		//Old brick collision
 		for(Brick[] brickCol : bricks){
 			for(Brick brick : brickCol){
-				brick.collision(ball);
+				brick.collision3(ball);
 			}
 		}
 		//Where ball meets brick

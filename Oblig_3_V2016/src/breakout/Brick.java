@@ -36,10 +36,11 @@ public class Brick implements Settings {
 		return isDestroyed;
 	}
 
+	//A thorough collision model, angular collision, speed preserved
 	public void collision(Ball ball){
 		if(rectangle.isDisabled())
 			return;
-		switch(getBallDirection(ball.getX(), ball.getY())){
+		switch(getPointZone(ball.getX(), ball.getY())){
 		//Edge collisions:
 		case 1: //Collision from top
 			if(ball.dy > 0 && ball.getBoundsBottom() > getBoundsTop() && isWithinSpaceH(ball)){
@@ -127,10 +128,96 @@ public class Brick implements Settings {
 		}
 	}
 
+	//A simple collision model, no angular calculation
+	public void collision2(Ball ball){
+		if(!rectangle.isDisabled() && isWithinSpace(ball)){
+			switch(getBallZone(ball)){
+			case 1:
+			case 7:
+				ball.bounceY();
+				destroy();
+				break;
+			case 3:
+			case 5:
+				ball.bounceX();
+				destroy();
+				break;
+			case 4:
+				if(isWithinBoundsV(calculateHorizontalIntersectY(ball)))
+					ball.bounceX();
+				else
+					ball.bounceY();
+				destroy();
+			}
+		}
+	}
+
+	//A advanced collision model, best of both worlds
+	public void collision3(Ball ball){
+		if(!rectangle.isDisabled() && isWithinSpace(ball)){
+			switch(getBallZone(ball)){
+			case 1: //Up & Down
+			case 7:
+				if(isWithinBoundsV(calculateHorizontalIntersectY(ball))){
+					System.out.println((ball.dy > 0 ? "Top" : "Bot"));
+					ball.bounceY();
+					destroy();
+				}
+				break;
+			case 3: //Left & Right
+			case 5:
+				if(isWithinBoundsH(calculateVerticalIntersectX(ball))){
+					System.out.println((ball.dx > 0 ? "Left" : "Right"));
+					ball.bounceX();
+					destroy();
+				}
+				break;
+			case 4: //Inside
+				System.out.println("inside");
+				if(ball.dx == 0)
+					ball.bounceY();
+				else if(ball.dy == 0)
+					ball.bounceX();
+				else if(!isWithinBoundsV(calculateHorizontalIntersectY(ball)))
+					ball.bounceY();
+				else if(!isWithinBoundsH(calculateVerticalIntersectX(ball)))
+					ball.bounceX();
+				else 
+					System.out.println("Special case");
+				destroy();
+			}
+		}
+	}
+
+	public double calculateHorizontalIntersectY(Ball ball){
+		int relevantBound = (ball.dx > 0 ? getBoundsLeft() - ball.getRadius() : getBoundsRight() + ball.getRadius());
+		return ball.getY() - (ball.getX()-relevantBound)*ball.dy/ball.dx;
+	}
+	public double calculateVerticalIntersectX(Ball ball){
+		int relevantBound = (ball.dy > 0 ? getBoundsTop() - ball.getRadius() : getBoundsBottom() + ball.getRadius());
+		return ball.getX() - (ball.getY()-relevantBound)*ball.dx/ball.dy;
+	}
+	
 	public Rectangle getRectangle(){
 		return rectangle;
 	}
 
+	public boolean isWithinBoundsH(double x){
+		if(x < getBoundsBottom() && x > getBoundsTop())
+			return true;
+		return false;
+	}
+	public boolean isWithinBoundsV(double y){
+		if(y < getBoundsRight() && y > getBoundsLeft())
+			return true;
+		return false;
+	}
+	public boolean isWithinSpaceH(double x, double r){
+		return x < getBoundsBottom() + r && x > getBoundsTop() - r;
+	}
+	public boolean isWithinSpaceV(double y, double r){
+		return y < getBoundsRight() + r && y > getBoundsLeft() - r;
+	}
 	public boolean isWithinSpaceH(Ball ball){
 		if(ball.getBoundsLeft() < getBoundsRight() && ball.getBoundsRight() > getBoundsLeft())
 			return true;
@@ -140,6 +227,9 @@ public class Brick implements Settings {
 		if(ball.getBoundsBottom() > getBoundsTop() && ball.getBoundsTop() < getBoundsBottom())
 			return true;
 		return false;
+	}
+	public boolean isWithinSpace(Ball ball){
+		return isWithinSpaceH(ball) && isWithinSpaceV(ball);
 	}
 
 	public int getBoundsLeft(){
@@ -155,7 +245,7 @@ public class Brick implements Settings {
 		return (int)(rectangle.getTranslateY() + rectangle.getHeight());
 	}
 
-	public int getBallDirection(double x, double y){
+	public int getPointZone(double x, double y){
 		int hPosition = 1;
 		int vPosition = 1;
 		if(x < getBoundsLeft())
@@ -167,6 +257,14 @@ public class Brick implements Settings {
 		else if(y > getBoundsBottom())
 			vPosition = 2;
 		return 3 * vPosition + hPosition;
+	}
+	
+	public int getBallZone(Ball ball){
+		return getPointZone(ball.getX(), ball.getY());
+	}
+	
+	public int getBallPrevZone(Ball ball){
+		return getPointZone(ball.getPrevX(), ball.getPrevY());
 	}
 
 	public void setFill(Paint value){
