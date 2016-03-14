@@ -7,6 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -27,6 +28,7 @@ public class ScreenManager implements Settings {
 	private long totalSeconds;
 	private Text timerText;
 
+
 	public ScreenManager(){
 		//Texts
 		Font font = Font.font(FONT_SIZE_GAMEOVER);
@@ -42,14 +44,14 @@ public class ScreenManager implements Settings {
 		Text victoryText = new Text("Victory!");
 		victoryText.setFill(TEXT_COLOR_GAMEOVER);
 		victoryText.setFont(font);
-		timerText = new Text(TIMER_X, TIMER_Y, "00:00:00");
-		timerText.setFont(font);
-		timerText.setFill(TEXT_COLOR_GAMEOVER);
-
+		timerText = new Text("00:00:00");
+		timerText.setFont(Font.font(30));
+		timerText.setFill(Color.WHITE);
+	
 		//Timer
 		timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
 		timer.setCycleCount(Timeline.INDEFINITE);
-		
+
 		//Game Pane
 		playLayer = new Pane();
 		Rectangle shadow = new Rectangle(0, 0, WIDTH, HEIGHT); 
@@ -61,9 +63,6 @@ public class ScreenManager implements Settings {
 		gameScreen = new StackPane(playLayer, pauseLayer, timerLayer);
 		gameScreen.setBackground(BACKGROUND);
 		
-
-		
-
 		//GameOver Pane
 		endScreen = new StackPane(endText);
 		endScreen.setBackground(BACKGROUND);
@@ -118,11 +117,11 @@ public class ScreenManager implements Settings {
 	}
 	public void setGameOverScreen(){
 		scene.setRoot(endScreen);
-
+		resetTimer();
 	}
 	public void setVictoryScreen(){
 		scene.setRoot(victoryScreen);
-
+		resetTimer();
 	}
 	public void updateTimer() {
 		totalSeconds++;
