@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 public class PlayState extends GameState {
 
 	public PlayState(){
-		sManager.setPlayScreen();
+		screenManager.setPlayScreen();
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class PlayState extends GameState {
 	@Override
 	public void tick(){
 		ball.tick();
-		bManager.tick(game, ball);
+		brickManager.tick(game, ball);
 		if(room.collision(ball)){
 			game.gameOver();
 		}

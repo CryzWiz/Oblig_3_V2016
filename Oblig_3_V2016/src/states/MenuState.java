@@ -5,14 +5,14 @@ import javafx.scene.input.MouseEvent;
 public class MenuState extends GameState {
 
 	public MenuState(){
-		sManager.setMenuScreen();
+		screenManager.setMenuScreen();
 	}
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 			game.play();
-			bManager.reset();
+			brickManager.reset();
 			ball.reset();
 		}
 	}
@@ -20,7 +20,7 @@ public class MenuState extends GameState {
 	@Override
 	public void onEnterPressed(){
 		game.play();
-		bManager.reset();
+		brickManager.reset();
 		ball.reset();
 	}
 	

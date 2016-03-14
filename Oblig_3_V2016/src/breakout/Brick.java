@@ -25,7 +25,6 @@ public class Brick implements Settings {
 		rectangle.setVisible(false);
 		isDestroyed = true;
 	}
-	
 	public void reset(){
 		rectangle.setDisable(false);
 		rectangle.setVisible(true);
@@ -36,32 +35,31 @@ public class Brick implements Settings {
 		return isDestroyed;
 	}
 
-	//A thorough collision model, angular collision, speed preserved
-	public void collision(Ball ball){
-		if(rectangle.isDisabled() && isWithinSpace(ball))
+	private void collision_old(Ball ball){
+		if(rectangle.isDisabled() && isInMaxRange(ball))
 			return;
 		switch(getPointZone(ball.getX(), ball.getY())){
 		//Edge collisions:
 		case 1: //Collision from top
-			if(ball.dy > 0 && ball.getBoundsBottom() > getBoundsTop() && isWithinSpaceH(ball)){
+			if(ball.dy > 0 && ball.getBoundsBottom() > getBoundsTop() && isInMaxRangeX(ball)){
 				ball.bounceY();
 				destroy();
 			}
 			break;
 		case 3: //Left
-			if(ball.dx > 0 && ball.getBoundsRight() > getBoundsLeft()&& isWithinSpaceV(ball)){
+			if(ball.dx > 0 && ball.getBoundsRight() > getBoundsLeft()&& isInMaxRangeY(ball)){
 				ball.bounceX();
 				destroy();
 			}
 			break;
 		case 5: //Right
-			if(ball.dx < 0 && ball.getBoundsLeft() < getBoundsRight()&& isWithinSpaceV(ball)){
+			if(ball.dx < 0 && ball.getBoundsLeft() < getBoundsRight()&& isInMaxRangeY(ball)){
 				ball.bounceX();
 				destroy();
 			}
 			break;
 		case 7:
-			if(ball.dy < 0 && ball.getBoundsTop() < getBoundsBottom()&& isWithinSpaceH(ball)){
+			if(ball.dy < 0 && ball.getBoundsTop() < getBoundsBottom()&& isInMaxRangeX(ball)){
 				ball.bounceY();
 				destroy();
 			}
@@ -127,10 +125,8 @@ public class Brick implements Settings {
 			break;
 		}
 	}
-
-	//A simple collision model, no angular calculation
-	public void collision2(Ball ball){
-		if(!rectangle.isDisabled() && isWithinSpace(ball)){
+	private void collision_simple(Ball ball){
+		if(!rectangle.isDisabled() && isInMaxRange(ball)){
 			switch(getBallZone(ball)){
 			case 1:
 			case 7:
@@ -143,7 +139,7 @@ public class Brick implements Settings {
 				destroy();
 				break;
 			case 4:
-				if(isWithinBoundsV(calculateHorizontalIntersectY(ball)))
+				if(isInCloseRangeY(yWhenEnterCloseRange(ball)))
 					ball.bounceX();
 				else
 					ball.bounceY();
@@ -151,49 +147,119 @@ public class Brick implements Settings {
 			}
 		}
 	}
-
-	//A advanced collision model, best of both worlds
-	public void collision3(Ball ball){
-		if(!rectangle.isDisabled() && isWithinSpace(ball)){
+	private void collision_full(Ball ball){
+		if(!rectangle.isDisabled() && isInMaxRange(ball)){
+			/*System.out.println("\n\n" + getBoundsLeft() + ", " + getBoundsRight());
+			System.out.println(getBoundsTop() + ", " + getBoundsBottom());
+			System.out.println(ball.dx + ", " + ball.dy);
+			System.out.print(ball.getX() + ", " + ball.getY());*/ //For Debugging purposes
 			switch(getBallZone(ball)){
-			case 1: //Up & Down
-			case 7:
-				if(isWithinBoundsV(calculateHorizontalIntersectY(ball))){
-					System.out.println((ball.dy > 0 ? "Top" : "Bot"));
-					ball.bounceY();
-					destroy();
+			case 1: //Top
+			case 7: //Bot
+				if(ball.dy != 0){
+					if(!isInMaxRangeX(xWhenEnterCloseRange(ball), ball.getRadius()))
+						break;
+				}
+				//System.out.println((ball.dy > 0 ? " - TOP" : " - BOT")); //For debugging purposes
+				ball.bounceY();
+				destroy();
+				break;
+			case 3: //Left
+			case 5: //Right
+				if(ball.dx != 0){
+					if(!isInMaxRangeY(yWhenEnterCloseRange(ball), ball.getRadius()))
+						break;
+				}
+				//System.out.println((ball.dx > 0 ? " - LEFT" : " - RIGHT")); //For debugging purposes
+				ball.bounceX();
+				destroy();
+				break;
+			//Corners
+			case 0: //Top-Left
+				if(ball.dx > 0 || ball.dy > 0){ // TASK: Move distance check from bounceOffPoint into if-test
+					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop()))  
+						destroy();
 				}
 				break;
-			case 3: //Left & Right
-			case 5:
-				if(isWithinBoundsH(calculateVerticalIntersectX(ball))){
-					System.out.println((ball.dx > 0 ? "Left" : "Right"));
-					ball.bounceX();
-					destroy();
+			case 2: //Top-Right
+				if(ball.dx < 0 || ball.dy > 0){
+					if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop()))
+						destroy();
+				}
+				break;
+			case 6: //Bottom-Left
+				if(ball.dx > 0 || ball.dy < 0){
+					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom()))
+						destroy();
+				}
+				break;
+			case 8: //Bottom-Right
+				if(ball.dx < 0 || ball.dy < 0){
+					if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom()))
+						destroy();
 				}
 				break;
 			case 4: //Inside
-				System.out.println("inside");
-				if(ball.dx == 0)
+				ball.bounceX();
+				ball.bounceY();
+				if(ball.dx < 0){
+					if(ball.dy < 0){
+						if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop())){
+							destroy();
+							break;
+						}
+					} else {
+						if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom())){
+							destroy();
+							break;
+						}
+					}
+				} else {
+					if(ball.dy < 0){
+						if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop())){
+							destroy();
+							break;
+						}
+					} else {
+						if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom())){
+							destroy();
+							break;
+						}
+					}
+				}
+				if(Math.abs(ball.dx) > Math.abs(ball.dy))
 					ball.bounceY();
-				else if(ball.dy == 0)
+				else
 					ball.bounceX();
-				else if(!isWithinBoundsV(calculateHorizontalIntersectY(ball)))
-					ball.bounceY();
-				else if(!isWithinBoundsH(calculateVerticalIntersectX(ball)))
-					ball.bounceX();
-				else 
-					System.out.println("Special case");
 				destroy();
+				break;
 			}
 		}
 	}
 
-	public double calculateHorizontalIntersectY(Ball ball){
+	public void collision(Ball ball, int version){
+		switch(version){
+		case COLLISION_MODEL_OLD:
+			collision_old(ball);
+			break;
+		case COLLISION_MODEL_SIMPLE:
+			collision_simple(ball);
+			break;
+		case COLLISION_MODEL_FULL:
+			collision_full(ball);
+			break;
+		}
+	}
+	public void collision(Ball ball){
+		collision(ball, COLLISION_MODEL_DEFAULT);
+	}
+	
+	public double yWhenEnterCloseRange(Ball ball){
 		int relevantBound = (ball.dx > 0 ? getBoundsLeft() - ball.getRadius() : getBoundsRight() + ball.getRadius());
+		//return ball.getY() - (Math.abs(ball.getX()-relevantBound))*ball.dy/ball.dx;
 		return ball.getY() - (ball.getX()-relevantBound)*ball.dy/ball.dx;
 	}
-	public double calculateVerticalIntersectX(Ball ball){
+	public double xWhenEnterCloseRange(Ball ball){
 		int relevantBound = (ball.dy > 0 ? getBoundsTop() - ball.getRadius() : getBoundsBottom() + ball.getRadius());
 		return ball.getX() - (ball.getY()-relevantBound)*ball.dx/ball.dy;
 	}
@@ -202,34 +268,34 @@ public class Brick implements Settings {
 		return rectangle;
 	}
 
-	public boolean isWithinBoundsH(double x){
-		if(x < getBoundsBottom() && x > getBoundsTop())
+	public boolean isInCloseRangeX(double x){
+		if(x < getBoundsRight() && x > getBoundsLeft())
 			return true;
 		return false;
 	}
-	public boolean isWithinBoundsV(double y){
-		if(y < getBoundsRight() && y > getBoundsLeft())
+	public boolean isInCloseRangeY(double y){
+		if(y < getBoundsBottom() && y > getBoundsTop())
 			return true;
 		return false;
 	}
-	public boolean isWithinSpaceH(double x, double r){
-		return x < getBoundsBottom() + r && x > getBoundsTop() - r;
+	public boolean isInMaxRangeX(double x, double r){
+		return x < getBoundsRight() + r && x > getBoundsLeft() - r;
 	}
-	public boolean isWithinSpaceV(double y, double r){
-		return y < getBoundsRight() + r && y > getBoundsLeft() - r;
+	public boolean isInMaxRangeY(double y, double r){
+		return y < getBoundsBottom() + r && y > getBoundsTop() - r;
 	}
-	public boolean isWithinSpaceH(Ball ball){
+	public boolean isInMaxRangeX(Ball ball){
 		if(ball.getBoundsLeft() < getBoundsRight() && ball.getBoundsRight() > getBoundsLeft())
 			return true;
 		return false;
 	}
-	public boolean isWithinSpaceV(Ball ball){
+	public boolean isInMaxRangeY(Ball ball){
 		if(ball.getBoundsBottom() > getBoundsTop() && ball.getBoundsTop() < getBoundsBottom())
 			return true;
 		return false;
 	}
-	public boolean isWithinSpace(Ball ball){
-		return isWithinSpaceH(ball) && isWithinSpaceV(ball);
+	public boolean isInMaxRange(Ball ball){
+		return isInMaxRangeX(ball) && isInMaxRangeY(ball);
 	}
 
 	public int getBoundsLeft(){
@@ -258,11 +324,10 @@ public class Brick implements Settings {
 			vPosition = 2;
 		return 3 * vPosition + hPosition;
 	}
-	
 	public int getBallZone(Ball ball){
+
 		return getPointZone(ball.getX(), ball.getY());
 	}
-	
 	public int getBallPrevZone(Ball ball){
 		return getPointZone(ball.getPrevX(), ball.getPrevY());
 	}

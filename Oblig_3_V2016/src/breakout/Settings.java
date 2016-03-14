@@ -5,10 +5,13 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 
 public interface Settings {
+	boolean BALL_GRAVITY_ON = true;
+	boolean BOUNCE_ON_BOT = false;
+
 	Color BACKGROUND_COLOR = Color.BLACK;
 	Color BALL_COLOR = Color.YELLOWGREEN;
 	Color PADDLE_COLOR = Color.GRAY;
-	Color TEXT_COLOR_GAMEOVER = Color.GREEN;
+	Color TEXT_COLOR = Color.GREEN;
 
 	Background BACKGROUND = new Background(new BackgroundFill(BACKGROUND_COLOR, null, null));
 	/*Color BRICK_COLOR_LAYER1 = Color.BLUE;
@@ -21,17 +24,22 @@ public interface Settings {
 	Color BRICK_COLOR_LAYER3 = Color.GRAY;
 	Color BRICK_COLOR_LAYER4 = Color.RED;
 
-	boolean BOUNCE_ON_BOT = false;
-
 	int MILLIS_PER_FRAME = 40; //Lower speed + higher framerate = same look, more precision, higher CPU load
 
 	int FONT_SIZE_GAMEOVER = 48;
+	
+	int COLLISION_MODEL_OLD = 0;
+	int COLLISION_MODEL_SIMPLE = 1;
+	int COLLISION_MODEL_FULL = 2;
+
+	int COLLISION_MODEL_DEFAULT = COLLISION_MODEL_FULL;
 
 	int BALL_START_X = 400;
 	int BALL_START_Y = 500;
-	int BALL_START_DX = 1;
-	int BALL_START_DY = -3;
+	int BALL_START_DX = 4;
+	int BALL_START_DY = -11;
 	int BALL_RADIUS = 10;
+	double BALL_GRAVITY_FACTOR = (Math.abs(BALL_START_DY) + Math.abs(BALL_START_DX)) / 5.0;
 	
 	int PADDLE_HEIGHT = 10;
 	int PADDLE_WIDTH = 200;

@@ -10,8 +10,8 @@ import javafx.scene.input.MouseEvent;
 
 public abstract class GameState {
 	protected static GameManager game;
-	protected static ScreenManager sManager;
-	protected static BrickManager bManager;
+	protected static ScreenManager screenManager;
+	protected static BrickManager brickManager;
 	protected static Racket racket;
 	protected static Ball ball;
 	protected static Room room;
@@ -20,8 +20,8 @@ public abstract class GameState {
 
 	public static void setStatics(GameManager root, ScreenManager sm){
 		GameState.game = root;
-		sManager = sm;
-		bManager = new BrickManager(sm.getPlayLayer());
+		screenManager = sm;
+		brickManager = new BrickManager(sm.getPlayLayer());
 		racket = new Racket(sm.getPlayLayer());
 		ball = new Ball(sm.getPlayLayer());
 		room = new Room(sm.getScene());

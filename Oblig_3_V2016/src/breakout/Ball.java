@@ -7,6 +7,7 @@ import javafx.scene.shape.Circle;
 public class Ball implements Settings {
 	private Circle circle;
 	double dx, dy;
+	boolean gravityOn;
 
 	public Ball(Pane pane){
 		this(pane, BALL_START_DX, BALL_START_DY, BALL_RADIUS, BALL_COLOR);
@@ -21,6 +22,7 @@ public class Ball implements Settings {
 		circle.setTranslateX(x);
 		circle.setTranslateY(y);
 		pane.getChildren().add(circle);
+		gravityOn = BALL_GRAVITY_ON;
 	}
 
 	public void reset(){
@@ -109,5 +111,7 @@ public class Ball implements Settings {
 	public void tick(){
 		circle.setTranslateX(circle.getTranslateX() + dx);
 		circle.setTranslateY(circle.getTranslateY() + dy);
+		if(dy * dy < 10 && gravityOn)
+			dy += BALL_GRAVITY_FACTOR;
 	}
 }

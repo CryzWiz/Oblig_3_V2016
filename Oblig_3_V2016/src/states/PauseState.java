@@ -3,7 +3,7 @@ package states;
 public class PauseState extends GameState {
 
 	public PauseState(){
-		sManager.setPauseScreen();
+		screenManager.setPauseScreen();
 	}
 
 	@Override

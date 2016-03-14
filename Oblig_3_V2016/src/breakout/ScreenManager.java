@@ -23,16 +23,16 @@ public class ScreenManager implements Settings {
 		//Texts
 		Font font = Font.font(FONT_SIZE_GAMEOVER);
 		Text endText = new Text("GAME OVER!");
-		endText.setFill(TEXT_COLOR_GAMEOVER);
+		endText.setFill(TEXT_COLOR);
 		endText.setFont(font);
 		Text pauseText = new Text("Game paused!");
-		pauseText.setFill(TEXT_COLOR_GAMEOVER);
+		pauseText.setFill(TEXT_COLOR);
 		pauseText.setFont(font);
 		Text menuText = new Text("Click to Start");
-		menuText.setFill(TEXT_COLOR_GAMEOVER);
+		menuText.setFill(TEXT_COLOR);
 		menuText.setFont(font);
 		Text victoryText = new Text("Victory!");
-		victoryText.setFill(TEXT_COLOR_GAMEOVER);
+		victoryText.setFill(TEXT_COLOR);
 		victoryText.setFont(font);
 
 		//Game Pane
@@ -76,6 +76,9 @@ public class ScreenManager implements Settings {
 	}
 	public Pane getGameOverScreen(){
 		return endScreen;
+	}
+	public Pane getVictoryScreen(){
+		return victoryScreen;
 	}
 	public void setPauseOpacity(double opacity){
 		pauseLayer.setOpacity(opacity);

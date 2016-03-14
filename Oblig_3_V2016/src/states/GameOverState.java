@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 public class GameOverState extends GameState {
 
 	public GameOverState(){
-		sManager.setGameOverScreen();
+		screenManager.setGameOverScreen();
 	}
 
 	@Override
@@ -13,7 +13,7 @@ public class GameOverState extends GameState {
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 			game.play();
 			ball.reset();
-			bManager.reset();
+			brickManager.reset();
 		}
 	}
 	

@@ -5,7 +5,7 @@ import javafx.scene.input.MouseEvent;
 public class VictoryState extends GameState {
 
 	public VictoryState(){
-		sManager.setVictoryScreen();
+		screenManager.setVictoryScreen();
 	}
 
 	@Override
@@ -13,7 +13,7 @@ public class VictoryState extends GameState {
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 			game.play();
 			ball.reset();
-			bManager.reset();
+			brickManager.reset();
 		}
 	}
 	

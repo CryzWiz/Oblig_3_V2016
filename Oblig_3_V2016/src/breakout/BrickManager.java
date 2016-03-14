@@ -98,7 +98,7 @@ public class BrickManager implements Settings {
 		for(Brick[] brickCol : bricks){
 			for(Brick brick : brickCol){
 				if (!brick.isDestroyed()) {
-					brick.collision3(ball);
+					brick.collision(ball);
 					if(brick.isDestroyed())
 						bricksLeft--;
 				}
