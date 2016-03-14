@@ -6,11 +6,13 @@ public class GameOverState extends GameState {
 
 	public GameOverState(){
 		screenManager.setGameOverScreen();
+		pauseTimer();
 	}
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
+			resetTimer();
 			game.play();
 			ball.reset();
 			brickManager.reset();

@@ -6,11 +6,13 @@ public class VictoryState extends GameState {
 
 	public VictoryState(){
 		screenManager.setVictoryScreen();
+		pauseTimer();
 	}
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
+			resetTimer();
 			game.play();
 			ball.reset();
 			brickManager.reset();

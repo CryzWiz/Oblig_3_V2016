@@ -14,15 +14,15 @@ public interface Settings {
 	Color TEXT_COLOR = Color.GREEN;
 
 	Background BACKGROUND = new Background(new BackgroundFill(BACKGROUND_COLOR, null, null));
-	/*Color BRICK_COLOR_LAYER1 = Color.BLUE;
-      Color BRICK_COLOR_LAYER2 = Color.GREEN;
-      Color BRICK_COLOR_LAYER3 = Color.YELLOW;
-      Color BRICK_COLOR_LAYER4 = Color.RED;*/
+	Color BRICK_COLOR_LAYER1 = Color.BLUE;
+    Color BRICK_COLOR_LAYER2 = Color.GREEN;
+    Color BRICK_COLOR_LAYER3 = Color.YELLOW;
+    Color BRICK_COLOR_LAYER4 = Color.RED;
 
-	Color BRICK_COLOR_LAYER1 = Color.PALETURQUOISE;
-	Color BRICK_COLOR_LAYER2 = Color.GREENYELLOW;
-	Color BRICK_COLOR_LAYER3 = Color.GRAY;
-	Color BRICK_COLOR_LAYER4 = Color.RED;
+//	Color BRICK_COLOR_LAYER1 = Color.PALETURQUOISE;
+//	Color BRICK_COLOR_LAYER2 = Color.GREENYELLOW;
+//	Color BRICK_COLOR_LAYER3 = Color.GRAY;
+//	Color BRICK_COLOR_LAYER4 = Color.RED;
 
 	int MILLIS_PER_FRAME = 40; //Lower speed + higher framerate = same look, more precision, higher CPU load
 
