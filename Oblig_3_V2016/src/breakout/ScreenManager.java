@@ -21,12 +21,10 @@ public class ScreenManager implements Settings {
 	private StackPane gameScreen;
 	private Pane playLayer; //Play is just part of the gameScreen, thus not named as a "screen"
 	private Pane pauseLayer; //Pause is just part of the gameScreen, thus not named as a "screen"
-	private Pane timerLayer;
+	private BorderPane timerLayer;
 	private Pane endScreen;
 	private Pane victoryScreen;
-
 	private Text timerText;
-
 
 	public ScreenManager(){
 		//Texts
@@ -47,14 +45,12 @@ public class ScreenManager implements Settings {
 		timerText.setFont(Font.font(30));
 		timerText.setFill(Color.WHITE);
 	
-
-
 		//Game Pane
 		playLayer = new Pane();
 		Rectangle shadow = new Rectangle(0, 0, WIDTH, HEIGHT); 
 		Pane shadowLayer = new Pane(shadow);
 		shadowLayer.setOpacity(0.7);
-		BorderPane timerLayer = new BorderPane();
+		timerLayer = new BorderPane();
 		timerLayer.setBottom(timerText);
 		pauseLayer = new StackPane(shadowLayer, pauseText);
 		gameScreen = new StackPane(playLayer, pauseLayer, timerLayer);
@@ -114,8 +110,6 @@ public class ScreenManager implements Settings {
 	public void setVictoryScreen(){
 		scene.setRoot(victoryScreen);
 	}
-
-
 	public void setTimerText(String timerText) {
 		this.timerText.setText(timerText);
 	}

@@ -57,7 +57,6 @@ public abstract class GameState {
 		long hours = totalSeconds / 3600;
 		long minutes = (totalSeconds % 3600) / 60;
 		long seconds = totalSeconds % 60;
-		
 		sManager.setTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
 	}
 	public void playTimer() {
@@ -70,8 +69,7 @@ public abstract class GameState {
 		totalSeconds = 0;
 		updateTimer();
 	}
-
 	public void tick(){
-
+		
 	}
 }
