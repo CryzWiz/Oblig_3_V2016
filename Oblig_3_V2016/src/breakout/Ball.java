@@ -6,7 +6,7 @@ import javafx.scene.shape.Circle;
 
 public class Ball implements Settings {
 	private Circle circle;
-	double dx, dy; //Convert int to double????
+	double dx, dy;
 
 	public Ball(Pane pane){
 		this(pane, BALL_START_DX, BALL_START_DY, BALL_RADIUS, BALL_COLOR);
