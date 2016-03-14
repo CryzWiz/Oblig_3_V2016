@@ -4,6 +4,7 @@ public class PauseState extends GameState {
 
 	public PauseState(){
 		sManager.setPauseScreen();
+		pauseTimer();
 	}
 
 	@Override

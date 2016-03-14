@@ -14,6 +14,7 @@ public class MenuState extends GameState {
 			game.play();
 			bManager.reset();
 			ball.reset();
+			resetTimer();
 		}
 	}
 
@@ -22,6 +23,7 @@ public class MenuState extends GameState {
 		game.play();
 		bManager.reset();
 		ball.reset();
+		resetTimer();
 	}
 	
 	@Override

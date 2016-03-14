@@ -24,8 +24,7 @@ public class ScreenManager implements Settings {
 	private Pane timerLayer;
 	private Pane endScreen;
 	private Pane victoryScreen;
-	private Timeline timer;
-	private long totalSeconds;
+
 	private Text timerText;
 
 
@@ -48,9 +47,7 @@ public class ScreenManager implements Settings {
 		timerText.setFont(Font.font(30));
 		timerText.setFill(Color.WHITE);
 	
-		//Timer
-		timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
-		timer.setCycleCount(Timeline.INDEFINITE);
+
 
 		//Game Pane
 		playLayer = new Pane();
@@ -103,42 +100,23 @@ public class ScreenManager implements Settings {
 	public void setPlayScreen(){
 		scene.setRoot(gameScreen);
 		setPauseOpacity(0);
-		playTimer();
 	}
 	public void setPauseScreen(){
 		scene.setRoot(gameScreen);
 		setPauseOpacity(1);
-		pauseTimer();
-		
 	}
 	public void setMenuScreen(){
 		scene.setRoot(menuScreen);
-		resetTimer();
 	}
 	public void setGameOverScreen(){
 		scene.setRoot(endScreen);
-		resetTimer();
 	}
 	public void setVictoryScreen(){
 		scene.setRoot(victoryScreen);
-		resetTimer();
 	}
-	public void updateTimer() {
-		totalSeconds++;
-		long hours = totalSeconds / 3600;
-		long minutes = (totalSeconds % 3600) / 60;
-		long seconds = totalSeconds % 60;
-		
-		timerText.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
-	
-	}
-	public void playTimer() {
-		timer.play();
-	}
-	public void pauseTimer() {
-		timer.pause();
-	}
-	public void resetTimer() {
-		totalSeconds = 0;
+
+
+	public void setTimerText(String timerText) {
+		this.timerText.setText(timerText);
 	}
 }
