@@ -25,9 +25,9 @@ public class Room implements Settings{
 		return false;
 	}
 	public boolean collideRacket(Ball ball){
-		if(ball.getY() > PADDLE_Y_OFFSET)
-			if(ball.getX() < (Racket.dx + (PADDLE_WIDTH / 2)) && 
-					ball.getX() > (Racket.dx - (PADDLE_WIDTH / 2)))
+		if(ball.getY() > (PADDLE_Y_OFFSET - 15) )
+			if(ball.getX() < (Racket.dx + ((PADDLE_WIDTH / 2) + 10)) && 
+					ball.getX() > (Racket.dx - ((PADDLE_WIDTH / 2) + 10)) && (ball.getY() < (PADDLE_Y_OFFSET)))
 				return true;
 		return false;
 	}
