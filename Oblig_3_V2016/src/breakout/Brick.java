@@ -38,7 +38,7 @@ public class Brick implements Settings {
 
 	//A thorough collision model, angular collision, speed preserved
 	public void collision(Ball ball){
-		if(rectangle.isDisabled())
+		if(rectangle.isDisabled() && isWithinSpace(ball))
 			return;
 		switch(getPointZone(ball.getX(), ball.getY())){
 		//Edge collisions:
