@@ -58,4 +58,6 @@ public interface Settings {
 			BRICK_ROWS * (BRICK_HEIGHT + BRICK_PADDING_V) - BRICK_PADDING_V;
 	
 	int PERCENT_BRICKS_TO_REMOVE = 20;
+	int TIMER_X = WIDTH / 2; //--------------------------------------------------- CHANGE THIS!!!!!
+	int TIMER_Y = HEIGHT / 2;     //--------------------------------------------------- CHANGE THIS!!!!!
 }

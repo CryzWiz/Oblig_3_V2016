@@ -3,12 +3,16 @@ package breakout;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 
 public class ScreenManager implements Settings {
 	private Scene scene;
@@ -16,8 +20,12 @@ public class ScreenManager implements Settings {
 	private StackPane gameScreen;
 	private Pane playLayer; //Play is just part of the gameScreen, thus not named as a "screen"
 	private Pane pauseLayer; //Pause is just part of the gameScreen, thus not named as a "screen"
+	private Pane timerLayer;
 	private Pane endScreen;
 	private Pane victoryScreen;
+	private Timeline timer;
+	private long totalSeconds;
+	private Text timerText;
 
 	public ScreenManager(){
 		//Texts
@@ -34,15 +42,27 @@ public class ScreenManager implements Settings {
 		Text victoryText = new Text("Victory!");
 		victoryText.setFill(TEXT_COLOR_GAMEOVER);
 		victoryText.setFont(font);
+		timerText = new Text(TIMER_X, TIMER_Y, "00:00:00");
+		timerText.setFont(font);
+		timerText.setFill(TEXT_COLOR_GAMEOVER);
 
+		//Timer
+		timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateTimer()));
+		timer.setCycleCount(Timeline.INDEFINITE);
+		
 		//Game Pane
 		playLayer = new Pane();
 		Rectangle shadow = new Rectangle(0, 0, WIDTH, HEIGHT); 
 		Pane shadowLayer = new Pane(shadow);
 		shadowLayer.setOpacity(0.7);
+		BorderPane timerLayer = new BorderPane();
+		timerLayer.setBottom(timerText);
 		pauseLayer = new StackPane(shadowLayer, pauseText);
-		gameScreen = new StackPane(playLayer, pauseLayer);
+		gameScreen = new StackPane(playLayer, pauseLayer, timerLayer);
 		gameScreen.setBackground(BACKGROUND);
+		
+
+		
 
 		//GameOver Pane
 		endScreen = new StackPane(endText);
@@ -84,18 +104,42 @@ public class ScreenManager implements Settings {
 	public void setPlayScreen(){
 		scene.setRoot(gameScreen);
 		setPauseOpacity(0);
+		playTimer();
 	}
 	public void setPauseScreen(){
 		scene.setRoot(gameScreen);
 		setPauseOpacity(1);
+		pauseTimer();
+		
 	}
 	public void setMenuScreen(){
 		scene.setRoot(menuScreen);
+		resetTimer();
 	}
 	public void setGameOverScreen(){
 		scene.setRoot(endScreen);
+
 	}
 	public void setVictoryScreen(){
 		scene.setRoot(victoryScreen);
+
+	}
+	public void updateTimer() {
+		totalSeconds++;
+		long hours = totalSeconds / 3600;
+		long minutes = (totalSeconds % 3600) / 60;
+		long seconds = totalSeconds % 60;
+		
+		timerText.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+	
+	}
+	public void playTimer() {
+		timer.play();
+	}
+	public void pauseTimer() {
+		timer.pause();
+	}
+	public void resetTimer() {
+		totalSeconds = 0;
 	}
 }
