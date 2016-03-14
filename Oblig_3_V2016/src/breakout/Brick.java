@@ -36,7 +36,7 @@ public class Brick implements Settings {
 	}
 
 	private void collision_old(Ball ball){
-		if(rectangle.isDisabled() && isInMaxRange(ball))
+		if(isInMaxRange(ball))
 			return;
 		switch(getPointZone(ball.getX(), ball.getY())){
 		//Edge collisions:
@@ -126,7 +126,7 @@ public class Brick implements Settings {
 		}
 	}
 	private void collision_simple(Ball ball){
-		if(!rectangle.isDisabled() && isInMaxRange(ball)){
+		if(isInMaxRange(ball)){
 			switch(getBallZone(ball)){
 			case 1:
 			case 7:
@@ -148,7 +148,7 @@ public class Brick implements Settings {
 		}
 	}
 	private void collision_full(Ball ball){
-		if(!rectangle.isDisabled() && isInMaxRange(ball)){
+		if(isInMaxRange(ball)){
 			/*System.out.println("\n\n" + getBoundsLeft() + ", " + getBoundsRight());
 			System.out.println(getBoundsTop() + ", " + getBoundsBottom());
 			System.out.println(ball.dx + ", " + ball.dy);

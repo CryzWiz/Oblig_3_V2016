@@ -30,6 +30,7 @@ public class PlayState extends GameState {
 	public void tick(){
 		ball.tick();
 		brickManager.tick(game, ball);
+		racket.collision(ball);
 		if(room.collision(ball)){
 			game.gameOver();
 		}

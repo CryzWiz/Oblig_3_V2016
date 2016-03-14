@@ -4,8 +4,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Racket implements Settings{
 	private Rectangle pad;
-	static double dx;
-	double dy = PADDLE_Y_OFFSET;
+	double x;
 
 	public Racket(Pane pane) {
 		pad = new Rectangle(PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -17,14 +16,20 @@ public class Racket implements Settings{
 		return pad;
 	}
 	public void setpadX(double Xvalue){
-		dx = Xvalue;
-		move(dx);
+		x = Xvalue;
+		move(x);
 	}
 	public double getpadX(){
-		return dx;
+		return x;
 	}
 	public void move(double dx){
 		pad.setTranslateX((getpadX() - PADDLE_X_OFFSET) - (PADDLE_WIDTH / 2));
 	}
-
+	public void collision(Ball ball){
+		if(ball.getY() > PADDLE_Y_OFFSET - BALL_RADIUS - PADDLE_HEIGHT / 2
+				&& ball.getX() < x + PADDLE_WIDTH / 2 + BALL_RADIUS
+				&& ball.getX() > x - PADDLE_WIDTH / 2 + BALL_RADIUS
+				&& ball.getY() < PADDLE_Y_OFFSET)
+				ball.bounceY();
+	}
 }
