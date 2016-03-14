@@ -6,7 +6,7 @@ public class PlayState extends GameState {
 
 	public PlayState(){
 		screenManager.setPlayScreen();
-		playTimer();
+		timer.play();
 	}
 
 	@Override

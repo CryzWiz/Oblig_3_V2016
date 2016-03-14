@@ -92,6 +92,9 @@ public class ScreenManager implements Settings {
 	public Pane getVictoryScreen(){
 		return victoryScreen;
 	}
+	public Text getTimerText(){
+		return timerText;
+	}
 	public void setPauseOpacity(double opacity){
 		pauseLayer.setOpacity(opacity);
 	}
@@ -113,7 +116,7 @@ public class ScreenManager implements Settings {
 	public void setVictoryScreen(){
 		scene.setRoot(victoryScreen);
 	}
-	public void setTimerText(String timerText) {
+	/*public void setTimerText(String timerText) {
 		this.timerText.setText(timerText);
-	}
+	}*/
 }
