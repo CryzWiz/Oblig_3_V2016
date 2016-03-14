@@ -14,7 +14,7 @@ public class MenuState extends GameState {
 			game.play();
 			brickManager.reset();
 			ball.reset();
-			resetTimer();
+			timer.reset();
 		}
 	}
 
@@ -23,7 +23,7 @@ public class MenuState extends GameState {
 		game.play();
 		brickManager.reset();
 		ball.reset();
-		resetTimer();
+		timer.reset();
 	}
 	
 	@Override
