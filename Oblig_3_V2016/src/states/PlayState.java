@@ -22,7 +22,7 @@ public class PlayState extends GameState {
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_MOVED){
-			racket.setpadX(m.getX());
+			racket.mouseMove(m.getX());
 		}
 	}
 

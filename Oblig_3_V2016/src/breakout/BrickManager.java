@@ -9,7 +9,7 @@ public class BrickManager implements Settings {
 	private int numberOfCols;
 	private int bricksLeft;
 
-	public BrickManager(Pane pane) { 
+	public BrickManager(Pane pane) {
 		this(pane, BRICK_ROWS, BRICK_COLS);
 	}
 	public BrickManager(Pane pane, int numberOfRows, int numberOfCols) { 

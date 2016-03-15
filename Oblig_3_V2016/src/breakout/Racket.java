@@ -4,32 +4,56 @@ import javafx.scene.shape.Rectangle;
 
 public class Racket implements Settings{
 	private Rectangle pad;
-	double x;
+	double dx;
 
 	public Racket(Pane pane) {
-		pad = new Rectangle(PADDLE_X_OFFSET, PADDLE_Y_OFFSET, PADDLE_WIDTH, PADDLE_HEIGHT);
+		pad = new Rectangle(0, 0, PADDLE_WIDTH, PADDLE_HEIGHT);
+		pad.setTranslateX(PADDLE_X_OFFSET);
+		pad.setTranslateY(PADDLE_Y_OFFSET);
 		pad.setFill(PADDLE_COLOR);
 		pane.getChildren().add(pad);
+		dx = 0;
 	}
 
 	public Rectangle getpad(){
 		return pad;
 	}
-	public void setpadX(double Xvalue){
-		x = Xvalue;
-		move(x);
+
+	public double getBoundsLeft(){
+		return pad.getTranslateX();
 	}
-	public double getpadX(){
-		return x;
+	public double getBoundsRight(){
+		return getBoundsLeft() + PADDLE_WIDTH; 
 	}
-	public void move(double dx){
-		pad.setTranslateX((getpadX() - PADDLE_X_OFFSET) - (PADDLE_WIDTH / 2));
+	public double getBoundsTop(){
+		return pad.getTranslateY();
 	}
+	public double getBoundsBottom(){
+		return pad.getTranslateY() + PADDLE_HEIGHT;
+	}
+	public double getXMiddle(){
+		return getBoundsLeft() + PADDLE_WIDTH / 2;
+	}
+	
+	public void move(double x){
+		pad.setTranslateX(getBoundsLeft() + x);
+	}
+	public void mouseMove(double x){
+		dx = x - getXMiddle();
+		pad.setTranslateX(x - PADDLE_WIDTH / 2);
+	}
+
 	public void collision(Ball ball){
-		if(ball.getY() > PADDLE_Y_OFFSET - BALL_RADIUS - PADDLE_HEIGHT / 2
-				&& ball.getX() < x + PADDLE_WIDTH / 2 + BALL_RADIUS
-				&& ball.getX() > x - PADDLE_WIDTH / 2 + BALL_RADIUS
-				&& ball.getY() < PADDLE_Y_OFFSET)
-				ball.bounceY();
+		if(ball.getBoundsBottom() > getBoundsTop()
+				&& ball.getBoundsLeft() < getBoundsRight()
+				&& ball.getBoundsRight() > getBoundsLeft()
+				&& ball.getBoundsTop() < getBoundsBottom()
+				&& ball.dy > 0)
+				//&& ball.getY() < PADDLE_Y_OFFSET)
+		{
+			ball.bounceY();
+			ball.friction(dx, 0, PADDLE_FRICTION, 0);
+			dx = 0;
+		}
 	}
 }
