@@ -43,7 +43,7 @@ public interface Settings {
 	
 	int PADDLE_HEIGHT = 10;
 	int PADDLE_WIDTH = 200;
-	int PADDLE_Y_OFFSET = BALL_START_Y;
+	int PADDLE_Y_OFFSET = BALL_START_Y + BALL_RADIUS / 2;
 	int PADDLE_X_OFFSET = BALL_START_X - (PADDLE_WIDTH / 2);
 
 	int BRICK_WIDTH = 60;
