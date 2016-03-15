@@ -5,7 +5,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
 
 public interface Settings {
-	boolean BALL_GRAVITY_ON = true;
+	boolean BALL_GRAVITY_ON = false;
 	boolean BOUNCE_ON_BOT = false;
 
 	Color BACKGROUND_COLOR = Color.BLACK;
@@ -38,7 +38,8 @@ public interface Settings {
 	int PADDLE_WIDTH = 200;
 	int PADDLE_Y_OFFSET = 500;
 	int PADDLE_X_OFFSET = 300;
-	double PADDLE_FRICTION = 0.6;
+	double PADDLE_FRICTION_FACTOR = 0.0;
+	double PADDLE_TILT_ANGLE = Math.PI / 6;
 
 	int BALL_RADIUS = 10;
 	int BALL_START_X = PADDLE_X_OFFSET + PADDLE_WIDTH / 2;

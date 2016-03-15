@@ -1,5 +1,6 @@
 package states;
 
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 public class PlayState extends GameState {
@@ -21,8 +22,19 @@ public class PlayState extends GameState {
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
-		if(m.getEventType() == MouseEvent.MOUSE_MOVED){
+		if(m.getEventType() == MouseEvent.MOUSE_RELEASED){
+			racket.setNoTilt();
+		}
+		if(m.getEventType() == MouseEvent.MOUSE_MOVED || m.getEventType() == MouseEvent.MOUSE_DRAGGED){
 			racket.mouseMove(m.getX());
+		}
+		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
+			if(m.getButton() == MouseButton.PRIMARY){
+				racket.setLeftTilt();
+			}
+			else if(m.getButton() == MouseButton.SECONDARY){
+				racket.setRightTilt();
+			}
 		}
 	}
 
