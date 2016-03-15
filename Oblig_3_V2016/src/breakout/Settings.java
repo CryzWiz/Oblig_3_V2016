@@ -24,7 +24,7 @@ public interface Settings {
 //	Color BRICK_COLOR_LAYER3 = Color.GRAY;
 //	Color BRICK_COLOR_LAYER4 = Color.RED;
 
-	int MILLIS_PER_FRAME = 40; //Lower speed + higher framerate = same look, more precision, higher CPU load
+	int MILLIS_PER_FRAME = 20; //Lower speed + higher framerate = same look, more precision, higher CPU load
 
 	int FONT_SIZE_GAMEOVER = 48;
 	
@@ -36,8 +36,8 @@ public interface Settings {
 
 	int BALL_START_X = 400;
 	int BALL_START_Y = 500;
-	int BALL_START_DX = 4;
-	int BALL_START_DY = -11;
+	int BALL_START_DX = 3;
+	int BALL_START_DY = -5;
 	int BALL_RADIUS = 10;
 	double BALL_GRAVITY_FACTOR = (Math.abs(BALL_START_DY) + Math.abs(BALL_START_DX)) / 5.0;
 	
