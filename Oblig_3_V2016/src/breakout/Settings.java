@@ -28,7 +28,7 @@ public interface Settings {
     Color[] BRICK_COLORS_LVL1 = {Color.PALETURQUOISE, Color.GREEN, Color.YELLOW, Color.RED};
     Color[] BRICK_COLORS_LVL2 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
 
-	int MILLIS_PER_FRAME = 40; //Lower speed + higher framerate = same look, more precision, higher CPU load
+	int MILLIS_PER_FRAME = 20; //Lower speed + higher framerate = same look, more precision, higher CPU load
 
 	int FONT_SIZE_GAMEOVER = 48;
 	
@@ -40,14 +40,14 @@ public interface Settings {
 
 	int BALL_START_X = 400;
 	int BALL_START_Y = 500;
-	int BALL_START_DX = 4;
-	int BALL_START_DY = -11;
+	int BALL_START_DX = 3;
+	int BALL_START_DY = -5;
 	int BALL_RADIUS = 10;
 	double BALL_GRAVITY_FACTOR = (Math.abs(BALL_START_DY) + Math.abs(BALL_START_DX)) / 5.0;
 	
 	int PADDLE_HEIGHT = 10;
 	int PADDLE_WIDTH = 200;
-	int PADDLE_Y_OFFSET = BALL_START_Y;
+	int PADDLE_Y_OFFSET = BALL_START_Y + BALL_RADIUS;
 	int PADDLE_X_OFFSET = BALL_START_X - (PADDLE_WIDTH / 2);
 
 	int BRICK_WIDTH = 60;

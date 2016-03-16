@@ -18,10 +18,12 @@ public class ScreenManager implements Settings {
 	private StackPane gameScreen;
 	private Pane playLayer; //Play is just part of the gameScreen, thus not named as a "screen"
 	private Pane pauseLayer; //Pause is just part of the gameScreen, thus not named as a "screen"
+	private Pane victoryLayer; //Victory is just part of the gameScreen, thus not named as a "screen"
 	private BorderPane timerLayer;
 	private Pane endScreen;
 	private Pane victoryScreen;
 	private Text timerText;
+	private Pane shadowLayer;
 
 	public ScreenManager(){
 		//Texts
@@ -42,24 +44,21 @@ public class ScreenManager implements Settings {
 		timerText.setFont(Font.font(30));
 		timerText.setFill(Color.WHITE);
 	
-		//Game Pane
+		//Game Pane + pause and victory
 		playLayer = new Pane();
-		Rectangle shadow = new Rectangle(0, 0, WIDTH, HEIGHT); 
-		Pane shadowLayer = new Pane(shadow);
-		shadowLayer.setOpacity(0.7);
 		timerLayer = new BorderPane();
 		timerLayer.setBottom(timerText);
-		pauseLayer = new StackPane(shadowLayer, pauseText);
-		gameScreen = new StackPane(playLayer, pauseLayer, timerLayer);
+		Rectangle shadow = new Rectangle(0, 0, WIDTH, HEIGHT); 
+		shadowLayer = new Pane(shadow);
+		shadowLayer.setOpacity(0.7);
+		pauseLayer = new StackPane(pauseText);
+		victoryLayer = new StackPane(victoryText);
+		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer);
 		gameScreen.setBackground(BACKGROUND);
 		
 		//GameOver Pane
 		endScreen = new StackPane(endText);
 		endScreen.setBackground(BACKGROUND);
-		
-		//Victory Pane
-		victoryScreen = new StackPane(victoryText);
-		victoryScreen.setBackground(BACKGROUND);
 
 		//Main Menu Pane
 		Button newGame = new Button("New Game");
@@ -95,14 +94,30 @@ public class ScreenManager implements Settings {
 	public void setPauseOpacity(double opacity){
 		pauseLayer.setOpacity(opacity);
 	}
+	public void setShadowOpacity(double opacity){
+		shadowLayer.setOpacity(opacity);
+	}
+	public void setVictoryOpacity(double opacity){
+		victoryLayer.setOpacity(opacity);
+	}
 
 	public void setPlayScreen(){
 		scene.setRoot(gameScreen);
+		setShadowOpacity(0);
 		setPauseOpacity(0);
+		setVictoryOpacity(0);
 	}
 	public void setPauseScreen(){
 		scene.setRoot(gameScreen);
+		setShadowOpacity(0.7);
 		setPauseOpacity(1);
+		setVictoryOpacity(0);
+	}
+	public void setVictoryScreen(){
+		scene.setRoot(gameScreen);
+		setShadowOpacity(0.7);
+		setPauseOpacity(0);
+		setVictoryOpacity(1);
 	}
 	public void setMenuScreen(){
 		scene.setRoot(menuScreen);
@@ -110,10 +125,4 @@ public class ScreenManager implements Settings {
 	public void setGameOverScreen(){
 		scene.setRoot(endScreen);
 	}
-	public void setVictoryScreen(){
-		scene.setRoot(victoryScreen);
-	}
-	/*public void setTimerText(String timerText) {
-		this.timerText.setText(timerText);
-	}*/
 }
