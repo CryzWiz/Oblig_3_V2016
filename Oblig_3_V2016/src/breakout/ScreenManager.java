@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
+
 
 public class ScreenManager implements Settings {
 	private Scene scene;
