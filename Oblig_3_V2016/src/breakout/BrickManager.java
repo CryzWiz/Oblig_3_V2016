@@ -216,7 +216,7 @@ public class BrickManager implements Settings {
 			firstRow = Math.max(firstRow, 0);
 			lastRow = Math.min(lastRow, BRICK_ROWS - 1);
 			firstCol = Math.max(firstCol, 0);
-			lastCol = Math.max(lastCol ,BRICK_COLUMNS - 1);
+			lastCol = Math.min(lastCol ,BRICK_COLUMNS - 1);
 			
 			for(int row = firstRow; row <= lastRow; row++){
 				for(int col = firstCol; col <= lastCol; col++){
