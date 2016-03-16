@@ -19,7 +19,7 @@ public class MenuState extends GameState {
 	}
 
 	@Override
-	public void onEnterPressed(){
+	public void onEnterPress(){
 		game.play();
 		brickManager.reset();
 		ball.reset();
@@ -27,7 +27,7 @@ public class MenuState extends GameState {
 	}
 	
 	@Override
-	public void onEscPressed(){
+	public void onEscPress(){
 		game.exit();
 	}
 }

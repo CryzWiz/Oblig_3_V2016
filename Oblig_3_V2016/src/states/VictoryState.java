@@ -20,7 +20,7 @@ public class VictoryState extends GameState {
 	}
 	
 	@Override
-	public void onEscPressed(){
+	public void onEscPress(){
 		System.exit(0);
 	};
 

@@ -11,7 +11,7 @@ public class GameOverState extends GameState {
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
-		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
+		if(m.getEventType() == MouseEvent.MOUSE_PRESSED){
 			timer.reset();
 			game.play();
 			ball.reset();
@@ -20,7 +20,7 @@ public class GameOverState extends GameState {
 	}
 	
 	@Override
-	public void onEscPressed(){
+	public void onEscPress(){
 		game.exit();
 	};
 

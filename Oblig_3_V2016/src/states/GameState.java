@@ -30,21 +30,12 @@ public abstract class GameState {
 		timer = new Timer(sm.getTimerText());
 	}
 	
-	public void onUpPressed(){
-		
-	}
-
-	public void onEscPressed(){
-
-	}
-
-	public void onSpacePressed(){
-		//Nothing
-	}
-
-	public void onEnterPressed(){
-
-	}
+	public void onUpPress(){}
+	public void onEscPress(){}
+	public void onSpacePress(){}
+	public void onEnterPress(){}
+	
+	public void onSpaceRelease(){}
 
 	public void onMouseEvent(MouseEvent m){
 	}

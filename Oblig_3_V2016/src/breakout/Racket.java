@@ -1,15 +1,24 @@
 package breakout;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import static breakout.Racket.Direction.*;
 
 public class Racket implements Settings{
-	public int LEFT = -1;
-	public int STILL = 0;
-	public int RIGHT = 1;
+	public static enum Direction{
+		LEFT(-1, Color.RED), STILL(0, PADDLE_COLOR), RIGHT(1, Color.BLUE);
+		
+		public int code;
+		public Color color;
+		Direction(int code, Color color){ this.code = code; this.color = color; }
+		public int value(){ return code; }
+		public Color color(){ return color; }
+	};
 	
 	private Rectangle pad;
-	double dx;
-	int direction;
+	private boolean isSlippery;
+	private double dx;
+	private Direction direction;
 
 	public Racket(Pane pane) {
 		pad = new Rectangle(0, 0, PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -19,6 +28,7 @@ public class Racket implements Settings{
 		pane.getChildren().add(pad);
 		dx = 0;
 		direction = STILL;
+		isSlippery = false;
 	}
 
 	public Rectangle getpad(){
@@ -48,17 +58,28 @@ public class Racket implements Settings{
 		dx = x - getXMiddle();
 		pad.setTranslateX(x - PADDLE_WIDTH / 2);
 	}
-	public void setRightTilt(){
-		direction = RIGHT;
+	public void setTilt(Direction direction){
+		this.direction = direction;
+		pad.setFill(direction.color());
 	}
-	public void setNoTilt(){
-		direction = STILL;
+	public int getDirection(){
+		switch(direction){
+		case LEFT:
+			return -1;
+		case STILL:
+			return 0;
+		case RIGHT:
+			return 1;
+		default:
+			return 0;
+		}
 	}
-	public void setLeftTilt(){
-		direction = LEFT;
+	public void setSlippery(boolean value){
+		isSlippery = value;
+		pad.setStroke(value ? Color.BLUE : Color.BLACK);
 	}
 	
-	
+	@SuppressWarnings("unused")
 	public void collision(Ball ball){
 		if(ball.getBoundsBottom() > getBoundsTop()
 				&& ball.getBoundsLeft() < getBoundsRight()
@@ -66,8 +87,9 @@ public class Racket implements Settings{
 				&& ball.getBoundsTop() < getBoundsBottom()
 				&& ball.dy > 0)
 		{
-			ball.bounce(PADDLE_TILT_ANGLE * direction - Math.PI / 2);
-			ball.friction(dx, 0, PADDLE_FRICTION_FACTOR, 0);
+			ball.bounce(PADDLE_TILT_ANGLE * direction.value() - Math.PI / 2);
+			if(!isSlippery && FRICTION_ON)
+				ball.friction(dx, 0, PADDLE_FRICTION_FACTOR, 0);
 			dx = 0;
 		}
 	}

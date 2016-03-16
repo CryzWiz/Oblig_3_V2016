@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 public interface Settings {
 	boolean BALL_GRAVITY_ON = false;
 	boolean BOUNCE_ON_BOT = false;
+	boolean FRICTION_ON = false;
 
 	Color BACKGROUND_COLOR = Color.BLACK;
 	Color BALL_COLOR = Color.YELLOWGREEN;
@@ -38,8 +39,8 @@ public interface Settings {
 	int PADDLE_WIDTH = 200;
 	int PADDLE_Y_OFFSET = 500;
 	int PADDLE_X_OFFSET = 300;
-	double PADDLE_FRICTION_FACTOR = 0.0;
-	double PADDLE_TILT_ANGLE = Math.PI / 6;
+	double PADDLE_FRICTION_FACTOR = 0.6;
+	double PADDLE_TILT_ANGLE = Math.PI / 12;
 
 	int BALL_RADIUS = 10;
 	int BALL_START_X = PADDLE_X_OFFSET + PADDLE_WIDTH / 2;

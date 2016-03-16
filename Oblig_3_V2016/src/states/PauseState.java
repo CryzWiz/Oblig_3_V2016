@@ -8,17 +8,17 @@ public class PauseState extends GameState {
 	}
 
 	@Override
-	public void onSpacePressed(){
+	public void onSpacePress(){
 		game.play();
 	}
 	
 	@Override
-	public void onEnterPressed(){
+	public void onEnterPress(){
 		game.play();
 	}
 	
 	@Override
-	public void onEscPressed(){
+	public void onEscPress(){
 		game.menu();
 	}
 }

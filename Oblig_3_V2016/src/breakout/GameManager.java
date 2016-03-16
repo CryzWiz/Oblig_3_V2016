@@ -19,17 +19,26 @@ public class GameManager {
 		if(k.getEventType() == KeyEvent.KEY_PRESSED){
 			switch(k.getCode()){
 				case SPACE:
-					state.onSpacePressed();
+					state.onSpacePress();
 					break;
 				case ESCAPE:
-					state.onEscPressed();
+					state.onEscPress();
 					break;
 				case ENTER:
-					state.onEnterPressed();
+					state.onEnterPress();
 					break;
 				case UP:
-					state.onUpPressed();
+					state.onUpPress();
 					break;
+			default:
+				break;
+			}
+		}
+		if(k.getEventType() == KeyEvent.KEY_RELEASED){
+			switch(k.getCode()){
+			case SPACE:
+				state.onSpaceRelease();
+				break;
 			default:
 				break;
 			}
