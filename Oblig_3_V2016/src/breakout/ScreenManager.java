@@ -12,6 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class ScreenManager implements Settings {
 	private Scene scene;
@@ -46,8 +47,10 @@ public class ScreenManager implements Settings {
 		timerText.setFill(Color.WHITE);
 	
 		//lvl buttons
-		 double Opacity = 1;
-		 Rectangle lvl1Box = new Rectangle(0, 0, 75, 25);
+		 double Opacity = 0.2;
+		 int level = 0; //Starting on lvl 0.
+		 //Box 1
+		 Rectangle lvl1Box = new Rectangle(0, 0, 65, 25);
 		 lvl1Box.setFill(Color.RED);
 		 Text lvl1Text = new Text(); 
 		 lvl1Text.setText("lvl 1");
@@ -55,18 +58,30 @@ public class ScreenManager implements Settings {
 		 lvl1Text.setFill(Color.BLACK);
 		 StackPane levelBox1 = new StackPane(lvl1Box,lvl1Text);
 		 levelBox1.setAlignment(Pos.TOP_RIGHT);
-		 Rectangle lvl2Box = new Rectangle(0, 0, 75, 25);
+		 //Box 2
+		 Rectangle lvl2Box = new Rectangle(0, 0, 65, 25);
 		 lvl2Box.setFill(Color.PURPLE);
-		 lvl2Box.setOpacity(Opacity);
+		 if(level < 1){
+			 lvl2Box.setOpacity(Opacity);
+		 }
+		 else{
+			 lvl2Box.setOpacity(1);
+		 }
 		 Text lvl2Text = new Text();
 		 lvl2Text.setText("lvl 2");
 		 lvl2Text.setFont(Font.font(20));
 		 lvl2Text.setFill(Color.BLACK);
 		 StackPane levelBox2 = new StackPane(lvl2Box,lvl2Text);
 		 levelBox2.setAlignment(Pos.TOP_RIGHT);
-		 Rectangle lvl3Box = new Rectangle(0, 0, 75, 25);
+		 //Box 3
+		 Rectangle lvl3Box = new Rectangle(0, 0, 65, 25);
 		 lvl3Box.setFill(Color.BLUE);
-		 lvl3Box.setOpacity(Opacity);
+		 if(level < 2){
+			 lvl3Box.setOpacity(Opacity);
+		 }
+		 else{
+			 lvl3Box.setOpacity(1);
+		 }
 		 Text lvl3Text = new Text();
 		 lvl3Text.setText("lvl 3");
 		 lvl3Text.setFont(Font.font(20));
