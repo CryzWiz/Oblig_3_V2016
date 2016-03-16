@@ -8,26 +8,43 @@ public class BrickManager implements Settings {
 	private int numberOfRows;
 	private int numberOfCols;
 	private int bricksLeft;
+	private int currentLevel;
+	
 
 	public BrickManager(Pane pane) { 
 		this(pane, BRICK_ROWS, BRICK_COLS);
 	}
-	public BrickManager(Pane pane, int numberOfRows, int numberOfCols) { 
-		this(pane, numberOfRows, numberOfCols, BRICK_COLOR_LAYER1, BRICK_COLOR_LAYER2, BRICK_COLOR_LAYER3, BRICK_COLOR_LAYER4);
-	}
-	public BrickManager(Pane pane, int numberOfRows, int numberOfCols, Color colorTop, Color colorMid1, Color colorMid2, Color colorBottom) { 
+
+	public BrickManager(Pane pane, int numberOfRows, int numberOfCols) { 		
 		createBricks(numberOfRows, numberOfCols);
-		bricksLeft = numberOfRows * numberOfCols;
-		setBrickColors(colorTop, colorMid1, colorMid2, colorBottom);
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
-		destroyRandomBricks(PERCENT_BRICKS_TO_REMOVE);
+		bricksLeft = numberOfRows * numberOfCols;
+		setLevel(1); //-------------------------------------------------
 		for(int row = 0; row < BRICK_ROWS; row++){
 			for(int col = 0; col < BRICK_COLS; col++){
 				pane.getChildren().add(bricks[row][col].getRectangle());
 			}
 		}
 	}
+	
+	public void setLevel(int lvl) {//-------------------------------------------------
+		currentLevel = lvl;
+		switch(currentLevel) {
+			case 1:
+				setBrickColors(BRICK_COLORS_LVL1);
+				destroyRandomBricks(PERCENT_BRICKS_TO_REMOVE);
+				break;
+			case 2:
+				setBrickColors(BRICK_COLORS_LVL2);
+				destroyRandomBricks(PERCENT_BRICKS_TO_REMOVE / 2);
+				break;
+			case 3:
+				break;
+		
+		}
+	}
+
 
 	public void createBricks(int numberOfRows, int numberOfCols) {
 		Brick[][] bricks = new Brick[numberOfRows][numberOfCols];
@@ -45,24 +62,65 @@ public class BrickManager implements Settings {
 		}
 		this.bricks = bricks;
 	}
-	public void setBrickColors(Color colorTop, Color colorMid1, Color colorMid2, Color colorBottom) {
-		for(int row = 0; row < bricks.length; row++){
-			for(int col = 0; col < bricks[row].length; col++){
-				if(row < 3){
-					bricks[row][col].setFill(colorTop);
-				}
-				else if(row < 6){
-					bricks[row][col].setFill(colorMid1);
-				}
-				else if(row < 9){
-					bricks[row][col].setFill(colorMid2);
-				}
-				else{
-					bricks[row][col].setFill(colorBottom);
-				}
 
+	public void setBrickColors(Color[] brickColors) {
+		switch (currentLevel) {
+		case 1:
+			for (int row = 0; row < bricks.length; row++) {
+				for (int col = 0; col < bricks[row].length; col++) {
+					if (row < 3) {
+						bricks[row][col].setFill(brickColors[0]);
+					} else if (row < 6) {
+						bricks[row][col].setFill(brickColors[1]);
+					} else if (row < 9) {
+						bricks[row][col].setFill(brickColors[2]);
+					} else {
+						bricks[row][col].setFill(brickColors[3]);
+					}
+
+				}
 			}
+			break;
+		case 2:
+			// Diagonal from upper left down to middle (inclusive)
+			for(int row = 0; row < BRICK_ROWS; row ++) {
+				for(int col = 0; col <= BRICK_COLS / 2; col++) {
+					if(row == col) {
+						bricks[row][col].setFill(brickColors[0]);
+						bricks[row][col].setProtection(true);
+					} else if(col - row == 1 || row - col == 1) {
+						bricks[row][col].setFill(brickColors[1]);
+						bricks[row][col].setProtection(true);
+					} else if(col - row == 2 || row - col == 2) {
+						bricks[row][col].setFill(brickColors[2]);
+						bricks[row][col].setProtection(true);
+					} else {
+						bricks[row][col].setFill(brickColors[3]);
+					}
+				}
+			}
+			// Diagonal from upper right down to middle (exclusive)
+			for(int row = 0; row < BRICK_ROWS; row++) {
+				for(int col = 8; col < BRICK_COLS; col++) {
+					if(row + col == BRICK_COLS - 1) {
+						bricks[row][col].setFill(brickColors[0]);
+						bricks[row][col].setProtection(true);
+					} else if(row + col == 13 || row + col == 15) {
+						bricks[row][col].setFill(brickColors[1]);
+						bricks[row][col].setProtection(true);
+					} else if(row + col == 12 || row + col == 16) {
+						bricks[row][col].setFill(brickColors[2]);
+						bricks[row][col].setProtection(true);
+					} else {
+						bricks[row][col].setFill(brickColors[3]);
+					}
+				}
+			}
+			break;
+		case 3:
+			break;
 		}
+
 	}
 	public void destroyRandomBricks(int percentBricksToRemove) {
 		int numberOfBricksToRemove = (int)(((numberOfRows * numberOfCols) / 100.0) * percentBricksToRemove);
@@ -70,7 +128,7 @@ public class BrickManager implements Settings {
 		while(numberOfBricksToRemove > 0) {
 			int randomRow = (int)(Math.random() * numberOfRows);
 			int randomCol = (int)(Math.random() * numberOfCols);
-			if(!bricks[randomRow][randomCol].isDestroyed()) {
+			if(!bricks[randomRow][randomCol].isDestroyed() &&!bricks[randomRow][randomCol].isProtected()) {
 				bricks[randomRow][randomCol].destroy();
 				numberOfBricksToRemove--;
 				bricksLeft--;
@@ -85,7 +143,8 @@ public class BrickManager implements Settings {
 			}
 		}
 		bricksLeft = numberOfRows * numberOfCols;
-		destroyRandomBricks(PERCENT_BRICKS_TO_REMOVE);  
+		setLevel(currentLevel);
+//		destroyRandomBricks(PERCENT_BRICKS_TO_REMOVE);  
 		
 	}
 
@@ -108,6 +167,7 @@ public class BrickManager implements Settings {
 		//Use brick.collision(ball); on a limited amount of bricks.
 		//Tip: Use ball.getBounds...(); as the hard limits of possibilities.
 	}
+
 	
 	public Brick getBrick(int row, int col) {
 		return bricks[row][col];

@@ -23,6 +23,10 @@ public interface Settings {
 //	Color BRICK_COLOR_LAYER2 = Color.GREENYELLOW;
 //	Color BRICK_COLOR_LAYER3 = Color.GRAY;
 //	Color BRICK_COLOR_LAYER4 = Color.RED;
+    
+//    Color[] BRICK_COLORS_LVL1 = {Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
+    Color[] BRICK_COLORS_LVL1 = {Color.PALETURQUOISE, Color.GREEN, Color.YELLOW, Color.RED};
+    Color[] BRICK_COLORS_LVL2 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
 
 	int MILLIS_PER_FRAME = 40; //Lower speed + higher framerate = same look, more precision, higher CPU load
 
