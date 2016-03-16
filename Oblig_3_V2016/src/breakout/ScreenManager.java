@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -44,6 +45,38 @@ public class ScreenManager implements Settings {
 		timerText.setFont(Font.font(30));
 		timerText.setFill(Color.WHITE);
 	
+		//lvl buttons
+		 double Opacity = 1;
+		 Rectangle lvl1Box = new Rectangle(0, 0, 75, 25);
+		 lvl1Box.setFill(Color.RED);
+		 Text lvl1Text = new Text(); 
+		 lvl1Text.setText("lvl 1");
+		 lvl1Text.setFont(Font.font(20));
+		 lvl1Text.setFill(Color.BLACK);
+		 StackPane levelBox1 = new StackPane(lvl1Box,lvl1Text);
+		 levelBox1.setAlignment(Pos.TOP_RIGHT);
+		 Rectangle lvl2Box = new Rectangle(0, 0, 75, 25);
+		 lvl2Box.setFill(Color.PURPLE);
+		 lvl2Box.setOpacity(Opacity);
+		 Text lvl2Text = new Text();
+		 lvl2Text.setText("lvl 2");
+		 lvl2Text.setFont(Font.font(20));
+		 lvl2Text.setFill(Color.BLACK);
+		 StackPane levelBox2 = new StackPane(lvl2Box,lvl2Text);
+		 levelBox2.setAlignment(Pos.TOP_RIGHT);
+		 Rectangle lvl3Box = new Rectangle(0, 0, 75, 25);
+		 lvl3Box.setFill(Color.BLUE);
+		 lvl3Box.setOpacity(Opacity);
+		 Text lvl3Text = new Text();
+		 lvl3Text.setText("lvl 3");
+		 lvl3Text.setFont(Font.font(20));
+		 lvl3Text.setFill(Color.BLACK);
+		 StackPane levelBox3 = new StackPane(lvl3Box,lvl3Text);
+		 levelBox3.setAlignment(Pos.TOP_RIGHT);
+		 HBox lvls = new HBox(levelBox1, levelBox2, levelBox3);
+		//lvl buttons stops here. Should we put in its in own class? Should it be never-ending, or are 3 levels enough?
+		//Still to do - Needs a function that removes/sets opacity when its round win / game over.
+		
 		//Game Pane + pause and victory
 		playLayer = new Pane();
 		timerLayer = new BorderPane();
@@ -53,7 +86,7 @@ public class ScreenManager implements Settings {
 		shadowLayer.setOpacity(0.7);
 		pauseLayer = new StackPane(pauseText);
 		victoryLayer = new StackPane(victoryText);
-		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer);
+		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer, lvls);
 		gameScreen.setBackground(BACKGROUND);
 		
 		//GameOver Pane
