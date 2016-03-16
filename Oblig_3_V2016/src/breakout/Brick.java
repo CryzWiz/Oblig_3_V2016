@@ -4,9 +4,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * @author benedicte
+ *
+ */
 public class Brick implements Settings {
 	private Rectangle rectangle;
 	private boolean isDestroyed = false;
+	private boolean isProtected = false;
 
 	public Brick(int posX, int posY, Color c) {
 		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT, c);
@@ -33,6 +38,15 @@ public class Brick implements Settings {
 
 	public boolean isDestroyed() {
 		return isDestroyed;
+	}
+	/**
+	 * Protection from random destruction
+	 */
+	public void setProtection(boolean protection) {
+		isProtected = protection;
+	}
+	public boolean isProtected() {
+		return isProtected;
 	}
 
 	private void collision_old(Ball ball){
