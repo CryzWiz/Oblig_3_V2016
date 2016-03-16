@@ -21,7 +21,7 @@ public class PlayState extends GameState {
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
-		if(m.getEventType() == MouseEvent.MOUSE_MOVED){
+		if(m.getEventType() == MouseEvent.MOUSE_MOVED || m.getEventType() == MouseEvent.MOUSE_DRAGGED){
 			racket.setpadX(m.getX());
 		}
 	}
