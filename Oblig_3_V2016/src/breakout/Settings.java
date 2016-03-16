@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 
 public interface Settings {
 	boolean BALL_GRAVITY_ON = true;
-	boolean BOUNCE_ON_BOT = false;
+	boolean BOUNCE_ON_BOT = true;
 
 	Color BACKGROUND_COLOR = Color.BLACK;
 	Color BALL_COLOR = Color.YELLOWGREEN;
