@@ -40,7 +40,7 @@ public class BrickManager implements Settings {
 	private int numberOfRows;
 	private int numberOfCols;
 	private int bricksLeft;
-	//private int currentLevel;
+
 	private Level currentLevel;
 	
 

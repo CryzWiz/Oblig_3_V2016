@@ -3,7 +3,7 @@ package breakout;
 import javafx.scene.Scene;
 
 public class Room implements Settings{
-	Scene room;
+	private Scene room;
 
 	public Room(Scene s){
 		room = s;
@@ -23,22 +23,22 @@ public class Room implements Settings{
 		return false;
 	}
 
-	public boolean collideLeft(Ball ball){
+	private boolean collideLeft(Ball ball){
 		if(ball.getX() < ball.getRadius() && ball.dx < 0)
 			return true;
 		return false;
 	}
-	public boolean collideRight(Ball ball){
+	private boolean collideRight(Ball ball){
 		if(ball.getX() > room.getWidth() - ball.getRadius() && ball.dx > 0)
 			return true;
 		return false;
 	}
-	public boolean collideTop(Ball ball){
+	private boolean collideTop(Ball ball){
 		if(ball.getY() < ball.getRadius() && ball.dy < 0)
 			return true;
 		return false;
 	}
-	public boolean collideBot(Ball ball){
+	private boolean collideBot(Ball ball){
 		if(ball.getY() > room.getHeight() - ball.getRadius() && ball.dy > 0)
 			return true;
 		return false;

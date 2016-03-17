@@ -100,8 +100,12 @@ public class Ball implements Settings {
 		return false;
 	}
 	public void accelerate(double x, double y){
-		dx = x;
-		dy = y;
+		dx += x;
+		dy += y;
+	}
+	public void friction(double x, double y, double xFactor, double yFactor){
+		dx -= (dx - x) * xFactor;
+		dy -= (dy - y) * yFactor;
 	}
 	public void move(double x, double y){
 		circle.setTranslateX(circle.getTranslateX() + x);
@@ -111,7 +115,7 @@ public class Ball implements Settings {
 	public void tick(){
 		circle.setTranslateX(circle.getTranslateX() + dx);
 		circle.setTranslateY(circle.getTranslateY() + dy);
-		if(dy * dy < 10 && gravityOn)
+		if(dy*dy < BALL_GRAVITY_THRESHOLD && gravityOn)
 			dy += BALL_GRAVITY_FACTOR;
 	}
 }
