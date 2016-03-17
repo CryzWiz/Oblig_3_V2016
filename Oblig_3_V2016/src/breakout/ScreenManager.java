@@ -48,7 +48,7 @@ public class ScreenManager implements Settings {
 	
 		//lvl buttons
 		 double Opacity = 0.2;
-		 int level = 2; //Starting on lvl 0.
+		 int level = 1; //Starting on lvl 0.
 		 //Box 1
 		 Rectangle lvl1Box = new Rectangle(0, 0, 65, 25);
 		 lvl1Box.setFill(Color.RED);
@@ -61,12 +61,10 @@ public class ScreenManager implements Settings {
 		 //Box 2
 		 Rectangle lvl2Box = new Rectangle(0, 0, 65, 25);
 		 lvl2Box.setFill(Color.PURPLE);
-		 if(level < 1){
+		 if(level <= 2){
 			 lvl2Box.setOpacity(Opacity);
 		 }
-		 else{
-			 lvl2Box.setOpacity(1);
-		 }
+		 
 		 Text lvl2Text = new Text();
 		 lvl2Text.setText("lvl 2");
 		 lvl2Text.setFont(Font.font(20));
@@ -76,11 +74,8 @@ public class ScreenManager implements Settings {
 		 //Box 3
 		 Rectangle lvl3Box = new Rectangle(0, 0, 65, 25);
 		 lvl3Box.setFill(Color.BLUE);
-		 if(level < 2){
+		 if(level <= 3){
 			 lvl3Box.setOpacity(Opacity);
-		 }
-		 else{
-			 lvl3Box.setOpacity(1);
 		 }
 		 Text lvl3Text = new Text();
 		 lvl3Text.setText("lvl 3");
@@ -88,6 +83,7 @@ public class ScreenManager implements Settings {
 		 lvl3Text.setFill(Color.BLACK);
 		 StackPane levelBox3 = new StackPane(lvl3Box,lvl3Text);
 		 levelBox3.setAlignment(Pos.TOP_RIGHT);
+		 
 		 HBox lvls = new HBox(levelBox1, levelBox2, levelBox3);
 		//lvl buttons stops here. Should we put in its in own class? Should it be never-ending, or are 3 levels enough?
 		//Still to do - Needs a function that removes/sets opacity when its round win / game over.
