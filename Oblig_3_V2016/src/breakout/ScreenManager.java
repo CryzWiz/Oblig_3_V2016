@@ -9,7 +9,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class ScreenManager implements Settings {
@@ -27,21 +26,20 @@ public class ScreenManager implements Settings {
 
 	public ScreenManager(){
 		//Texts
-		Font font = Font.font(FONT_SIZE_GAMEOVER);
 		Text endText = new Text("GAME OVER!");
 		endText.setFill(TEXT_COLOR);
-		endText.setFont(font);
+		endText.setFont(FONT_TEXT);
 		Text pauseText = new Text("Game paused!");
 		pauseText.setFill(TEXT_COLOR);
-		pauseText.setFont(font);
+		pauseText.setFont(FONT_TEXT);
 		Text menuText = new Text("Click to Start");
 		menuText.setFill(TEXT_COLOR);
-		menuText.setFont(font);
+		menuText.setFont(FONT_TEXT);
 		Text victoryText = new Text("Victory!");
 		victoryText.setFill(TEXT_COLOR);
-		victoryText.setFont(font);
+		victoryText.setFont(FONT_TEXT);
 		timerText = new Text("00:00:00");
-		timerText.setFont(Font.font(30));
+		timerText.setFont(FONT_TIMER);
 		timerText.setFill(Color.WHITE);
 	
 		//Game Pane + pause and victory
@@ -53,7 +51,7 @@ public class ScreenManager implements Settings {
 		shadowLayer.setOpacity(0.7);
 		pauseLayer = new StackPane(pauseText);
 		victoryLayer = new StackPane(victoryText);
-		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer);
+		gameScreen = new StackPane(playLayer, shadowLayer, pauseLayer, victoryLayer, timerLayer);
 		gameScreen.setBackground(BACKGROUND);
 		
 		//GameOver Pane
@@ -106,18 +104,21 @@ public class ScreenManager implements Settings {
 		setShadowOpacity(0);
 		setPauseOpacity(0);
 		setVictoryOpacity(0);
+		BorderPane.setAlignment(timerText, Pos.BOTTOM_LEFT);
 	}
 	public void setPauseScreen(){
 		scene.setRoot(gameScreen);
 		setShadowOpacity(0.7);
 		setPauseOpacity(1);
 		setVictoryOpacity(0);
+		//BorderPane.setAlignment(timerText, Pos.CENTER);
 	}
 	public void setVictoryScreen(){
 		scene.setRoot(gameScreen);
 		setShadowOpacity(0.7);
 		setPauseOpacity(0);
 		setVictoryOpacity(1);
+		BorderPane.setAlignment(timerText, Pos.TOP_CENTER);
 	}
 	public void setMenuScreen(){
 		scene.setRoot(menuScreen);

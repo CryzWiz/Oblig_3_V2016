@@ -16,9 +16,9 @@ public class Racket implements Settings{
 	};
 	
 	private Rectangle pad;
+	private Direction direction;
 	private boolean isSlippery;
 	private double dx;
-	private Direction direction;
 
 	public Racket(Pane pane) {
 		pad = new Rectangle(0, 0, PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -50,6 +50,15 @@ public class Racket implements Settings{
 	public double getXMiddle(){
 		return getBoundsLeft() + PADDLE_WIDTH / 2;
 	}
+	public double getYatX(double x){
+		return (x - getXMiddle()) * Math.tan(getTiltAngleRads()) + getBoundsTop();
+	}
+	public double getTiltAngleRads(){
+		return direction.value() * PADDLE_TILT_ANGLE;
+	}
+	public double getTiltAngleDegrees(){
+		return getTiltAngleRads() * 180 / Math.PI;
+	}
 	
 	public void move(double x){
 		pad.setTranslateX(getBoundsLeft() + x);
@@ -59,8 +68,11 @@ public class Racket implements Settings{
 		pad.setTranslateX(x - PADDLE_WIDTH / 2);
 	}
 	public void setTilt(Direction direction){
-		this.direction = direction;
-		pad.setFill(direction.color());
+		if(ALLOW_TILT){
+			this.direction = direction;
+			pad.setFill(direction.color());
+			pad.setRotate(getTiltAngleDegrees());
+		}
 	}
 	public int getDirection(){
 		switch(direction){
@@ -81,13 +93,13 @@ public class Racket implements Settings{
 	
 	@SuppressWarnings("unused")
 	public void collision(Ball ball){
-		if(ball.getBoundsBottom() > getBoundsTop()
+		if(ball.getBoundsBottom() > getYatX(ball.getX())
 				&& ball.getBoundsLeft() < getBoundsRight()
 				&& ball.getBoundsRight() > getBoundsLeft()
 				&& ball.getBoundsTop() < getBoundsBottom()
 				&& ball.dy > 0)
 		{
-			ball.bounce(PADDLE_TILT_ANGLE * direction.value() - Math.PI / 2);
+			ball.bounce(getTiltAngleRads() - Math.PI / 2);
 			if(!isSlippery && FRICTION_ON)
 				ball.friction(dx, 0, PADDLE_FRICTION_FACTOR, 0);
 			dx = 0;

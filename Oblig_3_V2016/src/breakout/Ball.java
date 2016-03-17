@@ -115,7 +115,7 @@ public class Ball implements Settings {
 	public void tick(){
 		circle.setTranslateX(circle.getTranslateX() + dx);
 		circle.setTranslateY(circle.getTranslateY() + dy);
-		if(dy * dy < 10 && gravityOn)
+		if(dy*dy < BALL_GRAVITY_THRESHOLD && gravityOn)
 			dy += BALL_GRAVITY_FACTOR;
 	}
 }

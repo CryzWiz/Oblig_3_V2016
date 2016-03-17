@@ -24,7 +24,7 @@ public class BreakOut extends Application implements Settings{
 				gameManager.onMouseEvent(mouseEvent);
 			}
 		});
-		scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+		scene.addEventFilter(KeyEvent.ANY, new EventHandler<KeyEvent>(){
 			@Override
 			public void handle(KeyEvent k){
 				gameManager.onKeyEvent(k);
