@@ -10,6 +10,7 @@ public class BrickManager implements Settings {
 		
 		int value;
 		int removePercentage;
+		public static int level;
 		
 		Level(int value, int removePercentage){
 			this.value = value;
@@ -17,7 +18,11 @@ public class BrickManager implements Settings {
 		}
 		
 		public int value(){
+			level = value;
 			return value;
+		}
+		public static int getvalue(){
+			return level;
 		}
 		public int percentage(){
 			return removePercentage;

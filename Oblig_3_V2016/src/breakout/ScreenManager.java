@@ -48,7 +48,7 @@ public class ScreenManager implements Settings {
 	
 		//lvl buttons
 		 double Opacity = 0.2;
-		 int level = 1; //Starting on lvl 0.
+		 int level = BrickManager.Level.getvalue(); //Starting on lvl 0.
 		 //Box 1
 		 Rectangle lvl1Box = new Rectangle(0, 0, 65, 25);
 		 lvl1Box.setFill(Color.RED);
