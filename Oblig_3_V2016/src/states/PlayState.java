@@ -33,8 +33,6 @@ public class PlayState extends GameState {
 
 	@Override
 	public void onMouseEvent(MouseEvent m){
-		if(m.getEventType() == MouseEvent.MOUSE_MOVED || m.getEventType() == MouseEvent.MOUSE_DRAGGED){
-			racket.setpadX(m.getX());
 		if(m.getEventType() == MouseEvent.MOUSE_RELEASED){
 			racket.setTilt(STILL);
 		}
@@ -49,6 +47,7 @@ public class PlayState extends GameState {
 		if(m.getEventType() == MouseEvent.MOUSE_MOVED || m.getEventType() == MouseEvent.MOUSE_DRAGGED){
 			racket.mouseMove(m.getX());
 		}
+		
 	}
 
 	@Override
