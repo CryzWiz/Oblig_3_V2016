@@ -20,18 +20,8 @@ public interface Settings {
 
 	Font FONT_TEXT = Font.font(48);
 	Font FONT_TIMER = Font.font(30);
-	
-	Color BRICK_COLOR_LAYER1 = Color.BLUE;
-    Color BRICK_COLOR_LAYER2 = Color.GREEN;
-    Color BRICK_COLOR_LAYER3 = Color.YELLOW;
-    Color BRICK_COLOR_LAYER4 = Color.RED;
-//	Color BRICK_COLOR_LAYER1 = Color.PALETURQUOISE;
-//	Color BRICK_COLOR_LAYER2 = Color.GREENYELLOW;
-//	Color BRICK_COLOR_LAYER3 = Color.GRAY;
-//	Color BRICK_COLOR_LAYER4 = Color.RED;
     
-//    Color[] BRICK_COLORS_LVL1 = {Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
-    Color[] BRICK_COLORS_LVL1 = {Color.PALETURQUOISE, Color.GREEN, Color.YELLOW, Color.RED};
+    Color[] BRICK_COLORS_LVL1 = {Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
     Color[] BRICK_COLORS_LVL2 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
     Color[] BRICK_COLORS_LVL3 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
 
