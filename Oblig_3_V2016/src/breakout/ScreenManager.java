@@ -59,34 +59,34 @@ public class ScreenManager implements Settings {
 		timerText.setFill(Color.WHITE);
 	
 		//lvl Icons
-		 //Icon 1
-		 lvl1Box = new Rectangle(0, 0, 65, 25);
-		 lvl1Box.setFill(Color.RED);
-		 lvl1Text = new Text(); 
-		 lvl1Text.setText("lvl 1");
-		 lvl1Text.setFont(Font.font(20));
-		 lvl1Text.setFill(Color.BLACK);
-		 levelIcon1 = new StackPane(lvl1Box,lvl1Text);
-		 levelIcon1.setAlignment(Pos.TOP_RIGHT);
-		 //Icon 2
-		 lvl2Box = new Rectangle(0, 0, 65, 25);
-		 lvl2Box.setFill(Color.PURPLE);
-		 lvl2Text = new Text();
-		 lvl2Text.setText("lvl 2");
-		 lvl2Text.setFont(Font.font(20));
-		 lvl2Text.setFill(Color.BLACK);
-		 levelIcon2 = new StackPane(lvl2Box,lvl2Text);
-		 levelIcon2.setAlignment(Pos.TOP_RIGHT);
-		 //Icon 3
-		 lvl3Box = new Rectangle(0, 0, 65, 25);
-		 lvl3Box.setFill(Color.BLUE);
-		 lvl3Text = new Text();
-		 lvl3Text.setText("lvl 3");
-		 lvl3Text.setFont(Font.font(20));
-		 lvl3Text.setFill(Color.BLACK);
-		 levelIcon3 = new StackPane(lvl3Box,lvl3Text);
-		 levelIcon3.setAlignment(Pos.TOP_RIGHT);
-		 lvls = new HBox(levelIcon1, levelIcon2, levelIcon3);
+		//Icon 1
+		lvl1Box = new Rectangle(0, 0, 65, 25);
+		lvl1Box.setFill(Color.RED);
+		lvl1Text = new Text(); 
+		lvl1Text.setText("Level 1");
+		lvl1Text.setFont(Font.font(20));
+		lvl1Text.setFill(Color.BLACK);
+		levelIcon1 = new StackPane(lvl1Box,lvl1Text);
+		levelIcon1.setAlignment(Pos.TOP_RIGHT);
+		//Icon 2
+		lvl2Box = new Rectangle(0, 0, 65, 25);
+		lvl2Box.setFill(Color.PURPLE);
+		lvl2Text = new Text();
+		lvl2Text.setText("Level 2");
+		lvl2Text.setFont(Font.font(20));
+		lvl2Text.setFill(Color.BLACK);
+		levelIcon2 = new StackPane(lvl2Box,lvl2Text);
+		levelIcon2.setAlignment(Pos.TOP_RIGHT);
+		//Icon 3
+		lvl3Box = new Rectangle(0, 0, 65, 25);
+		lvl3Box.setFill(Color.BLUE);
+		lvl3Text = new Text();
+		lvl3Text.setText("Level 3");
+		lvl3Text.setFont(Font.font(20));
+		lvl3Text.setFill(Color.BLACK);
+		levelIcon3 = new StackPane(lvl3Box,lvl3Text);
+		levelIcon3.setAlignment(Pos.TOP_RIGHT);
+		lvls = new HBox(levelIcon1, levelIcon2, levelIcon3);
 		
 		//Game Pane + pause and victory
 		playLayer = new Pane();
