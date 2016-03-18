@@ -33,6 +33,7 @@ public interface Settings {
 //    Color[] BRICK_COLORS_LVL1 = {Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
     Color[] BRICK_COLORS_LVL1 = {Color.PALETURQUOISE, Color.GREEN, Color.YELLOW, Color.RED};
     Color[] BRICK_COLORS_LVL2 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
+    Color[] BRICK_COLORS_LVL3 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
 
     Color BACKGROUND_COLOR = Color.BLACK;
 	Color BALL_COLOR = Color.YELLOWGREEN;

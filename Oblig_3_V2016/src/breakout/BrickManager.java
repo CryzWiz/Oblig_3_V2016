@@ -6,15 +6,17 @@ import javafx.scene.paint.Color;
 
 public class BrickManager implements Settings {
 	public static enum Level{
-		ONE(1, 20), TWO(2, 15), THREE(3, 10), VICTORY(4, 0);
+		ONE(1, 20, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 10, BRICK_COLORS_LVL3), VICTORY(4, 0, BRICK_COLORS_LVL1);
 		
 		int value;
 		int removePercentage;
+		Color[] brickColors;
 		public static int level;
 		
-		Level(int value, int removePercentage){
+		Level(int value, int removePercentage, Color[] brickColors){
 			this.value = value;
 			this.removePercentage = removePercentage;
+			this.brickColors = brickColors;
 		}
 		
 		public int value(){
@@ -26,6 +28,10 @@ public class BrickManager implements Settings {
 		}
 		public int percentage(){
 			return removePercentage;
+		}
+		
+		public Color[] brickColors() {
+			return brickColors;
 		}
 		
 		public Level nextLevel(){
