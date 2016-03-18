@@ -93,8 +93,8 @@ public class BrickManager implements Settings {
 						//These expressions can be made into methods for calculating position based on row/col number
 						//They would work kind of opposite to the getCol and getRow methods.
 						col * (BRICK_WIDTH + BRICK_PADDING_H) + WALL_PADDING_LEFT,
-						row * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP,
-						BRICK_WIDTH,
+						row * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP, 
+						BRICK_WIDTH, 
 						BRICK_HEIGHT);
 
 				bricks[row][col]= brick;
@@ -237,11 +237,10 @@ public class BrickManager implements Settings {
 	}
 
 	public int getRow(double y){
-		return 9; //Return what row of bricks corresponds to the y coordinate
+		return (int)((y - WALL_PADDING_TOP) / (BRICK_HEIGHT + BRICK_PADDING_V));
 	}
 	public int getColumn(double x){
-		return 7; //Return what column of bricks corresponds to the x coordinate
-		//See the formulae for 
+		return (int)((x - WALL_PADDING_LEFT) / (BRICK_WIDTH + BRICK_PADDING_H));
 	}
 	
 	public boolean levelComplete() {
