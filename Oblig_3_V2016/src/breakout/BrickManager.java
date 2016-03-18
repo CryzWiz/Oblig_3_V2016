@@ -24,8 +24,14 @@ public class BrickManager implements Settings {
 		currentLevel = lvl;
 		reset();
 	}*/
-	public void setLevel(Level lvl) {//-------------------------------------------------
-		reset();
+	public void setNextLevel() {//-------------------------------------------------
+		nextLevel();
+		for(int row = 0; row < BRICK_ROWS; row++){
+			for(int col = 0; col < BRICK_COLUMNS; col++){
+				bricks[row][col].reset();
+				getLevel().brickColor(bricks[row][col], row, col);
+			}
+		}
 	}
 
 	public void createBricks(Pane pane, int numberOfRows, int numberOfCols) {
@@ -121,8 +127,8 @@ public class BrickManager implements Settings {
 	public void tick(GameManager gManager, Ball ball) {
 		collision(ball);
 		if (levelComplete()) {
+			setNextLevel();
 			gManager.levelCleared();
-			nextLevel();
 		}
 	}
 }

@@ -1,12 +1,11 @@
 package states;
 
-import breakout.ScreenManager;
 import javafx.scene.input.MouseEvent;
 
 public class nextLevelState extends GameState {
 
 	public nextLevelState(){
-		ScreenManager.updateLevel();
+		screenManager.updateLevel();
 		screenManager.setNextLevelScreen();
 		timer.pause();
 	}

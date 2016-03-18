@@ -28,16 +28,16 @@ public class ScreenManager implements Settings {
 	private Pane shadowLayer;
 	private Pane nextLevelLayer;
 
-	public static Text lvl1Text;
-	public static Text lvl2Text;
-	public static Text lvl3Text;
-	public static Rectangle lvl1Box;
-	public static Rectangle lvl2Box;
-	public static Rectangle lvl3Box;
-	public static StackPane levelIcon1;
-	public static StackPane levelIcon2;
-	public static StackPane levelIcon3;
-	public static HBox lvls;
+	public Text lvl1Text;
+	public Text lvl2Text;
+	public Text lvl3Text;
+	public Rectangle lvl1Box;
+	public Rectangle lvl2Box;
+	public Rectangle lvl3Box;
+	public StackPane levelIcon1;
+	public StackPane levelIcon2;
+	public StackPane levelIcon3;
+	public HBox lvls;
 	
 	
 	
@@ -94,7 +94,7 @@ public class ScreenManager implements Settings {
 		lvls = new HBox(levelIcon1, levelIcon2, levelIcon3);
 		
 		//Game Pane + pause and victory
-		nextLevelLayer = new Pane(nextLevelText);
+		nextLevelLayer = new StackPane(nextLevelText);
 		playLayer = new Pane();
 		timerLayer = new BorderPane();
 		timerLayer.setBottom(timerText);
@@ -156,22 +156,22 @@ public class ScreenManager implements Settings {
 		nextLevelLayer.setOpacity(opacity);
 	}
 
-	public static void updateLevel(){
+	public void updateLevel(){
 		switch(getLevel()) {
 		case ONE:
-			ScreenManager.lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			ScreenManager.lvl2Box.setOpacity(OPACITY_LEVELICONS_ON);
-			ScreenManager.lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
 			break;
 		case TWO:
-			ScreenManager.lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			ScreenManager.lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			ScreenManager.lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
 			break;
 		case THREE:
-			ScreenManager.lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			ScreenManager.lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			ScreenManager.lvl3Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_OFF);
 			break;
 		case VICTORY:
 			break;
