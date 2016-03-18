@@ -85,7 +85,37 @@ public enum Level {
 					brick.setFill(brickColors[3]);
 				}
 			}
+			break;
 		case THREE:
+			// Diagonal from upper left down to middle (inclusive)
+			if (col < BRICK_COLUMNS / 2) {
+				if(row == col) {
+					brick.setFill(brickColors[0]);
+					brick.setProtection(true);
+				} else if(col - row == 1 || col - row == 2) {
+					brick.setFill(brickColors[1]);
+					brick.setProtection(true);
+				} else if(col - row == 3 || col - row == 4) {
+					brick.setFill(brickColors[2]);
+					brick.setProtection(true);
+				} else {
+					brick.setFill(brickColors[3]);
+				}
+			} else {
+			// Diagonal from upper right down to middle (exclusive)
+				if(row + col == BRICK_COLUMNS - 1) {
+					brick.setFill(brickColors[0]);
+					brick.setProtection(true);
+				} else if(row + col == 14 || row + col == 13) {
+					brick.setFill(brickColors[1]);
+					brick.setProtection(true);
+				} else if(row + col == 12 || row + col == 11) {
+					brick.setFill(brickColors[2]);
+					brick.setProtection(true);
+				} else {
+					brick.setFill(brickColors[3]);
+				}
+			}
 			break;
 		case VICTORY:
 			break;
