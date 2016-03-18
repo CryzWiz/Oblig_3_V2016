@@ -26,6 +26,8 @@ public class ScreenManager implements Settings {
 	private Pane victoryScreen;
 	private Text timerText;
 	private Pane shadowLayer;
+	private Pane nextLevelLayer;
+
 	public static Text lvl1Text;
 	public static Text lvl2Text;
 	public static Text lvl3Text;
@@ -54,6 +56,9 @@ public class ScreenManager implements Settings {
 		Text victoryText = new Text("Victory!");
 		victoryText.setFill(TEXT_COLOR);
 		victoryText.setFont(font);
+		Text nextLevelText = new Text("Congratulations - Level cleared!");
+		nextLevelText.setFill(TEXT_COLOR);
+		nextLevelText.setFont(font);
 		timerText = new Text("00:00:00");
 		timerText.setFont(Font.font(30));
 		timerText.setFill(Color.WHITE);
@@ -89,6 +94,7 @@ public class ScreenManager implements Settings {
 		lvls = new HBox(levelIcon1, levelIcon2, levelIcon3);
 		
 		//Game Pane + pause and victory
+		nextLevelLayer = new Pane(nextLevelText);
 		playLayer = new Pane();
 		timerLayer = new BorderPane();
 		timerLayer.setBottom(timerText);
@@ -97,8 +103,9 @@ public class ScreenManager implements Settings {
 		shadowLayer.setOpacity(0.7);
 		pauseLayer = new StackPane(pauseText);
 		victoryLayer = new StackPane(victoryText);
-		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer, lvls);
+		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer, lvls, nextLevelLayer);
 		gameScreen.setBackground(BACKGROUND);
+	
 		
 		//GameOver Pane
 		endScreen = new StackPane(endText);
@@ -143,24 +150,37 @@ public class ScreenManager implements Settings {
 	public void setVictoryOpacity(double opacity){
 		victoryLayer.setOpacity(opacity);
 	}
+	public void setnextLevelOpacity(double opacity){
+		nextLevelLayer.setOpacity(opacity);
+	}
 
 	public void setPlayScreen(){
 		scene.setRoot(gameScreen);
 		setShadowOpacity(0);
 		setPauseOpacity(0);
 		setVictoryOpacity(0);
+		setnextLevelOpacity(0);
 	}
 	public void setPauseScreen(){
 		scene.setRoot(gameScreen);
 		setShadowOpacity(0.7);
 		setPauseOpacity(1);
 		setVictoryOpacity(0);
+		setnextLevelOpacity(0);
 	}
 	public void setVictoryScreen(){
 		scene.setRoot(gameScreen);
 		setShadowOpacity(0.7);
 		setPauseOpacity(0);
 		setVictoryOpacity(1);
+		setnextLevelOpacity(0);
+	}
+	public void setNextLevelScreen(){
+		scene.setRoot(gameScreen);
+		setShadowOpacity(0.7);
+		setPauseOpacity(0);
+		setVictoryOpacity(0);
+		setnextLevelOpacity(1);
 	}
 	public void setMenuScreen(){
 		scene.setRoot(menuScreen);
@@ -168,4 +188,5 @@ public class ScreenManager implements Settings {
 	public void setGameOverScreen(){
 		scene.setRoot(endScreen);
 	}
+
 }

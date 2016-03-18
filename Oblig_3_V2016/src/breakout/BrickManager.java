@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 
 public class BrickManager implements Settings {
 	public static enum Level{
-		ONE(1, 20), TWO(2, 15), THREE(3, 10), VICTORY(4, 0);
+		ONE(1, 99), TWO(2, 15), THREE(3, 10), VICTORY(4, 0);
 		
 		int value;
 		int removePercentage;
@@ -229,8 +229,9 @@ public class BrickManager implements Settings {
 	public void tick(GameManager gManager, Ball ball) {
 		collision(ball);
 		if(levelComplete()) {
-			gManager.victory();
+			gManager.levelCleared();
 			setLevel(currentLevel.nextLevel());
 		}
+		
 	}
 }
