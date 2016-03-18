@@ -38,9 +38,6 @@ public class ScreenManager implements Settings {
 	public StackPane levelIcon2;
 	public StackPane levelIcon3;
 	public HBox lvls;
-	
-	
-	
 
 	public ScreenManager(){
 		//Texts
@@ -143,18 +140,6 @@ public class ScreenManager implements Settings {
 	public Text getTimerText(){
 		return timerText;
 	}
-	public void setPauseOpacity(double opacity){
-		pauseLayer.setOpacity(opacity);
-	}
-	public void setShadowOpacity(double opacity){
-		shadowLayer.setOpacity(opacity);
-	}
-	public void setVictoryOpacity(double opacity){
-		victoryLayer.setOpacity(opacity);
-	}
-	public void setnextLevelOpacity(double opacity){
-		nextLevelLayer.setOpacity(opacity);
-	}
 
 	public void updateLevel(){
 		switch(getLevel()) {
@@ -178,6 +163,19 @@ public class ScreenManager implements Settings {
 		}
 	}
 	
+	public void setPauseOpacity(double opacity){
+		pauseLayer.setOpacity(opacity);
+	}
+	public void setShadowOpacity(double opacity){
+		shadowLayer.setOpacity(opacity);
+	}
+	public void setVictoryOpacity(double opacity){
+		victoryLayer.setOpacity(opacity);
+	}
+	public void setnextLevelOpacity(double opacity){
+		nextLevelLayer.setOpacity(opacity);
+	}
+
 	public void setPlayScreen(){
 		scene.setRoot(gameScreen);
 		setShadowOpacity(0);

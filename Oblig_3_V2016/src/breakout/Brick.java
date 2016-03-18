@@ -18,11 +18,94 @@ public class Brick implements Settings {
 		rectangle.setTranslateX(posX);
 		rectangle.setTranslateY(posY);
 	}
-
 	public Brick(int posX, int posY, int width, int height) {
 		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT);
 		rectangle.setTranslateX(posX);
 		rectangle.setTranslateY(posY);
+	}
+
+	public void setFill(Paint value){
+		rectangle.setFill(value);
+	}
+	public Rectangle getRectangle(){
+		return rectangle;
+	}
+
+	public int getBoundsLeft(){
+		return (int)(rectangle.getTranslateX());
+	}
+	public int getBoundsRight(){
+		return (int)(rectangle.getTranslateX() + rectangle.getWidth());
+	}
+	public int getBoundsTop(){
+		return (int)(rectangle.getTranslateY());
+	}
+	public int getBoundsBottom(){
+		return (int)(rectangle.getTranslateY() + rectangle.getHeight());
+	}
+
+	public boolean isInCloseRangeX(double x){
+		if(x < getBoundsRight() && x > getBoundsLeft())
+			return true;
+		return false;
+	}
+	public boolean isInCloseRangeY(double y){
+		if(y < getBoundsBottom() && y > getBoundsTop())
+			return true;
+		return false;
+	}
+	public boolean isInMaxRangeX(double x, double r){
+		return x < getBoundsRight() + r && x > getBoundsLeft() - r;
+	}
+	public boolean isInMaxRangeY(double y, double r){
+		return y < getBoundsBottom() + r && y > getBoundsTop() - r;
+	}
+	public boolean isInMaxRangeX(Ball ball){
+		if(ball.getBoundsLeft() < getBoundsRight() && ball.getBoundsRight() > getBoundsLeft())
+			return true;
+		return false;
+	}
+	public boolean isInMaxRangeY(Ball ball){
+		if(ball.getBoundsBottom() > getBoundsTop() && ball.getBoundsTop() < getBoundsBottom())
+			return true;
+		return false;
+	}
+	public boolean isInMaxRange(Ball ball){
+		return isInMaxRangeX(ball) && isInMaxRangeY(ball);
+	}
+	public boolean isDestroyed() {
+		return isDestroyed;
+	}
+
+	public int getPointZone(double x, double y){
+		int hPosition = 1;
+		int vPosition = 1;
+		if(x < getBoundsLeft())
+			hPosition = 0;
+		else if(x > getBoundsRight())
+			hPosition = 2;
+		if(y < getBoundsTop())
+			vPosition = 0;
+		else if(y > getBoundsBottom())
+			vPosition = 2;
+		return 3 * vPosition + hPosition;
+	}
+	public int getBallZone(Ball ball){
+
+		return getPointZone(ball.getX(), ball.getY());
+	}
+	public int getBallPrevZone(Ball ball){
+		return getPointZone(ball.getPrevX(), ball.getPrevY());
+	}
+
+	public double yWhenEnterCloseRange(Ball ball){
+		int relevantBound = (ball.dx > 0 ? getBoundsLeft() - ball.getRadius() : getBoundsRight() + ball.getRadius());
+		//return ball.getY() - (Math.abs(ball.getX()-relevantBound))*ball.dy/ball.dx;
+		return ball.getY() - (ball.getX()-relevantBound)*ball.dy/ball.dx;
+	}
+	public double xWhenEnterCloseRange(Ball ball){
+		int relevantBound = (ball.dy > 0 ? getBoundsTop() - ball.getRadius() : getBoundsBottom() + ball.getRadius());
+		return ball.getX() - (ball.getY()-relevantBound)*ball.dx/ball.dy;
 	}
 
 	public void destroy(){
@@ -36,9 +119,6 @@ public class Brick implements Settings {
 		isDestroyed = false;
 	}
 
-	public boolean isDestroyed() {
-		return isDestroyed;
-	}
 	/**
 	 * Protection from random destruction
 	 */
@@ -266,87 +346,5 @@ public class Brick implements Settings {
 	}
 	public void collision(Ball ball){
 		collision(ball, COLLISION_MODEL_DEFAULT);
-	}
-	
-	public double yWhenEnterCloseRange(Ball ball){
-		int relevantBound = (ball.dx > 0 ? getBoundsLeft() - ball.getRadius() : getBoundsRight() + ball.getRadius());
-		//return ball.getY() - (Math.abs(ball.getX()-relevantBound))*ball.dy/ball.dx;
-		return ball.getY() - (ball.getX()-relevantBound)*ball.dy/ball.dx;
-	}
-	public double xWhenEnterCloseRange(Ball ball){
-		int relevantBound = (ball.dy > 0 ? getBoundsTop() - ball.getRadius() : getBoundsBottom() + ball.getRadius());
-		return ball.getX() - (ball.getY()-relevantBound)*ball.dx/ball.dy;
-	}
-	
-	public Rectangle getRectangle(){
-		return rectangle;
-	}
-
-	public boolean isInCloseRangeX(double x){
-		if(x < getBoundsRight() && x > getBoundsLeft())
-			return true;
-		return false;
-	}
-	public boolean isInCloseRangeY(double y){
-		if(y < getBoundsBottom() && y > getBoundsTop())
-			return true;
-		return false;
-	}
-	public boolean isInMaxRangeX(double x, double r){
-		return x < getBoundsRight() + r && x > getBoundsLeft() - r;
-	}
-	public boolean isInMaxRangeY(double y, double r){
-		return y < getBoundsBottom() + r && y > getBoundsTop() - r;
-	}
-	public boolean isInMaxRangeX(Ball ball){
-		if(ball.getBoundsLeft() < getBoundsRight() && ball.getBoundsRight() > getBoundsLeft())
-			return true;
-		return false;
-	}
-	public boolean isInMaxRangeY(Ball ball){
-		if(ball.getBoundsBottom() > getBoundsTop() && ball.getBoundsTop() < getBoundsBottom())
-			return true;
-		return false;
-	}
-	public boolean isInMaxRange(Ball ball){
-		return isInMaxRangeX(ball) && isInMaxRangeY(ball);
-	}
-
-	public int getBoundsLeft(){
-		return (int)(rectangle.getTranslateX());
-	}
-	public int getBoundsRight(){
-		return (int)(rectangle.getTranslateX() + rectangle.getWidth());
-	}
-	public int getBoundsTop(){
-		return (int)(rectangle.getTranslateY());
-	}
-	public int getBoundsBottom(){
-		return (int)(rectangle.getTranslateY() + rectangle.getHeight());
-	}
-
-	public int getPointZone(double x, double y){
-		int hPosition = 1;
-		int vPosition = 1;
-		if(x < getBoundsLeft())
-			hPosition = 0;
-		else if(x > getBoundsRight())
-			hPosition = 2;
-		if(y < getBoundsTop())
-			vPosition = 0;
-		else if(y > getBoundsBottom())
-			vPosition = 2;
-		return 3 * vPosition + hPosition;
-	}
-	public int getBallZone(Ball ball){
-
-		return getPointZone(ball.getX(), ball.getY());
-	}
-	public int getBallPrevZone(Ball ball){
-		return getPointZone(ball.getPrevX(), ball.getPrevY());
-	}
-
-	public void setFill(Paint value){
-		rectangle.setFill(value);
 	}
 }

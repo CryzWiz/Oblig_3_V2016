@@ -12,26 +12,11 @@ public class BrickManager implements Settings {
 	public BrickManager(Pane pane) {
 		this(pane, BRICK_ROWS, BRICK_COLUMNS);
 	}
-
 	public BrickManager(Pane pane, int numberOfRows, int numberOfCols) {
 		createBricks(pane, numberOfRows, numberOfCols);
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
 		bricksLeft = numberOfRows * numberOfCols;
-	}
-
-	/*public void setLevel(Level lvl) {// -------------------------------------------------
-		currentLevel = lvl;
-		reset();
-	}*/
-	public void setNextLevel() {//-------------------------------------------------
-		nextLevel();
-		for(int row = 0; row < BRICK_ROWS; row++){
-			for(int col = 0; col < BRICK_COLUMNS; col++){
-				bricks[row][col].reset();
-				getLevel().brickColor(bricks[row][col], row, col);
-			}
-		}
 	}
 
 	public void createBricks(Pane pane, int numberOfRows, int numberOfCols) {
@@ -45,15 +30,6 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
-
-	public int setX(int col) {
-		return col * (BRICK_WIDTH + BRICK_PADDING_H) + WALL_PADDING_LEFT;
-	}
-
-	public int setY(int row) {
-		return row * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP;
-	}
-
 	public void destroyRandomBricks(int percentBricksToRemove) {
 		int numberOfBricksToRemove = (int) (((numberOfRows * numberOfCols) / 100.0) * percentBricksToRemove);
 
@@ -67,7 +43,6 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
-
 	public void reset() {
 		for (Brick[] col : bricks) {
 			for (Brick brick : col) {
@@ -79,14 +54,38 @@ public class BrickManager implements Settings {
 		destroyRandomBricks(getLevel().percentage());
 	}
 
-	public Brick getBrick(int row, int col) {
-		return bricks[row][col];
-	}
-
 	public Brick[][] getBricks() {
 		return bricks;
 	}
+	public Brick getBrick(int row, int col) {
+		return bricks[row][col];
+	}
+	
+	public int getRow(double y) {
+		return (int) ((y - WALL_PADDING_TOP) / (BRICK_HEIGHT + BRICK_PADDING_V));
+	}
+	public int getColumn(double x) {
+		return (int) ((x - WALL_PADDING_LEFT) / (BRICK_WIDTH + BRICK_PADDING_H));
+	}
+	public int setX(int col) {
+		return col * (BRICK_WIDTH + BRICK_PADDING_H) + WALL_PADDING_LEFT;
+	}
+	public int setY(int row) {
+		return row * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP;
+	}
 
+	public boolean levelComplete() {
+		return ((bricksLeft > 0) ? false : true);
+	}
+	public void setNextLevel() {
+		nextLevel();
+		for(int row = 0; row < BRICK_ROWS; row++){
+			for(int col = 0; col < BRICK_COLUMNS; col++){
+				bricks[row][col].reset();
+				getLevel().brickColor(bricks[row][col], row, col);
+			}
+		}
+	}
 	public void collision(Ball ball) {
 		int firstCol = getColumn(ball.getBoundsLeft());
 		int lastCol = getColumn(ball.getBoundsRight());
@@ -111,19 +110,6 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
-
-	public int getRow(double y) {
-		return (int) ((y - WALL_PADDING_TOP) / (BRICK_HEIGHT + BRICK_PADDING_V));
-	}
-
-	public int getColumn(double x) {
-		return (int) ((x - WALL_PADDING_LEFT) / (BRICK_WIDTH + BRICK_PADDING_H));
-	}
-
-	public boolean levelComplete() {
-		return ((bricksLeft > 0) ? false : true);
-	}
-
 	public void tick(GameManager gManager, Ball ball) {
 		collision(ball);
 		if (levelComplete()) {
