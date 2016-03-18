@@ -30,8 +30,52 @@ public class BrickManager implements Settings {
 			return removePercentage;
 		}
 		
-		public Color[] brickColors() {
-			return brickColors;
+		public void brickColor(Brick brick, int row, int col) {
+			switch (this) {
+			case ONE:
+				if (row < 3) {
+					brick.setFill(brickColors[0]);
+				} else if (row < 6) {
+					brick.setFill(brickColors[1]);
+				} else if (row < 9) {
+					brick.setFill(brickColors[2]);
+				} else {
+					brick.setFill(brickColors[3]);
+				}
+			case TWO:
+				if (col < BRICK_COLUMNS / 2) {
+					if (row == col) {
+						brick.setFill(brickColors[0]);
+						brick.setProtection(true);
+					} else if (col - row == 1 || row - col == 1) {
+						brick.setFill(brickColors[1]);
+						brick.setProtection(true);
+					} else if (col - row == 2 || row - col == 2) {
+						brick.setFill(brickColors[2]);
+						brick.setProtection(true);
+					} else {
+						brick.setFill(brickColors[3]);
+					}
+				} else {
+					if (row + col == BRICK_COLUMNS - 1) {
+						brick.setFill(brickColors[0]);
+						brick.setProtection(true);
+					} else if (row + col == 13 || row + col == 15) {
+						brick.setFill(brickColors[1]);
+						brick.setProtection(true);
+					} else if (row + col == 12 || row + col == 16) {
+						brick.setFill(brickColors[2]);
+						brick.setProtection(true);
+					} else {
+						brick.setFill(brickColors[3]);
+					}
+				}
+			case THREE:
+				break;
+			case VICTORY:
+				break;
+			}
+		
 		}
 		
 		public Level nextLevel(){
@@ -70,31 +114,30 @@ public class BrickManager implements Settings {
 	public void setLevel(Level lvl) {//-------------------------------------------------
 		currentLevel = lvl;
 		reset();
-		switch(currentLevel) {
-			case ONE:
-				setBrickColors(BRICK_COLORS_LVL1);
-				break;
-			case TWO:
-				setBrickColors(BRICK_COLORS_LVL2);
-				break;
-			case THREE:
-				break;
-			case VICTORY:
-				break;
-		}
+//		switch(currentLevel) {
+//			case ONE:
+//				setBrickColors(BRICK_COLORS_LVL1);
+//				break;
+//			case TWO:
+//				setBrickColors(BRICK_COLORS_LVL2);
+//				break;
+//			case THREE:
+//				break;
+//			case VICTORY:
+//				break;
+//		}
 	}
 
 	public void createBricks(Pane pane, int numberOfRows, int numberOfCols) {
-		Brick[][] bricks = new Brick[numberOfRows][numberOfCols];
+		bricks = new Brick[numberOfRows][numberOfCols];
 		for(int row = 0; row < numberOfRows; row++){
 			for(int col = 0; col < numberOfCols; col++){
 				Brick brick = new Brick(setX(col), setY(row), BRICK_WIDTH, BRICK_HEIGHT);
 				bricks[row][col]= brick;
 				pane.getChildren().add(brick.getRectangle());
+				currentLevel.brickColor(brick, row, col);
 			}
-
 		}
-		this.bricks = bricks;
 	}
 	
 	public int setX(int col) {
@@ -105,7 +148,55 @@ public class BrickManager implements Settings {
 		return row * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP;
 	}
 	
-	public void setBrickColors(Color[] brickColors) {
+//	public void setBrickColor(int row, int col) {
+//		Color[] brickColors = currentLevel.brickColors();
+//		switch (currentLevel) {
+//		case ONE:
+//			if (row < 3) {
+//				bricks[row][col].setFill(brickColors[0]);
+//			} else if (row < 6) {
+//				bricks[row][col].setFill(brickColors[1]);
+//			} else if (row < 9) {
+//				bricks[row][col].setFill(brickColors[2]);
+//			} else {
+//				bricks[row][col].setFill(brickColors[3]);
+//			}
+//		case TWO:
+//			if (col < BRICK_COLUMNS / 2) {
+//				if (row == col) {
+//					bricks[row][col].setFill(brickColors[0]);
+//					bricks[row][col].setProtection(true);
+//				} else if (col - row == 1 || row - col == 1) {
+//					bricks[row][col].setFill(brickColors[1]);
+//					bricks[row][col].setProtection(true);
+//				} else if (col - row == 2 || row - col == 2) {
+//					bricks[row][col].setFill(brickColors[2]);
+//					bricks[row][col].setProtection(true);
+//				} else {
+//					bricks[row][col].setFill(brickColors[3]);
+//				}
+//			} else {
+//				if (row + col == BRICK_COLUMNS - 1) {
+//					bricks[row][col].setFill(brickColors[0]);
+//					bricks[row][col].setProtection(true);
+//				} else if (row + col == 13 || row + col == 15) {
+//					bricks[row][col].setFill(brickColors[1]);
+//					bricks[row][col].setProtection(true);
+//				} else if (row + col == 12 || row + col == 16) {
+//					bricks[row][col].setFill(brickColors[2]);
+//					bricks[row][col].setProtection(true);
+//				} else {
+//					bricks[row][col].setFill(brickColors[3]);
+//				}
+//			}
+//		case THREE:
+//			break;
+//		case VICTORY:
+//			break;
+//		}
+//	}
+	
+/*	public void setBrickColors(Color[] brickColors) {
 		switch (currentLevel) {
 		case ONE:
 			for (int row = 0; row < bricks.length; row++) {
@@ -165,7 +256,8 @@ public class BrickManager implements Settings {
 			break;
 		}
 
-	}
+	}*/
+	
 	public void destroyRandomBricks(int percentBricksToRemove) {
 		int numberOfBricksToRemove = (int)(((numberOfRows * numberOfCols) / 100.0) * percentBricksToRemove);
 
