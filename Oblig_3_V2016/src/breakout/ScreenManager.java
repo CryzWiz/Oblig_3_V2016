@@ -10,7 +10,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
 
 public class ScreenManager implements Settings {
 	private Scene scene;
@@ -24,6 +26,7 @@ public class ScreenManager implements Settings {
 	private Pane victoryScreen;
 	private Text timerText;
 	private Pane shadowLayer;
+
 
 	public ScreenManager(){
 		//Texts

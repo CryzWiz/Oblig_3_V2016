@@ -7,13 +7,9 @@ import javafx.scene.text.Font;
 
 public interface Settings {
 	boolean BALL_GRAVITY_ON = true;
-<<<<<<< HEAD
 	boolean BOUNCE_ON_BOT = false;
 	boolean FRICTION_ON = false;
 	boolean ALLOW_TILT = true;
-=======
-	boolean BOUNCE_ON_BOT = true;
->>>>>>> refs/heads/Allans-branch
 
 	int MILLIS_PER_FRAME = 20; //Lower speed + higher frame rate = same look, more precision, higher CPU load
 
