@@ -26,7 +26,19 @@ public class ScreenManager implements Settings {
 	private Pane victoryScreen;
 	private Text timerText;
 	private Pane shadowLayer;
-
+	public static Text lvl1Text;
+	public static Text lvl2Text;
+	public static Text lvl3Text;
+	public static Rectangle lvl1Box;
+	public static Rectangle lvl2Box;
+	public static Rectangle lvl3Box;
+	public static StackPane levelIcon1;
+	public static StackPane levelIcon2;
+	public static StackPane levelIcon3;
+	public static HBox lvls;
+	
+	
+	
 
 	public ScreenManager(){
 		//Texts
@@ -46,47 +58,35 @@ public class ScreenManager implements Settings {
 		timerText.setFont(FONT_TIMER);
 		timerText.setFill(Color.WHITE);
 	
-		//lvl buttons
-		 double Opacity = 0.2;
-		 int level = Level.getvalue(); //Starting on lvl 0.
-		 //Box 1
-		 Rectangle lvl1Box = new Rectangle(0, 0, 65, 25);
-		 lvl1Box.setFill(Color.RED);
-		 Text lvl1Text = new Text(); 
-		 lvl1Text.setText("lvl 1");
-		 lvl1Text.setFont(Font.font(20));
-		 lvl1Text.setFill(Color.BLACK);
-		 StackPane levelBox1 = new StackPane(lvl1Box,lvl1Text);
-		 levelBox1.setAlignment(Pos.TOP_RIGHT);
-		 //Box 2
-		 Rectangle lvl2Box = new Rectangle(0, 0, 65, 25);
-		 lvl2Box.setFill(Color.PURPLE);
-		 if(level <= 2){
-			 lvl2Box.setOpacity(Opacity);
-		 }
-		 
-		 Text lvl2Text = new Text();
-		 lvl2Text.setText("lvl 2");
-		 lvl2Text.setFont(Font.font(20));
-		 lvl2Text.setFill(Color.BLACK);
-		 StackPane levelBox2 = new StackPane(lvl2Box,lvl2Text);
-		 levelBox2.setAlignment(Pos.TOP_RIGHT);
-		 //Box 3
-		 Rectangle lvl3Box = new Rectangle(0, 0, 65, 25);
-		 lvl3Box.setFill(Color.BLUE);
-		 if(level <= 3){
-			 lvl3Box.setOpacity(Opacity);
-		 }
-		 Text lvl3Text = new Text();
-		 lvl3Text.setText("lvl 3");
-		 lvl3Text.setFont(Font.font(20));
-		 lvl3Text.setFill(Color.BLACK);
-		 StackPane levelBox3 = new StackPane(lvl3Box,lvl3Text);
-		 levelBox3.setAlignment(Pos.TOP_RIGHT);
-		 
-		 HBox lvls = new HBox(levelBox1, levelBox2, levelBox3);
-		//lvl buttons stops here. Should we put in its in own class? Should it be never-ending, or are 3 levels enough?
-		//Still to do - Needs a function that removes/sets opacity when its round win / game over.
+		//lvl Icons
+		//Icon 1
+		lvl1Box = new Rectangle(0, 0, 65, 25);
+		lvl1Box.setFill(Color.RED);
+		lvl1Text = new Text(); 
+		lvl1Text.setText("Level 1");
+		lvl1Text.setFont(Font.font(20));
+		lvl1Text.setFill(Color.BLACK);
+		levelIcon1 = new StackPane(lvl1Box,lvl1Text);
+		levelIcon1.setAlignment(Pos.TOP_RIGHT);
+		//Icon 2
+		lvl2Box = new Rectangle(0, 0, 65, 25);
+		lvl2Box.setFill(Color.PURPLE);
+		lvl2Text = new Text();
+		lvl2Text.setText("Level 2");
+		lvl2Text.setFont(Font.font(20));
+		lvl2Text.setFill(Color.BLACK);
+		levelIcon2 = new StackPane(lvl2Box,lvl2Text);
+		levelIcon2.setAlignment(Pos.TOP_RIGHT);
+		//Icon 3
+		lvl3Box = new Rectangle(0, 0, 65, 25);
+		lvl3Box.setFill(Color.BLUE);
+		lvl3Text = new Text();
+		lvl3Text.setText("Level 3");
+		lvl3Text.setFont(Font.font(20));
+		lvl3Text.setFill(Color.BLACK);
+		levelIcon3 = new StackPane(lvl3Box,lvl3Text);
+		levelIcon3.setAlignment(Pos.TOP_RIGHT);
+		lvls = new HBox(levelIcon1, levelIcon2, levelIcon3);
 		
 		//Game Pane + pause and victory
 		playLayer = new Pane();
@@ -117,7 +117,6 @@ public class ScreenManager implements Settings {
 	public Scene getScene(){
 		return scene;
 	}
-	
 	public Pane getPlayLayer(){
 		return playLayer;
 	}

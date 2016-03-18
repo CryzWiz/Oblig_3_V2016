@@ -37,7 +37,6 @@ public class BrickManager implements Settings {
 				bricks[row][col] = brick;
 				pane.getChildren().add(brick.getRectangle());
 				currentLevel.brickColor(brick, row, col);
-
 			}
 		}
 	}
