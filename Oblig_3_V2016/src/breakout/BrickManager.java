@@ -212,10 +212,10 @@ public class BrickManager implements Settings {
 		
 		
 		//New collision, probably works when getRow and getColumn works correctly
-		int firstRow = getRow(ball.getBoundsLeft());
-		int lastRow = getRow(ball.getBoundsRight());
-		int firstCol = getColumn(ball.getBoundsTop());
-		int lastCol = getColumn(ball.getBoundsBottom());
+		int firstCol = getColumn(ball.getBoundsLeft());
+		int lastCol = getColumn(ball.getBoundsRight());
+		int firstRow = getRow(ball.getBoundsTop());
+		int lastRow = getRow(ball.getBoundsBottom());
 
 		if(lastRow >= 0 && firstRow < BRICK_ROWS && lastCol >= 0 && firstCol < BRICK_COLUMNS){
 			firstRow = Math.max(firstRow, 0);
