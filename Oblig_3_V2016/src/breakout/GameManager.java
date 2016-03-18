@@ -62,8 +62,14 @@ public class GameManager {
 		state = new MenuState();
 	}
 	
+	public void nextLevel() {
+		state = new nextLevelState();
+	}
 	public void victory() {
 		state = new VictoryState();
+	}
+	public void levelCleared() {
+		state = new nextLevelState();
 	}
 	public void exit(){
 		System.exit(0);

@@ -1,5 +1,6 @@
 package breakout;
 import static breakout.BrickManager.*;
+
 import javafx.scene.paint.Color;
 
 
@@ -9,7 +10,7 @@ public enum Level {
 	int value;
 	int removePercentage;
 	Color[] brickColors;
-	public static int level;
+	private static Level level = ONE;
 
 	Level(int value, int removePercentage, Color[] brickColors) {
 		this.value = value;
@@ -17,11 +18,9 @@ public enum Level {
 		this.brickColors = brickColors;
 	}
 	public int value() {
-		level = value;
 		return value;
 	}
-
-	public static int getvalue() {
+	public static Level getLevel(){
 		return level;
 	}
 
@@ -78,16 +77,16 @@ public enum Level {
 
 	}
 
-	public Level nextLevel() {
-		switch (this) {
+	public static void nextLevel() {
+		switch (level) {
 		case ONE:
-			return TWO;
+			level = TWO;
 		case TWO:
-			return THREE;
+			level = THREE;
 		case THREE:
-			return VICTORY;
+			level = VICTORY;
 		default:
-			return ONE;
+			level = ONE;
 		}
 	}
 };

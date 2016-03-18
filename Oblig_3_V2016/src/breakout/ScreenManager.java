@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-
+import static breakout.Level.*;
 
 public class ScreenManager implements Settings {
 	private Scene scene;
@@ -26,6 +26,8 @@ public class ScreenManager implements Settings {
 	private Pane victoryScreen;
 	private Text timerText;
 	private Pane shadowLayer;
+	private Pane nextLevelLayer;
+
 	public static Text lvl1Text;
 	public static Text lvl2Text;
 	public static Text lvl3Text;
@@ -54,6 +56,9 @@ public class ScreenManager implements Settings {
 		Text victoryText = new Text("Victory!");
 		victoryText.setFill(TEXT_COLOR);
 		victoryText.setFont(FONT_TEXT);
+		Text nextLevelText = new Text("Congratulations - Level cleared!");
+		nextLevelText.setFill(TEXT_COLOR);
+		nextLevelText.setFont(FONT_TEXT);
 		timerText = new Text("00:00:00");
 		timerText.setFont(FONT_TIMER);
 		timerText.setFill(Color.WHITE);
@@ -89,6 +94,7 @@ public class ScreenManager implements Settings {
 		lvls = new HBox(levelIcon1, levelIcon2, levelIcon3);
 		
 		//Game Pane + pause and victory
+		nextLevelLayer = new Pane(nextLevelText);
 		playLayer = new Pane();
 		timerLayer = new BorderPane();
 		timerLayer.setBottom(timerText);
@@ -98,8 +104,9 @@ public class ScreenManager implements Settings {
 		pauseLayer = new StackPane(pauseText);
 		victoryLayer = new StackPane(victoryText);
 		//gameScreen = new StackPane(playLayer, shadowLayer, pauseLayer, victoryLayer, timerLayer);
-		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer, lvls);
+		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer, lvls, nextLevelLayer);
 		gameScreen.setBackground(BACKGROUND);
+	
 		
 		//GameOver Pane
 		endScreen = new StackPane(endText);
@@ -112,6 +119,7 @@ public class ScreenManager implements Settings {
 		menuScreen.setBackground(BACKGROUND);
 
 		scene = new Scene(menuScreen, WIDTH, HEIGHT);
+		updateLevel();
 	}
 	
 	public Scene getScene(){
@@ -144,12 +152,38 @@ public class ScreenManager implements Settings {
 	public void setVictoryOpacity(double opacity){
 		victoryLayer.setOpacity(opacity);
 	}
+	public void setnextLevelOpacity(double opacity){
+		nextLevelLayer.setOpacity(opacity);
+	}
 
+	public static void updateLevel(){
+		switch(getLevel()) {
+		case ONE:
+			ScreenManager.lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			ScreenManager.lvl2Box.setOpacity(OPACITY_LEVELICONS_ON);
+			ScreenManager.lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+			break;
+		case TWO:
+			ScreenManager.lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			ScreenManager.lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			ScreenManager.lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+			break;
+		case THREE:
+			ScreenManager.lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			ScreenManager.lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			ScreenManager.lvl3Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			break;
+		case VICTORY:
+			break;
+		}
+	}
+	
 	public void setPlayScreen(){
 		scene.setRoot(gameScreen);
 		setShadowOpacity(0);
 		setPauseOpacity(0);
 		setVictoryOpacity(0);
+		setnextLevelOpacity(0);
 		BorderPane.setAlignment(timerText, Pos.BOTTOM_LEFT);
 	}
 	public void setPauseScreen(){
@@ -164,6 +198,15 @@ public class ScreenManager implements Settings {
 		setShadowOpacity(0.7);
 		setPauseOpacity(0);
 		setVictoryOpacity(1);
+		setnextLevelOpacity(0);
+		BorderPane.setAlignment(timerText, Pos.TOP_CENTER);
+	}
+	public void setNextLevelScreen(){
+		scene.setRoot(gameScreen);
+		setShadowOpacity(0.7);
+		setPauseOpacity(0);
+		setVictoryOpacity(0);
+		setnextLevelOpacity(1);
 		BorderPane.setAlignment(timerText, Pos.TOP_CENTER);
 	}
 	public void setMenuScreen(){

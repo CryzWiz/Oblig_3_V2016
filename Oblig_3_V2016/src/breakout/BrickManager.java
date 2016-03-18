@@ -2,7 +2,6 @@ package breakout;
 
 import static breakout.Level.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 public class BrickManager implements Settings {
 	private Brick[][] bricks;
@@ -10,22 +9,22 @@ public class BrickManager implements Settings {
 	private int numberOfCols;
 	private int bricksLeft;
 
-	private Level currentLevel;
-
 	public BrickManager(Pane pane) {
 		this(pane, BRICK_ROWS, BRICK_COLUMNS);
 	}
 
 	public BrickManager(Pane pane, int numberOfRows, int numberOfCols) {
-		currentLevel = ONE;
 		createBricks(pane, numberOfRows, numberOfCols);
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
 		bricksLeft = numberOfRows * numberOfCols;
 	}
 
-	public void setLevel(Level lvl) {// -------------------------------------------------
+	/*public void setLevel(Level lvl) {// -------------------------------------------------
 		currentLevel = lvl;
+		reset();
+	}*/
+	public void setLevel(Level lvl) {//-------------------------------------------------
 		reset();
 	}
 
@@ -36,7 +35,7 @@ public class BrickManager implements Settings {
 				Brick brick = new Brick(setX(col), setY(row), BRICK_WIDTH, BRICK_HEIGHT);
 				bricks[row][col] = brick;
 				pane.getChildren().add(brick.getRectangle());
-				currentLevel.brickColor(brick, row, col);
+				getLevel().brickColor(brick, row, col);
 			}
 		}
 	}
@@ -71,7 +70,7 @@ public class BrickManager implements Settings {
 		}
 		bricksLeft = numberOfRows * numberOfCols;
 		// setLevel(currentLevel);
-		destroyRandomBricks(currentLevel.percentage());
+		destroyRandomBricks(getLevel().percentage());
 	}
 
 	public Brick getBrick(int row, int col) {
@@ -122,8 +121,8 @@ public class BrickManager implements Settings {
 	public void tick(GameManager gManager, Ball ball) {
 		collision(ball);
 		if (levelComplete()) {
-			gManager.victory();
-			setLevel(currentLevel.nextLevel());
+			gManager.levelCleared();
+			nextLevel();
 		}
 	}
 }
