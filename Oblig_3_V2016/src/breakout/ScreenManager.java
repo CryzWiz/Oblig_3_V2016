@@ -26,7 +26,19 @@ public class ScreenManager implements Settings {
 	private Pane victoryScreen;
 	private Text timerText;
 	private Pane shadowLayer;
-
+	public static Text lvl1Text;
+	public static Text lvl2Text;
+	public static Text lvl3Text;
+	public static Rectangle lvl1Box;
+	public static Rectangle lvl2Box;
+	public static Rectangle lvl3Box;
+	public static StackPane levelBox1;
+	public static StackPane levelBox2;
+	public static StackPane levelBox3;
+	public static HBox lvls;
+	
+	
+	
 	public ScreenManager(){
 		//Texts
 		Font font = Font.font(FONT_SIZE_GAMEOVER);
@@ -47,8 +59,7 @@ public class ScreenManager implements Settings {
 		timerText.setFill(Color.WHITE);
 	
 		//lvl buttons
-		 double Opacity = 0.2;
-		 int level = BrickManager.Level.getvalue(); //Starting on lvl 0.
+		 
 		 //Box 1
 		 Rectangle lvl1Box = new Rectangle(0, 0, 65, 25);
 		 lvl1Box.setFill(Color.RED);
@@ -61,10 +72,7 @@ public class ScreenManager implements Settings {
 		 //Box 2
 		 Rectangle lvl2Box = new Rectangle(0, 0, 65, 25);
 		 lvl2Box.setFill(Color.PURPLE);
-		 if(level <= 2){
-			 lvl2Box.setOpacity(Opacity);
-		 }
-		 
+		
 		 Text lvl2Text = new Text();
 		 lvl2Text.setText("lvl 2");
 		 lvl2Text.setFont(Font.font(20));
@@ -74,9 +82,7 @@ public class ScreenManager implements Settings {
 		 //Box 3
 		 Rectangle lvl3Box = new Rectangle(0, 0, 65, 25);
 		 lvl3Box.setFill(Color.BLUE);
-		 if(level <= 3){
-			 lvl3Box.setOpacity(Opacity);
-		 }
+		 
 		 Text lvl3Text = new Text();
 		 lvl3Text.setText("lvl 3");
 		 lvl3Text.setFont(Font.font(20));
@@ -116,7 +122,6 @@ public class ScreenManager implements Settings {
 	public Scene getScene(){
 		return scene;
 	}
-	
 	public Pane getPlayLayer(){
 		return playLayer;
 	}
@@ -169,4 +174,54 @@ public class ScreenManager implements Settings {
 	public void setGameOverScreen(){
 		scene.setRoot(endScreen);
 	}
+	public static void setLevelIcon(){
+		/*
+		if(BrickManager.Level.getvalue() == 1){
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+		}
+		else if(BrickManager.Level.getvalue() == 2){
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+		}
+		else if(BrickManager.Level.getvalue() == 3){
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_OFF);
+		}
+		else{
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+		}
+		*/
+		
+		/*
+		switch(BrickManager.Level.getvalue()){
+		case 1:
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+			
+		case 2:
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+			
+		case 3:
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			
+		default:
+			lvl1Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl2Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+			
+		}
+		*/
+ 	}
+	
 }

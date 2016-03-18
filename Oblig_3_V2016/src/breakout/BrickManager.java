@@ -72,12 +72,19 @@ public class BrickManager implements Settings {
 		reset();
 		switch(currentLevel) {
 			case ONE:
+				ScreenManager.lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+				ScreenManager.lvl2Box.setOpacity(OPACITY_LEVELICONS_ON);
+				ScreenManager.lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
 				setBrickColors(BRICK_COLORS_LVL1);
 				break;
 			case TWO:
+				ScreenManager.lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
+				ScreenManager.lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
+				ScreenManager.lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
 				setBrickColors(BRICK_COLORS_LVL2);
 				break;
 			case THREE:
+				
 				break;
 			case VICTORY:
 				break;
