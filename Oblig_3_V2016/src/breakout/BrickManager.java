@@ -54,19 +54,13 @@ public class BrickManager implements Settings {
 	}
 
 	public BrickManager(Pane pane, int numberOfRows, int numberOfCols) { 		
-		createBricks(numberOfRows, numberOfCols);
+		createBricks(pane, numberOfRows, numberOfCols);
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
 		bricksLeft = numberOfRows * numberOfCols;
-		setLevel(ONE); //-------------------------------------------------
-		for(int row = 0; row < BRICK_ROWS; row++){
-			for(int col = 0; col < BRICK_COLUMNS; col++){
-				pane.getChildren().add(bricks[row][col].getRectangle());
-			}
-		}
+		setLevel(ONE); //------------------------------------------------
 	}
 	
-	//public void setLevel(int lvl) {//-------------------------------------------------
 	public void setLevel(Level lvl) {//-------------------------------------------------
 		currentLevel = lvl;
 		reset();
@@ -84,25 +78,27 @@ public class BrickManager implements Settings {
 		}
 	}
 
-
-	public void createBricks(int numberOfRows, int numberOfCols) {
+	public void createBricks(Pane pane, int numberOfRows, int numberOfCols) {
 		Brick[][] bricks = new Brick[numberOfRows][numberOfCols];
 		for(int row = 0; row < numberOfRows; row++){
 			for(int col = 0; col < numberOfCols; col++){
-				Brick brick = new Brick(
-						//These expressions can be made into methods for calculating position based on row/col number
-						//They would work kind of opposite to the getCol and getRow methods.
-						col * (BRICK_WIDTH + BRICK_PADDING_H) + WALL_PADDING_LEFT,
-						row * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP, 
-						BRICK_WIDTH, 
-						BRICK_HEIGHT);
-
+				Brick brick = new Brick(setX(col), setY(row), BRICK_WIDTH, BRICK_HEIGHT);
 				bricks[row][col]= brick;
+				pane.getChildren().add(brick.getRectangle());
 			}
 
 		}
 		this.bricks = bricks;
 	}
+	
+	public int setX(int col) {
+		return col * (BRICK_WIDTH + BRICK_PADDING_H) + WALL_PADDING_LEFT;
+	}
+	
+	public int setY(int row) {
+		return row * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP;
+	}
+	
 	public void setBrickColors(Color[] brickColors) {
 		switch (currentLevel) {
 		case ONE:
@@ -196,22 +192,6 @@ public class BrickManager implements Settings {
 	}
 
 	public void collision(Ball ball){
-		//Old brick collision
-		/*for(Brick[] brickCol : bricks){
-			for(Brick brick : brickCol){
-				if (!brick.isDestroyed()) {
-					brick.collision(ball);
-					if(brick.isDestroyed())
-						bricksLeft--;
-				}
-			}
-		}*/
-		//Where ball meets brick
-		//Use brick.collision(ball); on a limited amount of bricks.
-		//Tip: Use ball.getBounds...(); as the hard limits of possibilities.
-		
-		
-		//New collision, probably works when getRow and getColumn works correctly
 		int firstCol = getColumn(ball.getBoundsLeft());
 		int lastCol = getColumn(ball.getBoundsRight());
 		int firstRow = getRow(ball.getBoundsTop());
