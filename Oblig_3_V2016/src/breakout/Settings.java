@@ -22,7 +22,8 @@ public interface Settings {
 	Font FONT_TIMER = Font.font(30);
     
     Color[] BRICK_COLORS_LVL1 = {Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
-    Color[] BRICK_COLORS_LVL2 = {Color.PURPLE, Color.RED, Color.PURPLE, Color.AQUA};
+//    Color[] BRICK_COLORS_LVL3 = {Color.DEEPSKYBLUE, Color.PALETURQUOISE, Color.PURPLE, Color.AQUA};
+    Color[] BRICK_COLORS_LVL2 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
     Color[] BRICK_COLORS_LVL3 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
 
     Color BACKGROUND_COLOR = Color.BLACK;
