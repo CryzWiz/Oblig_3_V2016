@@ -90,7 +90,10 @@ public class Ball implements Settings {
 	public void bounce(double reflectionAngle){
 		bounceX();
 		bounceY();
-		setSpeedPolar(getSpeed(), 2*reflectionAngle - getDirectionAngle());
+		if(Math.abs(reflectionAngle - getDirectionAngle()) < Math.PI / 2)
+			setSpeedPolar(getSpeed(), 2*reflectionAngle - getDirectionAngle());
+		else
+			setSpeedPolar(getSpeed(), 1.5*reflectionAngle-0.5*getDirectionAngle());
 	}
 	public boolean bounceOffPoint(int x, int y){
 		if(getDistanceSquared(x, y) < Math.pow(circle.getRadius(), 2)){
