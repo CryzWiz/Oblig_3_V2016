@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 public enum Level {
 	ONE(1, 20, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 0, BRICK_COLORS_LVL3), VICTORY(4, 0,BRICK_COLORS_LVL1);
 	
-	private static Level level = ONE;
+	private static Level level = THREE; // ---------------------------- ENDRE TIL LEVEL 1!!!
 	public static Level getLevel(){
 		return level;
 	}
@@ -31,7 +31,7 @@ public enum Level {
 	int value;
 	int removePercentage;
 	Color[] brickColors;
-
+    Color UNBREAKABLE_BRICK_COLOR = Color.GRAY;
 	Level(int value, int removePercentage, Color[] brickColors) {
 		this.value = value;
 		this.removePercentage = removePercentage;
@@ -89,7 +89,23 @@ public enum Level {
 			break;
 			
 		case THREE:
-			if(row == 2 || row == 6) {
+			// Unbreakable bricks:
+			if(row == 0) {
+				if(col < 6 || col > 8) {
+					setUnbreakableBrick(brick);
+				} else {
+					brick.setFill(brickColors[1]);
+				}
+			}
+			else if(row == 9) {
+				if(col < 10 && col > 4) {
+					setUnbreakableBrick(brick);
+				} else {
+					brick.setFill(brickColors[1]);
+				}
+			}
+			// Pattern
+			else if(row == 2 || row == 6) {
 				if(col == 3 || col == 7 || col == 11) {
 					brick.setFill(brickColors[0]);
 					brick.setProtection(true);
@@ -110,6 +126,7 @@ public enum Level {
 				} else {
 					brick.setFill(brickColors[1]);
 				}
+			// Surrounding bricks
 			} else {
 				brick.setFill(brickColors[1]);
 			}
@@ -120,5 +137,11 @@ public enum Level {
 		}
 
 	}
+	public void setUnbreakableBrick(Brick brick) {
+		brick.setFill(UNBREAKABLE_BRICK_COLOR);
+		brick.setProtection(true);
+		brick.setUnbreakable(true);
+	}
+
 };
 

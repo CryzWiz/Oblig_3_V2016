@@ -4,14 +4,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-/**
- * @author benedicte
- *
- */
 public class Brick implements Settings {
 	private Rectangle rectangle;
 	private boolean isDestroyed = false;
 	private boolean isProtected = false;
+	private boolean unbreakable = false;
 
 	public Brick(int posX, int posY, Color c) {
 		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT, c);
@@ -109,9 +106,11 @@ public class Brick implements Settings {
 	}
 
 	public void destroy(){
-		rectangle.setDisable(true);
-		rectangle.setVisible(false);
-		isDestroyed = true;
+		if(!unbreakable) {
+			rectangle.setDisable(true);
+			rectangle.setVisible(false);
+			isDestroyed = true;
+		}
 	}
 	public void reset(){
 		rectangle.setDisable(false);
@@ -128,7 +127,14 @@ public class Brick implements Settings {
 	public boolean isProtected() {
 		return isProtected;
 	}
-
+	
+	public void setUnbreakable(boolean unbreakable) {
+		this.unbreakable = unbreakable;
+	}
+	public boolean isUnbreakable() {
+		return unbreakable;
+	}
+	
 	private void collision_old(Ball ball){
 		if(isInMaxRange(ball))
 			return;
