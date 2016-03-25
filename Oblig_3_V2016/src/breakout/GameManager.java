@@ -103,11 +103,11 @@ public class GameManager implements Settings {
 			speedText = "Fast";
 			break;
 		}
-		MenuButton.setText(1, "Ball Speed: " + speedText);
+		MenuButton.setText(2, "Ball Speed: " + speedText);
 	}
 	public void toggleFriction(){
 		friction = !friction;
-		MenuButton.setText(2, "Friction: " + (friction ? "ON" : "OFF"));
+		MenuButton.setText(3, "Friction: " + (friction ? "ON" : "OFF"));
 	}
 	public void nextLevel() {
 		state = new nextLevelState();

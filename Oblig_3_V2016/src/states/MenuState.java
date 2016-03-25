@@ -2,6 +2,7 @@ package states;
 
 import java.util.List;
 
+import breakout.Level;
 import breakout.MenuButton;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -24,9 +25,20 @@ public class MenuState extends GameState {
 		((MenuButton)buttons.get(1)).normal();
 		((MenuButton)buttons.get(2)).normal();
 		((MenuButton)buttons.get(3)).normal();
+		((MenuButton)buttons.get(4)).normal();
 		if(y >= 0 && y < menu.getHeight() && x >= 0 && x < menu.getWidth()){
 			if(y < buttons.get(1).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(0)).hover();
+				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
+					Level.reset();
+					ball.reset(); //Doesn't reset to toggled speed
+					game.play(ball);
+					brickManager.reset();
+					timer.reset();
+				}
+			}
+			if(y < buttons.get(2).localToParent(0, 0).getY()){
+				((MenuButton)buttons.get(1)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 					ball.reset(); //Doesn't reset to toggled speed
 					game.play(ball);
@@ -34,18 +46,18 @@ public class MenuState extends GameState {
 					timer.reset();
 				}
 			}
-			else if(y < buttons.get(2).localToParent(0, 0).getY()){
-				((MenuButton)buttons.get(1)).hover();
+			else if(y < buttons.get(3).localToParent(0, 0).getY()){
+				((MenuButton)buttons.get(2)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
 					game.toggleSpeed(ball);
 			}
-			else if(y < buttons.get(3).localToParent(0, 0).getY()){
-				((MenuButton)buttons.get(2)).hover();
+			else if(y < buttons.get(4).localToParent(0, 0).getY()){
+				((MenuButton)buttons.get(3)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
 					game.toggleFriction(); //Doesn't set friction yet
 			}
 			else{
-				((MenuButton)buttons.get(3)).hover();
+				((MenuButton)buttons.get(4)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
 					game.exit();
 			}

@@ -114,7 +114,8 @@ public class ScreenManager implements Settings {
 
 		//Main Menu Pane
 		buttons = new VBox(
-				new MenuButton("PLAY!", Colors.GREEN),
+				new MenuButton("New Game!", Colors.GREEN),
+				new MenuButton("Continue...", Colors.GREEN),
 				new MenuButton("Ball Speed: Normal", Colors.YELLOW),
 				new MenuButton("Friction: OFF", Colors.BLUE),
 				new MenuButton("Exit Game", Colors.RED)

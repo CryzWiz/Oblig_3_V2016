@@ -120,5 +120,9 @@ public enum Level {
 		}
 
 	}
+
+	public static void reset(){
+		level = ONE;
+	}
 };
 
