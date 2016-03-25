@@ -12,10 +12,10 @@ public class Ball implements Settings {
 	public Ball(Pane pane){
 		this(pane, BALL_START_DX, BALL_START_DY, BALL_RADIUS, BALL_COLOR);
 	}
-	Ball(Pane pane, int dx, int dy, int r, Color c){
+	public Ball(Pane pane, int dx, int dy, int r, Color c){
 		this(pane, BALL_START_X, BALL_START_Y, BALL_START_DX, BALL_START_DY, BALL_RADIUS, BALL_COLOR);
 	}
-	Ball(Pane pane, int x, int y, int dx, int dy, int r, Color c){
+	public Ball(Pane pane, int x, int y, int dx, int dy, int r, Color c){
 		this.dx = dx;
 		this.dy = dy;
 		circle = new Circle(0, 0, r, c);

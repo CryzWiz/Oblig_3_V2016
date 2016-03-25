@@ -2,7 +2,6 @@ package breakout;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -12,11 +11,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
 import static breakout.Level.*;
+
+import breakout.MenuButton.Colors;
 
 public class ScreenManager implements Settings {
 	private Scene scene;
-	private VBox menuScreen;
+	private Pane menuScreen;
+	private VBox buttons;
 	private StackPane gameScreen;
 	private Pane playLayer; //Play is just part of the gameScreen, thus not named as a "screen"
 	private Pane pauseLayer; //Pause is just part of the gameScreen, thus not named as a "screen"
@@ -47,7 +50,7 @@ public class ScreenManager implements Settings {
 		Text pauseText = new Text("Game paused!");
 		pauseText.setFill(TEXT_COLOR);
 		pauseText.setFont(FONT_TEXT);
-		Text menuText = new Text("Click to Start");
+		Text menuText = new Text("Breakout - The Game");
 		menuText.setFill(TEXT_COLOR);
 		menuText.setFont(FONT_TEXT);
 		Text victoryText = new Text("Victory!");
@@ -110,10 +113,19 @@ public class ScreenManager implements Settings {
 		endScreen.setBackground(BACKGROUND);
 
 		//Main Menu Pane
-		Button newGame = new Button("New Game");
-		menuScreen = new VBox(menuText, newGame);
-		menuScreen.setAlignment(Pos.CENTER);
+		buttons = new VBox(
+				new MenuButton("PLAY!", Colors.GREEN),
+				new MenuButton("Ball Speed: Normal", Colors.YELLOW),
+				new MenuButton("Friction: OFF", Colors.BLUE),
+				new MenuButton("Exit Game", Colors.RED)
+				);
+		//buttons.getChildren().get(0)
+		//((MenuButton)buttons.getChildren().get(0)).setAlignment(Pos.CENTER);
+		menuScreen = new BorderPane(buttons, menuText, null, null, null);
 		menuScreen.setBackground(BACKGROUND);
+		//menuText.setTextAlignment(TextAlignment.CENTER);
+		buttons.setMaxSize(BUTTON_WIDTH, 3*BUTTON_HEIGHT);
+		buttons.setAlignment(Pos.CENTER);
 
 		scene = new Scene(menuScreen, WIDTH, HEIGHT);
 		updateLevel();
@@ -136,6 +148,9 @@ public class ScreenManager implements Settings {
 	}
 	public Pane getVictoryScreen(){
 		return victoryScreen;
+	}
+	public VBox getButtons(){
+		return buttons;
 	}
 	public Text getTimerText(){
 		return timerText;

@@ -28,7 +28,7 @@ public class Racket implements Settings{
 		pane.getChildren().add(pad);
 		dx = 0;
 		direction = STILL;
-		isSlippery = false;
+		setSlippery(true);
 	}
 
 	public Rectangle getpad(){
@@ -91,7 +91,6 @@ public class Racket implements Settings{
 		pad.setStroke(value ? Color.BLUE : Color.BLACK);
 	}
 	
-	@SuppressWarnings("unused")
 	public void collision(Ball ball){
 		if(ball.getBoundsBottom() > getYatX(ball.getX())
 				&& ball.getBoundsLeft() < getBoundsRight()
@@ -100,7 +99,7 @@ public class Racket implements Settings{
 				&& ball.dy > 0)
 		{
 			ball.bounce(getTiltAngleRads() - Math.PI / 2);
-			if(!isSlippery && FRICTION_ON)
+			if(!isSlippery)
 				ball.friction(dx, 0, PADDLE_FRICTION_FACTOR, 0);
 			dx = 0;
 		}
