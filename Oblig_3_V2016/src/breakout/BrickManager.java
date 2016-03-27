@@ -27,6 +27,10 @@ public class BrickManager implements Settings {
 				bricks[row][col] = brick;
 				pane.getChildren().add(brick.getRectangle());
 				getLevel().brickColor(brick, row, col);
+				if(col > 0)
+					bricks[row][col-1].setCloseBrick(0, brick);
+				if(row > 0)
+					bricks[row-1][col].setCloseBrick(1, brick);
 			}
 		}
 	}

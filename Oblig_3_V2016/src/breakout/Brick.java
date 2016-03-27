@@ -9,21 +9,25 @@ import javafx.scene.shape.Rectangle;
  *
  */
 public class Brick implements Settings {
+	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
 	private boolean isDestroyed = false;
 	private boolean isProtected = false;
 
-	public Brick(int posX, int posY, Color c) {
-		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT, c);
-		rectangle.setTranslateX(posX);
-		rectangle.setTranslateY(posY);
+	public Brick(int posX, int posY) {
+		this(posX, posY, BRICK_WIDTH, BRICK_HEIGHT);
 	}
 	public Brick(int posX, int posY, int width, int height) {
-		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT);
+		rectangle = new Rectangle(width, height);
 		rectangle.setTranslateX(posX);
 		rectangle.setTranslateY(posY);
+		closeBricks[0] = null;
+		closeBricks[1] = null;
 	}
 
+	public void setCloseBrick(int index, Brick brick){
+		closeBricks[index] = brick;
+	}
 	public void setFill(Paint value){
 		rectangle.setFill(value);
 	}
@@ -276,23 +280,30 @@ public class Brick implements Settings {
 				}
 				break;
 			case 2: //Top-Right
-				if(ball.dx < 0 || ball.dy > 0){
-					if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop()))
-						destroy();
+				if(closeBricks[0] == null || closeBricks[0].isDestroyed()){
+					if(ball.dx < 0 || ball.dy > 0){
+						if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop()))
+							destroy();
+					}
+					break;
 				}
-				break;
 			case 6: //Bottom-Left
-				if(ball.dx > 0 || ball.dy < 0){
-					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom()))
-						destroy();
+				if(closeBricks[1] == null || closeBricks[1].isDestroyed()){
+					if(ball.dx > 0 || ball.dy < 0){
+						if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom()))
+							destroy();
+					}
+					break;
 				}
-				break;
 			case 8: //Bottom-Right
-				if(ball.dx < 0 || ball.dy < 0){
-					if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom()))
-						destroy();
+				if((closeBricks[0] == null || closeBricks[0].isDestroyed()) &&
+						(closeBricks[1] == null || closeBricks[1].isDestroyed())){
+					if(ball.dx < 0 || ball.dy < 0){
+						if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom()))
+							destroy();
+					}
+					break;
 				}
-				break;
 			case 4: //Inside
 				ball.bounceX();
 				ball.bounceY();
