@@ -37,7 +37,7 @@ public class MenuState extends GameState {
 					timer.reset();
 				}
 			}
-			if(y < buttons.get(2).localToParent(0, 0).getY()){
+			else if(y < buttons.get(2).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(1)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 					ball.reset(); //Doesn't reset to toggled speed

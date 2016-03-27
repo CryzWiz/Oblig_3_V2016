@@ -64,6 +64,7 @@ public class Racket implements Settings{
 		pad.setTranslateX(getBoundsLeft() + x);
 	}
 	public void mouseMove(double x){
+		x = Math.max(Math.min(x, WIDTH - PADDLE_WIDTH / 2), PADDLE_WIDTH / 2);
 		dx = x - getXMiddle();
 		pad.setTranslateX(x - PADDLE_WIDTH / 2);
 	}
