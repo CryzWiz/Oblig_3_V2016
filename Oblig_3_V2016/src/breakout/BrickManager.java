@@ -1,6 +1,8 @@
 package breakout;
 
 import static breakout.Level.*;
+
+import breakout.Brick.COLLISION_TYPE;
 import javafx.scene.layout.Pane;
 
 public class BrickManager implements Settings {
@@ -27,6 +29,10 @@ public class BrickManager implements Settings {
 				bricks[row][col] = brick;
 				pane.getChildren().add(brick.getRectangle());
 				getLevel().brickColor(brick, row, col);
+				if(col > 0)
+					bricks[row][col-1].setCloseBrick(0, brick);
+				if(row > 0)
+					bricks[row-1][col].setCloseBrick(1, brick);
 			}
 		}
 	}
@@ -102,9 +108,11 @@ public class BrickManager implements Settings {
 				for (int col = firstCol; col <= lastCol; col++) {
 					Brick brick = bricks[row][col];
 					if (!brick.isDestroyed()) {
-						brick.collision(ball);
+						COLLISION_TYPE type = brick.collision(ball);
 						if (brick.isDestroyed())
 							bricksLeft--;
+						if(type == COLLISION_TYPE.CORNER_SIMPLE)
+							break;
 					}
 				}
 			}

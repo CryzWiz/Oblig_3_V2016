@@ -23,7 +23,8 @@ public class PlayState extends GameState {
 	
 	@Override
 	public void onSpacePress(){
-		racket.setSlippery(false);
+		if(game.isFriction())
+			racket.setSlippery(false);
 	}
 
 	@Override

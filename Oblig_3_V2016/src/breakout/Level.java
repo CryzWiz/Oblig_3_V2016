@@ -143,5 +143,9 @@ public enum Level {
 		brick.setUnbreakable(true);
 	}
 
+	public static void reset(){
+		level = ONE;
+	}
+
 };
 

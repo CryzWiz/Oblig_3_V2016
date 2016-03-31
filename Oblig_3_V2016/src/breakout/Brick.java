@@ -1,26 +1,31 @@
 package breakout;
 
-import javafx.scene.paint.Color;
+import static breakout.Brick.COLLISION_TYPE.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class Brick implements Settings {
+	public enum COLLISION_TYPE{EDGE, CORNER_ANGLE, CORNER_SIMPLE, INSIDE_CORNER, INSIDE, NOTHING};
+	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
 	private boolean isDestroyed = false;
 	private boolean isProtected = false;
 	private boolean unbreakable = false;
 
-	public Brick(int posX, int posY, Color c) {
-		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT, c);
-		rectangle.setTranslateX(posX);
-		rectangle.setTranslateY(posY);
+	public Brick(int posX, int posY) {
+		this(posX, posY, BRICK_WIDTH, BRICK_HEIGHT);
 	}
 	public Brick(int posX, int posY, int width, int height) {
-		rectangle = new Rectangle(BRICK_WIDTH, BRICK_HEIGHT);
+		rectangle = new Rectangle(width, height);
 		rectangle.setTranslateX(posX);
 		rectangle.setTranslateY(posY);
+		closeBricks[0] = null;
+		closeBricks[1] = null;
 	}
 
+	public void setCloseBrick(int index, Brick brick){
+		closeBricks[index] = brick;
+	}
 	public void setFill(Paint value){
 		rectangle.setFill(value);
 	}
@@ -247,93 +252,122 @@ public class Brick implements Settings {
 			}
 		}
 	}
-	private void collision_full(Ball ball){
-		if(isInMaxRange(ball)){
-			/*System.out.println("\n\n" + getBoundsLeft() + ", " + getBoundsRight());
-			System.out.println(getBoundsTop() + ", " + getBoundsBottom());
-			System.out.println(ball.dx + ", " + ball.dy);
-			System.out.print(ball.getX() + ", " + ball.getY());*/ //For Debugging purposes
-			switch(getBallZone(ball)){
-			case 1: //Top
-			case 7: //Bot
-				if(ball.dy != 0){
-					if(!isInMaxRangeX(xWhenEnterCloseRange(ball), ball.getRadius()))
-						break;
+	private COLLISION_TYPE collision_full(Ball ball){
+		if(!isInMaxRange(ball)){
+			return NOTHING;
+		}
+		/*System.out.println("\n\n" + getBoundsLeft() + ", " + getBoundsRight());
+		System.out.println(getBoundsTop() + ", " + getBoundsBottom());
+		System.out.println(ball.dx + ", " + ball.dy);
+		System.out.print(ball.getX() + ", " + ball.getY());*/ //For Debugging purposes
+		switch(getBallZone(ball)){
+		case 1: //Top
+		case 7: //Bot
+			if(ball.dy != 0){
+				if(!isInMaxRangeX(xWhenEnterCloseRange(ball), ball.getRadius()))
+					return NOTHING;
+			}
+			//System.out.println((ball.dy > 0 ? " - TOP" : " - BOT")); //For debugging purposes
+			ball.bounceY();
+			destroy();
+			return EDGE;
+		case 3: //Left
+		case 5: //Right
+			if(ball.dx != 0){
+				if(!isInMaxRangeY(yWhenEnterCloseRange(ball), ball.getRadius()))
+					return NOTHING;
+			}
+			//System.out.println((ball.dx > 0 ? " - LEFT" : " - RIGHT")); //For debugging purposes
+			ball.bounceX();
+			destroy();
+			return EDGE;
+		//Corners
+		case 0: //Top-Left
+			if(ball.dx > 0 || ball.dy > 0){ // TASK: Move distance check from bounceOffPoint into if-test
+				if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop())){  
+					destroy();
+					return CORNER_ANGLE;
 				}
-				//System.out.println((ball.dy > 0 ? " - TOP" : " - BOT")); //For debugging purposes
-				ball.bounceY();
-				destroy();
-				break;
-			case 3: //Left
-			case 5: //Right
-				if(ball.dx != 0){
-					if(!isInMaxRangeY(yWhenEnterCloseRange(ball), ball.getRadius()))
-						break;
-				}
-				//System.out.println((ball.dx > 0 ? " - LEFT" : " - RIGHT")); //For debugging purposes
-				ball.bounceX();
-				destroy();
-				break;
-			//Corners
-			case 0: //Top-Left
-				if(ball.dx > 0 || ball.dy > 0){ // TASK: Move distance check from bounceOffPoint into if-test
-					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop()))  
-						destroy();
-				}
-				break;
-			case 2: //Top-Right
+			}
+			return NOTHING;
+		case 2: //Top-Right
+			if(closeBricks[0] == null || closeBricks[0].isDestroyed()){
 				if(ball.dx < 0 || ball.dy > 0){
-					if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop()))
+					if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop())){
 						destroy();
+						return CORNER_ANGLE;
+					}
 				}
-				break;
-			case 6: //Bottom-Left
+				return NOTHING;
+			}
+			else{
+				collision_simple(ball);
+				return CORNER_SIMPLE;
+			}
+		case 6: //Bottom-Left
+			if(closeBricks[1] == null || closeBricks[1].isDestroyed()){
 				if(ball.dx > 0 || ball.dy < 0){
-					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom()))
+					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom())){
 						destroy();
+						return CORNER_ANGLE;
+					}
 				}
-				break;
-			case 8: //Bottom-Right
+				return NOTHING;
+			}
+			else{
+				collision_simple(ball);
+				return CORNER_SIMPLE;
+			}
+		case 8: //Bottom-Right
+			if((closeBricks[0] == null || closeBricks[0].isDestroyed()) &&
+					(closeBricks[1] == null || closeBricks[1].isDestroyed())){
 				if(ball.dx < 0 || ball.dy < 0){
-					if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom()))
+					if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom())){
 						destroy();
+						return CORNER_ANGLE;
+					}
 				}
-				break;
-			case 4: //Inside
-				ball.bounceX();
-				ball.bounceY();
-				if(ball.dx < 0){
-					if(ball.dy < 0){
-						if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop())){
-							destroy();
-							break;
-						}
-					} else {
-						if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom())){
-							destroy();
-							break;
-						}
+				return NOTHING;
+			}
+			else{
+				collision_simple(ball);
+				return CORNER_SIMPLE;
+			}
+		case 4: //Inside
+		default:
+			ball.bounceX();
+			ball.bounceY();
+			if(ball.dx < 0){
+				if(ball.dy < 0){
+					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop())){
+						destroy();
+						return INSIDE_CORNER;
 					}
 				} else {
-					if(ball.dy < 0){
-						if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop())){
-							destroy();
-							break;
-						}
-					} else {
-						if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom())){
-							destroy();
-							break;
-						}
+					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom())){
+						destroy();
+						return INSIDE_CORNER;
 					}
 				}
-				if(Math.abs(ball.dx) > Math.abs(ball.dy))
-					ball.bounceY();
-				else
-					ball.bounceX();
-				destroy();
-				break;
+			} else {
+				if(ball.dy < 0){
+					if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop())){
+						destroy();
+						return INSIDE_CORNER;
+					}
+				} else {
+					if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom())){
+						destroy();
+						return INSIDE_CORNER;
+					}
+				}
 			}
+			if(Math.abs(ball.dx) > Math.abs(ball.dy))
+				ball.bounceY();
+			else
+				ball.bounceX();
+			destroy();
+			return INSIDE;
 		}
 	}
 
@@ -350,7 +384,11 @@ public class Brick implements Settings {
 			break;
 		}
 	}
-	public void collision(Ball ball){
-		collision(ball, COLLISION_MODEL_DEFAULT);
+	public COLLISION_TYPE collision(Ball ball){
+		COLLISION_TYPE type = collision_full(ball);
+		if(type != NOTHING){
+			System.out.println(type);
+		}
+		return type;
 	}
 }

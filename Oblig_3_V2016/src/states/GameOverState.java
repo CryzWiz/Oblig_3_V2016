@@ -12,17 +12,19 @@ public class GameOverState extends GameState {
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_PRESSED){
-			timer.reset();
-			game.play();
-			ball.reset();
-			brickManager.reset();
+			game.menu();
 		}
 	}
 	
 	@Override
+	public void onSpacePress() {
+		game.menu();
+	}
+	
+	@Override
 	public void onEscPress(){
-		game.exit();
-	};
+		game.menu();
+	}
 
 	@Override
 	public void tick(){
