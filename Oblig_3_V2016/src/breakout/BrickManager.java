@@ -111,7 +111,7 @@ public class BrickManager implements Settings {
 						COLLISION_TYPE type = brick.collision(ball);
 						if (brick.isDestroyed())
 							bricksLeft--;
-						if(type == COLLISION_TYPE.CORNER_SIMPLE)
+						if(type == COLLISION_TYPE.EDGE_DOUBLE)
 							break;
 					}
 				}
