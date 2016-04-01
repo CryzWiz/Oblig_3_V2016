@@ -1,13 +1,16 @@
 package breakout;
 
 import static breakout.Brick.COLLISION_TYPE.*;
+import javafx.animation.FadeTransition;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class Brick implements Settings {
 	public enum COLLISION_TYPE{EDGE, EDGE_DOUBLE, CORNER_ANGLE, CORNER_SIMPLE, INSIDE_CORNER, INSIDE, NOTHING, NO_RANGE};
 	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
+	private FadeTransition bricks;
 	private boolean isDestroyed = false;
 	private boolean isProtected = false;
 	private boolean unbreakable = false;
@@ -112,14 +115,22 @@ public class Brick implements Settings {
 
 	public void destroy(){
 		if(!unbreakable) {
+			bricks = new FadeTransition(Duration.millis(1000), rectangle);
+			bricks.setFromValue(1.0);
+			bricks.setToValue(0.0);
+			bricks.play();
 			//rectangle.setDisable(true);
-			rectangle.setVisible(false);
+			//rectangle.setVisible(false);
 			isDestroyed = true;
 		}
 	}
 	public void reset(){
+		bricks = new FadeTransition(Duration.millis(100), rectangle);
+		bricks.setFromValue(0.0);
+		bricks.setToValue(1.0);
+		bricks.play();
 		rectangle.setDisable(false);
-		rectangle.setVisible(true);
+		//rectangle.setVisible(true);
 		isDestroyed = false;
 	}
 
