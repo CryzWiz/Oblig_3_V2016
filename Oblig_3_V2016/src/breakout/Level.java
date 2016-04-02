@@ -5,9 +5,9 @@ import javafx.scene.paint.Color;
 
 
 public enum Level {
-	ONE(1, 20, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 0, BRICK_COLORS_LVL3), VICTORY(4, 0,BRICK_COLORS_LVL1);
-	
-	private static Level level = ONE;
+//	ONE(1, 20, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 0, BRICK_COLORS_LVL3), VICTORY(4, 0,BRICK_COLORS_LVL1);
+	ONE(1, 60, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 0, BRICK_COLORS_LVL3), VICTORY(4, 0,BRICK_COLORS_LVL1);
+	private static Level level = THREE;
 	public static Level getLevel(){
 		return level;
 	}
@@ -46,6 +46,7 @@ public enum Level {
 		return removePercentage;
 	}
 	public void brickColor(Brick brick, int row, int col) {
+
 		switch (this) {
 		case ONE:
 			if (row < 3) {
@@ -110,20 +111,26 @@ public enum Level {
 				if(col == 3 || col == 7 || col == 11) {
 					brick.setFill(brickColors[0]);
 					brick.setProtection(true);
+					brick.setDurability(DOUBLE_HIT);
 				} else {
 					brick.setFill(brickColors[1]);
 				}
 			} else if(row == 3 || row == 5) {
+				
 				if(col == 2 || col == 4 || col == 6 || col == 8 || col == 10 || col == 12) {
+					// Durable bricks
 					brick.setFill(brickColors[0]);
 					brick.setProtection(true);
+					brick.setDurability(DOUBLE_HIT); 
 				} else {
 					brick.setFill(brickColors[1]);
 				}
 			} else if(row == 4) {
 				if(col == 1 || col == 5 || col == 9 || col == 13) {
+					// Durable bricks
 					brick.setFill(brickColors[0]);
 					brick.setProtection(true);
+					brick.setDurability(DOUBLE_HIT);
 				} else {
 					brick.setFill(brickColors[1]);
 				}
