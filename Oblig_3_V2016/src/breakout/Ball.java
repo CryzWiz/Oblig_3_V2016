@@ -71,7 +71,13 @@ public class Ball implements Settings {
 	public double getPrevY(){
 		return circle.getTranslateY() - dy;
 	}
-
+	public double getNextX(){
+		return getX() + dx;
+	}
+	public double getNextY(){
+		return getY() + dy;
+	}
+	
 	public void setSpeedCoords(double x, double y){
 		dx = x;
 		dy = y;
@@ -87,13 +93,18 @@ public class Ball implements Settings {
 	public void bounceY(){
 		dy *= -1;
 	}
-	public void bounce(double reflectionAngle){
+	public void bouncePad(double reflectionAngle){ //TASK: Possible bad calculation from weird angles
 		bounceX();
 		bounceY();
 		if(Math.abs(reflectionAngle - getDirectionAngle()) < Math.PI / 2)
 			setSpeedPolar(getSpeed(), 2*reflectionAngle - getDirectionAngle());
 		else
 			setSpeedPolar(getSpeed(), 1.5*reflectionAngle-0.5*getDirectionAngle());
+	}
+	public void bounce(double reflectionAngle){ //TASK: Possible bad calculation from weird angles
+		bounceX();
+		bounceY();
+		setSpeedPolar(getSpeed(), 2*reflectionAngle - getDirectionAngle());
 	}
 	public boolean bounceOffPoint(int x, int y){
 		if(getDistanceSquared(x, y) < Math.pow(circle.getRadius(), 2)){

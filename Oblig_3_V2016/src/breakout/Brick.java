@@ -5,7 +5,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class Brick implements Settings {
-	public enum COLLISION_TYPE{EDGE, EDGE_DOUBLE, CORNER_ANGLE, CORNER_SIMPLE, INSIDE_CORNER, INSIDE, NOTHING, NO_RANGE};
+	public enum COLLISION_TYPE{EDGE, EDGE_DOUBLE, CORNER_ANGLE, CORNER_SIMPLE, INSIDE_CORNER, INSIDE, DONE, NOTHING, NO_RANGE};
 	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
 	private boolean isDestroyed = false;
@@ -343,23 +343,17 @@ public class Brick implements Settings {
 	}
 	private COLLISION_TYPE collision_mixed(Ball ball){
 		if(!isInMaxRange(ball)){
-			return NOTHING;
+			return NO_RANGE;
 		}
 		switch(getBallZone(ball)){
 		case 1: //Top
-		case 7: //Bot
-			/*if(ball.dy != 0){
-				if(!isInMaxRangeX(xWhenEnterCloseRange(ball), ball.getRadius()))
-					return NOTHING;
-			}*/
 			return collisionByZone(ball, 1);
+		case 7: //Bot
+			return collisionByZone(ball, 7);
 		case 3: //Left
-		case 5: //Right
-			/*if(ball.dx != 0){
-				if(!isInMaxRangeY(yWhenEnterCloseRange(ball), ball.getRadius()))
-					return NOTHING;
-			}*/
 			return collisionByZone(ball, 3);
+		case 5: //Right
+			return collisionByZone(ball, 5);
 		//Corners
 		case 0: //Top-Left
 			return collisionByZone(ball, 0);
@@ -389,7 +383,7 @@ public class Brick implements Settings {
 		default:
 			ball.bounceX();
 			ball.bounceY();
-			if(ball.dx < 0){
+			/*if(ball.dx < 0){
 				if(ball.dy < 0){
 					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop())){
 						destroy();
@@ -413,7 +407,7 @@ public class Brick implements Settings {
 						return INSIDE_CORNER;
 					}
 				}
-			}
+			}*/
 			if(Math.abs(ball.dx) > Math.abs(ball.dy))
 				ball.bounceY();
 			else
@@ -425,52 +419,66 @@ public class Brick implements Settings {
 
 	private COLLISION_TYPE collisionByZone(Ball ball, int zone){
 		switch(zone){
-		case 1:
-		case 7:
+		case 1: //Top
+			if(ball.dy < 0)
+				return DONE;
 			ball.bounceY();
 			destroy();
 			return EDGE;
-		case 3:
-		case 5:
+		case 7: //Bot
+			if(ball.dy > 0)
+				return DONE;
+			ball.bounceY();
+			destroy();
+			return EDGE;
+		case 3: //Left
+			if(ball.dx < 0)
+				return DONE;
+			ball.bounceX();
+			destroy();
+			return EDGE;
+		case 5: //Right
+			if(ball.dx > 0)
+				return DONE;
 			ball.bounceX();
 			destroy();
 			return EDGE;
 		case 0:
-			if(ball.dx > 0 || ball.dy > 0){ // TASK: Move distance check from bounceOffPoint into if-test
+			if(ball.dx > 0 && ball.dy > 0){ // TASK: Move distance check from bounceOffPoint into if-test
 				if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop())){  
 					destroy();
 					return CORNER_ANGLE;
 				}
 				return NO_RANGE;
 			}
-			return NOTHING;
+			return DONE;
 		case 2:
-			if(ball.dx < 0 || ball.dy > 0){ // TASK: Move distance check from bounceOffPoint into if-test
+			if(ball.dx < 0 && ball.dy > 0){ // TASK: Move distance check from bounceOffPoint into if-test
 				if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop())){  
 					destroy();
 					return CORNER_ANGLE;
 				}
 				return NO_RANGE;
 			}
-			return NOTHING;
+			return DONE;
 		case 6:
-			if(ball.dx > 0 || ball.dy < 0){ // TASK: Move distance check from bounceOffPoint into if-test
+			if(ball.dx > 0 && ball.dy < 0){ // TASK: Move distance check from bounceOffPoint into if-test
 				if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom())){  
 					destroy();
 					return CORNER_ANGLE;
 				}
 				return NO_RANGE;
 			}
-			return NOTHING;
+			return DONE;
 		case 8:
-			if(ball.dx < 0 || ball.dy < 0){ // TASK: Move distance check from bounceOffPoint into if-test
+			if(ball.dx < 0 && ball.dy < 0){ // TASK: Move distance check from bounceOffPoint into if-test
 				if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom())){  
 					destroy();
 					return CORNER_ANGLE;
 				}
 				return NO_RANGE;
 			}
-			return NOTHING;
+			return DONE;
 		default:
 			return NOTHING;
 		}
@@ -501,7 +509,7 @@ public class Brick implements Settings {
 	}
 	public COLLISION_TYPE collision(Ball ball){
 		COLLISION_TYPE type = collision_mixed(ball);
-		if(type != NOTHING){
+		if(type != DONE && type != NO_RANGE){
 			System.out.println(type);
 		}
 		return type;
