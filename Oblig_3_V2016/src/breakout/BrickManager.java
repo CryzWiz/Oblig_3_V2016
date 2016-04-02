@@ -40,6 +40,14 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
+	public void resetBrickColors() {
+		for(int row = 0; row < BRICK_ROWS; row++){
+			for(int col = 0; col < BRICK_COLUMNS; col++){
+				bricks[row][col].reset();
+				getLevel().brickColor(bricks[row][col], row, col);
+			}
+		}
+	}
 	public void destroyRandomBricks(int percentBricksToRemove) {
 		int numberOfBricksToRemove = (int) (((numberOfRows * numberOfCols) / 100.0) * percentBricksToRemove);
 
@@ -49,7 +57,7 @@ public class BrickManager implements Settings {
 			if (!bricks[randomRow][randomCol].isDestroyed() && !bricks[randomRow][randomCol].isProtected()) {
 				bricks[randomRow][randomCol].destroy();
 				numberOfBricksToRemove--;
-				decreseBricksLeft();
+				bricksLeft--;
 			}
 		}
 	}
@@ -60,11 +68,7 @@ public class BrickManager implements Settings {
 		unbreakableBricks++;
 	}
 	public void reset() {
-		for (Brick[] col : bricks) {
-			for (Brick brick : col) {
-				brick.reset();
-				}
-		}
+		resetBrickColors();
 		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
 		destroyRandomBricks(getLevel().percentage());
 	}
@@ -75,10 +79,7 @@ public class BrickManager implements Settings {
 	public Brick getBrick(int row, int col) {
 		return bricks[row][col];
 	}
-	public void decreseBricksLeft() {
-		bricksLeft--;
-	}
-	
+
 	public int getRow(double y) {
 		return (int) ((y - WALL_PADDING_TOP) / (BRICK_HEIGHT + BRICK_PADDING_V));
 	}
@@ -92,17 +93,12 @@ public class BrickManager implements Settings {
 		return row * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP;
 	}
 
-	public boolean levelComplete() {
+	public boolean levelCleared() {
 		return ((bricksLeft > 0) ? false : true);
 	}
 	public void setNextLevel() {
 		nextLevel();
-		for(int row = 0; row < BRICK_ROWS; row++){
-			for(int col = 0; col < BRICK_COLUMNS; col++){
-				bricks[row][col].reset();
-				getLevel().brickColor(bricks[row][col], row, col);
-			}
-		}
+		resetBrickColors();
 	}
 	public void collision(Ball ball) {
 		int firstCol = getColumn(ball.getBoundsLeft());
@@ -132,7 +128,7 @@ public class BrickManager implements Settings {
 	}
 	public void tick(GameManager gManager, Ball ball) {
 		collision(ball);
-		if (levelComplete()) {
+		if (levelCleared()) {
 			setNextLevel();
 			gManager.levelCleared();
 		}
