@@ -1,5 +1,8 @@
 package breakout;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -13,14 +16,18 @@ import javafx.scene.input.MouseEvent;
 
 public class BreakOut extends Application implements Settings{
 	@Override 
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws AWTException {
 		ScreenManager screenManager = new ScreenManager();
 		Scene scene = screenManager.getScene();
 		GameManager gameManager = new GameManager(screenManager);
+		Robot robot = new Robot();
 
 		scene.addEventFilter(MouseEvent.ANY, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
+				int x = (int) Math.min(Math.max(mouseEvent.getScreenX(), scene.getX() + primaryStage.getX()), scene.getX() + primaryStage.getX() + WIDTH);
+				int y = (int) Math.min(Math.max(mouseEvent.getScreenY(), scene.getY() + primaryStage.getY()), scene.getY() + primaryStage.getY() + HEIGHT);
+				robot.mouseMove(x, y);
 				gameManager.onMouseEvent(mouseEvent);
 			}
 		});

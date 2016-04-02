@@ -64,8 +64,8 @@ public class GameManager implements Settings {
 		double dx, dy;
 		switch(speed){
 		case 0:
-			dx = BALL_START_DX * 0.5;
-			dy = BALL_START_DY * 0.5;
+			dx = BALL_START_DX * 0.7;
+			dy = BALL_START_DY * 0.7;
 			break;
 		case 2:
 			dx = BALL_START_DX * 1.3;
