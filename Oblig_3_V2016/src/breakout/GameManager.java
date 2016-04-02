@@ -68,8 +68,8 @@ public class GameManager implements Settings {
 			dy = BALL_START_DY * 0.5;
 			break;
 		case 2:
-			dx = BALL_START_DX * 1.5;
-			dy = BALL_START_DY * 1.5;
+			dx = BALL_START_DX * 1.3;
+			dy = BALL_START_DY * 1.3;
 			break;
 		default:
 			dx = BALL_START_DX;

@@ -346,79 +346,55 @@ public class Brick implements Settings {
 			return NO_RANGE;
 		}
 		switch(getBallZone(ball)){
+
+		//Edges type collision
 		case 1: //Top
-			return collisionByZone(ball, 1);
+			return collisionSwitch(ball, 1);
 		case 7: //Bot
-			return collisionByZone(ball, 7);
+			return collisionSwitch(ball, 7);
 		case 3: //Left
-			return collisionByZone(ball, 3);
+			return collisionSwitch(ball, 3);
 		case 5: //Right
-			return collisionByZone(ball, 5);
-		//Corners
+			return collisionSwitch(ball, 5);
+
+		//Corner type collision
 		case 0: //Top-Left
-			return collisionByZone(ball, 0);
+			return collisionSwitch(ball, 0);
 		case 2: //Top-Right
 			if(!hasBrickOnRight())
-				return collisionByZone(ball, 2);
-			collisionByZone(ball, 1);
+				return collisionSwitch(ball, 2);
+			collisionSwitch(ball, 1);
 			return EDGE_DOUBLE;
 		case 6: //Bottom-Left
 			if(!hasBrickOnBottom())
-				return collisionByZone(ball, 6);
-			collisionByZone(ball, 3);
+				return collisionSwitch(ball, 6);
+			collisionSwitch(ball, 3);
 			return EDGE_DOUBLE;
 		case 8: //Bottom-Right
 			if(!hasBrickOnBottom() && !hasBrickOnRight())
-				return collisionByZone(ball, 8);
+				return collisionSwitch(ball, 8);
 			else if(hasBrickOnRight()){
-				collisionByZone(ball, 7);
+				collisionSwitch(ball, 7);
 				return EDGE_DOUBLE;
 			}
 			else if(hasBrickOnBottom()){
-				collisionByZone(ball, 5);
+				collisionSwitch(ball, 5);
 				return EDGE_DOUBLE;
 			}
 			return NOTHING;
 		case 4: //Inside
 		default:
-			ball.bounceX();
-			ball.bounceY();
-			/*if(ball.dx < 0){
-				if(ball.dy < 0){
-					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop())){
-						destroy();
-						return INSIDE_CORNER;
-					}
-				} else {
-					if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom())){
-						destroy();
-						return INSIDE_CORNER;
-					}
-				}
-			} else {
-				if(ball.dy < 0){
-					if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop())){
-						destroy();
-						return INSIDE_CORNER;
-					}
-				} else {
-					if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom())){
-						destroy();
-						return INSIDE_CORNER;
-					}
-				}
-			}*/
 			if(Math.abs(ball.dx) > Math.abs(ball.dy))
-				ball.bounceY();
-			else
 				ball.bounceX();
+			else
+				ball.bounceY();
 			destroy();
 			return INSIDE;
 		}
 	}
 
-	private COLLISION_TYPE collisionByZone(Ball ball, int zone){
-		switch(zone){
+	private COLLISION_TYPE collisionSwitch(Ball ball, int collisionCase){
+		switch(collisionCase){
 		case 1: //Top
 			if(ball.dy < 0)
 				return DONE;
@@ -444,7 +420,7 @@ public class Brick implements Settings {
 			destroy();
 			return EDGE;
 		case 0:
-			if(ball.dx > 0 && ball.dy > 0){ // TASK: Move distance check from bounceOffPoint into if-test
+			if(ball.dx > 0 && ball.dy > 0){
 				if(ball.bounceOffPoint(getBoundsLeft(), getBoundsTop())){  
 					destroy();
 					return CORNER_ANGLE;
@@ -453,7 +429,7 @@ public class Brick implements Settings {
 			}
 			return DONE;
 		case 2:
-			if(ball.dx < 0 && ball.dy > 0){ // TASK: Move distance check from bounceOffPoint into if-test
+			if(ball.dx < 0 && ball.dy > 0){
 				if(ball.bounceOffPoint(getBoundsRight(), getBoundsTop())){  
 					destroy();
 					return CORNER_ANGLE;
@@ -462,7 +438,7 @@ public class Brick implements Settings {
 			}
 			return DONE;
 		case 6:
-			if(ball.dx > 0 && ball.dy < 0){ // TASK: Move distance check from bounceOffPoint into if-test
+			if(ball.dx > 0 && ball.dy < 0){
 				if(ball.bounceOffPoint(getBoundsLeft(), getBoundsBottom())){  
 					destroy();
 					return CORNER_ANGLE;
@@ -471,7 +447,7 @@ public class Brick implements Settings {
 			}
 			return DONE;
 		case 8:
-			if(ball.dx < 0 && ball.dy < 0){ // TASK: Move distance check from bounceOffPoint into if-test
+			if(ball.dx < 0 && ball.dy < 0){
 				if(ball.bounceOffPoint(getBoundsRight(), getBoundsBottom())){  
 					destroy();
 					return CORNER_ANGLE;

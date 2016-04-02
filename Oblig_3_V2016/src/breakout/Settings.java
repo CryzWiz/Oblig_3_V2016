@@ -48,7 +48,7 @@ public interface Settings {
 	int BALL_START_X = PADDLE_X_OFFSET + PADDLE_WIDTH / 2;
 	int BALL_START_Y = PADDLE_Y_OFFSET - BALL_RADIUS;
 	int BALL_START_DX = 5;
-	int BALL_START_DY = -3;
+	int BALL_START_DY = -4;
 	int BALL_GRAVITY_THRESHOLD = 1;
 	double BALL_GRAVITY_FACTOR = (Math.abs(BALL_START_DY) + Math.abs(BALL_START_DX)) / 5.0;
 	
