@@ -4,21 +4,25 @@ import static breakout.Level.*;
 
 import breakout.Brick.COLLISION_TYPE;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class BrickManager implements Settings {
 	private Brick[][] bricks;
 	private int numberOfRows;
 	private int numberOfCols;
 	private int bricksLeft;
+	private static int unbreakableBricks;
 
 	public BrickManager(Pane pane) {
 		this(pane, BRICK_ROWS, BRICK_COLUMNS);
 	}
 	public BrickManager(Pane pane, int numberOfRows, int numberOfCols) {
+		unbreakableBricks = 0;
+		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
 		createBricks(pane, numberOfRows, numberOfCols);
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
-		bricksLeft = numberOfRows * numberOfCols;
+		
 	}
 
 	public void createBricks(Pane pane, int numberOfRows, int numberOfCols) {
@@ -45,9 +49,15 @@ public class BrickManager implements Settings {
 			if (!bricks[randomRow][randomCol].isDestroyed() && !bricks[randomRow][randomCol].isProtected()) {
 				bricks[randomRow][randomCol].destroy();
 				numberOfBricksToRemove--;
-				bricksLeft--;
+				decreseBricksLeft();
 			}
 		}
+	}
+	public static void setUnbreakableBrick(Brick brick) {
+		brick.setFill(Color.GRAY);
+		brick.setProtection(true);
+		brick.setUnbreakable(true);
+		unbreakableBricks++;
 	}
 	public void reset() {
 		for (Brick[] col : bricks) {
@@ -55,8 +65,7 @@ public class BrickManager implements Settings {
 				brick.reset();
 				}
 		}
-		bricksLeft = numberOfRows * numberOfCols;
-		// setLevel(currentLevel);
+		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
 		destroyRandomBricks(getLevel().percentage());
 	}
 
@@ -65,6 +74,9 @@ public class BrickManager implements Settings {
 	}
 	public Brick getBrick(int row, int col) {
 		return bricks[row][col];
+	}
+	public void decreseBricksLeft() {
+		bricksLeft--;
 	}
 	
 	public int getRow(double y) {
@@ -125,4 +137,5 @@ public class BrickManager implements Settings {
 			gManager.levelCleared();
 		}
 	}
+
 }
