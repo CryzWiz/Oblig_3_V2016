@@ -26,7 +26,7 @@ public interface Settings {
 //    Color[] BRICK_COLORS_LVL3 = {Color.DEEPSKYBLUE, Color.PALETURQUOISE, Color.PURPLE, Color.AQUA};
     Color[] BRICK_COLORS_LVL2 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
     Color[] BRICK_COLORS_LVL3 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
-
+    
     Color BACKGROUND_COLOR = Color.BLACK;
 	Color BALL_COLOR = Color.YELLOWGREEN;
 	Color PADDLE_COLOR = Color.GRAY;
@@ -58,6 +58,7 @@ public interface Settings {
 	int BRICK_PADDING_V = 3;
 	int BRICK_ROWS = 10;
 	int BRICK_COLUMNS = 15;
+	// Durability on bricks:
 	int ONE_HIT = 0, DOUBLE_HIT = 1, TRIPPLE_HIT = 2;
 	
 	int WALL_PADDING_LEFT = BRICK_WIDTH;

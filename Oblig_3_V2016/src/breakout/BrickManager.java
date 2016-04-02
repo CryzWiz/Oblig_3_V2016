@@ -62,7 +62,6 @@ public class BrickManager implements Settings {
 		}
 	}
 	public static void setUnbreakableBrick(Brick brick) {
-		brick.setFill(Color.GRAY);
 		brick.setProtection(true);
 		brick.setUnbreakable(true);
 		unbreakableBricks++;
