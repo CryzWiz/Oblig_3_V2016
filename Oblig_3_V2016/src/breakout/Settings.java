@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 
 public interface Settings {
 	boolean BALL_GRAVITY_ON = true;
-	boolean BOUNCE_ON_BOT = false;
+	boolean BOUNCE_ON_BOT = true;
 	boolean ALLOW_TILT = true;
 
 	int MILLIS_PER_FRAME = 10; //Lower speed + higher frame rate = same look, more precision, higher CPU load
@@ -40,7 +40,7 @@ public interface Settings {
 	int PADDLE_HEIGHT = 10;
 	int PADDLE_WIDTH = 200;
 	int PADDLE_Y_OFFSET = 500;
-	int PADDLE_X_OFFSET = 300;
+	int PADDLE_X_OFFSET = 310;
 	double PADDLE_FRICTION_FACTOR = 0.6;
 	double PADDLE_TILT_ANGLE = Math.PI / 12;
 
@@ -48,7 +48,7 @@ public interface Settings {
 	int BALL_START_X = PADDLE_X_OFFSET + PADDLE_WIDTH / 2;
 	int BALL_START_Y = PADDLE_Y_OFFSET - BALL_RADIUS;
 	int BALL_START_DX = 5;
-	int BALL_START_DY = -3;
+	int BALL_START_DY = -4;
 	int BALL_GRAVITY_THRESHOLD = 1;
 	double BALL_GRAVITY_FACTOR = (Math.abs(BALL_START_DY) + Math.abs(BALL_START_DX)) / 5.0;
 	

@@ -99,7 +99,7 @@ public class Racket implements Settings{
 				&& ball.getBoundsTop() < getBoundsBottom()
 				&& ball.dy > 0)
 		{
-			ball.bounce(getTiltAngleRads() - Math.PI / 2);
+			ball.bouncePad(getTiltAngleRads() - Math.PI / 2);
 			if(!isSlippery)
 				ball.friction(dx, 0, PADDLE_FRICTION_FACTOR, 0);
 			dx = 0;
