@@ -11,7 +11,7 @@ public class Brick implements Settings {
 	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
 	private FadeTransition bricks;
-	private boolean isDestroyed = false, isProtected = false, unbreakable = false;
+	private boolean destroyed = false, protection = false, unbreakable = false;
 	private int durability = ONE_HIT;
 
 	public Brick(int posX, int posY) {
@@ -78,7 +78,7 @@ public class Brick implements Settings {
 		return isInMaxRangeX(ball) && isInMaxRangeY(ball);
 	}
 	public boolean isDestroyed() {
-		return isDestroyed;
+		return destroyed;
 	}
 
 	public int getPointZone(double x, double y){
@@ -121,7 +121,7 @@ public class Brick implements Settings {
 				bricks.play();
 				//rectangle.setDisable(true);
 				//rectangle.setVisible(false);
-				isDestroyed = true;
+				destroyed = true;
 			}
 		} else {
 			decreaseDurability();
@@ -135,17 +135,19 @@ public class Brick implements Settings {
 		bricks.play();
 		rectangle.setDisable(false);
 		//rectangle.setVisible(true);
-		isDestroyed = false;
+		setUnbreakable(false);
+		setDurability(ONE_HIT);
+		setProtection(false);
 	}
 
 	/**
 	 * Protection from random destruction
 	 */
 	public void setProtection(boolean protection) {
-		isProtected = protection;
+		this.protection = protection;
 	}
 	public boolean isProtected() {
-		return isProtected;
+		return protection;
 	}
 	
 	public void setUnbreakable(boolean unbreakable) {

@@ -11,15 +11,14 @@ public class BrickManager implements Settings {
 	private int numberOfRows;
 	private int numberOfCols;
 	private int bricksLeft;
-	private static int unbreakableBricks;
+	private static int unbreakableBricks = 0;
 
 	public BrickManager(Pane pane) {
 		this(pane, BRICK_ROWS, BRICK_COLUMNS);
 	}
 	public BrickManager(Pane pane, int numberOfRows, int numberOfCols) {
-		unbreakableBricks = 0;
-		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
 		createBricks(pane, numberOfRows, numberOfCols);
+		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
 		
@@ -40,14 +39,7 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
-	public void resetBrickColors() {
-		for(int row = 0; row < BRICK_ROWS; row++){
-			for(int col = 0; col < BRICK_COLUMNS; col++){
-				bricks[row][col].reset();
-				getLevel().brickColor(bricks[row][col], row, col);
-			}
-		}
-	}
+
 	public void destroyRandomBricks(int percentBricksToRemove) {
 		int numberOfBricksToRemove = (int) (((numberOfRows * numberOfCols) / 100.0) * percentBricksToRemove);
 
@@ -67,7 +59,13 @@ public class BrickManager implements Settings {
 		unbreakableBricks++;
 	}
 	public void reset() {
-//		resetBrickColors();
+		unbreakableBricks = 0;
+		for(int row = 0; row < BRICK_ROWS; row++){
+			for(int col = 0; col < BRICK_COLUMNS; col++){
+				bricks[row][col].reset();
+				getLevel().brickColor(bricks[row][col], row, col);
+			}
+		}
 		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
 		destroyRandomBricks(getLevel().percentage());
 	}
@@ -97,7 +95,7 @@ public class BrickManager implements Settings {
 	}
 	public void setNextLevel() {
 		nextLevel();
-		resetBrickColors();
+		reset();
 	}
 	public void collision(Ball ball) {
 		int firstCol = getColumn(ball.getBoundsLeft());
