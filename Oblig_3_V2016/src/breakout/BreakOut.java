@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 public class BreakOut extends Application implements Settings{
 	@Override 
 	public void start(Stage primaryStage) throws AWTException {
+		Highscore.loadScores();
 		ScreenManager screenManager = new ScreenManager();
 		Scene scene = screenManager.getScene();
 		GameManager gameManager = new GameManager(screenManager);

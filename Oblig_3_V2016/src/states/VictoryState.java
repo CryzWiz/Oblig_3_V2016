@@ -1,5 +1,6 @@
 package states;
 
+import breakout.Highscore;
 import breakout.Level;
 import javafx.scene.input.MouseEvent;
 
@@ -8,6 +9,7 @@ public class VictoryState extends GameState {
 	public VictoryState(){
 		screenManager.setVictoryScreen();
 		timer.pause();
+		new Highscore("00:01:34", "Kenneth K");
 	}
 
 	@Override
@@ -20,6 +22,10 @@ public class VictoryState extends GameState {
 			gameManager.play();
 		}
 	}
+	
+	public void onEnterPress(){
+		Highscore.saveScores("highscores.txt");
+	};
 	
 	@Override
 	public void onEscPress(){
