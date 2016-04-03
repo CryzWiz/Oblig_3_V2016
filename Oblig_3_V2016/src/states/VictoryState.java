@@ -14,7 +14,7 @@ public class VictoryState extends GameState {
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 			timer.reset();
 			game.play();
-			ball.reset();
+			ballManager.reset();
 			brickManager.reset();
 		}
 	}

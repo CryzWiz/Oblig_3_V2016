@@ -6,13 +6,11 @@ import states.*;
 
 public class GameManager implements Settings {
 	private GameState state;
-	private int speed;
 	private boolean friction;
 
 	public GameManager(ScreenManager sm) {
 		GameState.setStatics(this, sm);
 		state = new MenuState();
-		speed = 1;
 	}
 
 	public void onMouseEvent(MouseEvent m){
@@ -58,23 +56,6 @@ public class GameManager implements Settings {
 	public void tick(){
 		state.tick();
 	}
-	public void toggleSpeed(Ball ball){
-		speed++;
-		speed %= 3;
-		String speedText = "";
-		switch(speed){
-		case 0:
-			speedText = "Slow";
-			break;
-		case 1:
-			speedText = "Normal";
-			break;
-		case 2:
-			speedText = "Fast";
-			break;
-		}
-		MenuButton.setText(2, "Ball Speed: " + speedText);
-	}
 	public void toggleFriction(){
 		friction = !friction;
 		MenuButton.setText(3, "Friction: " + (friction ? "ON" : "OFF"));
@@ -89,22 +70,6 @@ public class GameManager implements Settings {
 	}
 	public void play(Ball ball) {
 		state = new PlayState();
-		double dx, dy;
-		switch(speed){
-		case 0:
-			dx = BALL_START_DX * 0.7;
-			dy = BALL_START_DY * 0.7;
-			break;
-		case 2:
-			dx = BALL_START_DX * 1.3;
-			dy = BALL_START_DY * 1.3;
-			break;
-		default:
-			dx = BALL_START_DX;
-			dy = BALL_START_DY;
-			break;
-		}
-		ball.setSpeedCoords(dx, dy);
 	}
 	public void pause() {
 		state = new PauseState();

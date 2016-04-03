@@ -59,7 +59,7 @@ public interface Settings {
 	int BRICK_ROWS = 10;
 	int BRICK_COLUMNS = 15;
 	// Durability on bricks:
-	int ONE_HIT = 0, DOUBLE_HIT = 1, TRIPPLE_HIT = 2;
+	int SINGLE_HIT = 0, DOUBLE_HIT = 1, TRIPLE_HIT = 2;
 	
 	int WALL_PADDING_LEFT = BRICK_WIDTH;
 	int WALL_PADDING_RIGHT = BRICK_WIDTH;

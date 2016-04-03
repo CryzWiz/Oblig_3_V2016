@@ -13,9 +13,9 @@ public class Brick implements Settings {
 
 	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
-	private FadeTransition bricks;
+	private FadeTransition fader;
 	private boolean isDestroyed = false, isProtected = false, unbreakable = false;
-	private int durability = ONE_HIT;
+	private int durability = SINGLE_HIT;
 
 	public Brick(int posX, int posY) {
 		this(posX, posY, BRICK_WIDTH, BRICK_HEIGHT);
@@ -123,12 +123,12 @@ public class Brick implements Settings {
 	}
 
 	public void destroy(){
-		if(durability == ONE_HIT) {
+		if(durability == SINGLE_HIT) {
 			if(!unbreakable) {
-				bricks = new FadeTransition(Duration.millis(1000), rectangle);
-				bricks.setFromValue(1.0);
-				bricks.setToValue(0.0);
-				bricks.play();
+				fader = new FadeTransition(Duration.millis(1000), rectangle);
+				fader.setFromValue(1.0);
+				fader.setToValue(0.0);
+				fader.play();
 				//rectangle.setDisable(true);
 				//rectangle.setVisible(false);
 				isDestroyed = true;
@@ -139,10 +139,10 @@ public class Brick implements Settings {
 	}
 
 	public void reset(){
-		bricks = new FadeTransition(Duration.millis(100), rectangle);
-		bricks.setFromValue(0.0);
-		bricks.setToValue(1.0);
-		bricks.play();
+		fader = new FadeTransition(Duration.millis(100), rectangle);
+		fader.setFromValue(0.0);
+		fader.setToValue(1.0);
+		fader.play();
 		rectangle.setDisable(false);
 		//rectangle.setVisible(true);
 		isDestroyed = false;
@@ -167,29 +167,29 @@ public class Brick implements Settings {
 	
 	public void setDurability(int durability) {
 		switch(durability) {
-		case ONE_HIT:
-			this.durability = ONE_HIT;
+		case SINGLE_HIT:
+			this.durability = SINGLE_HIT;
 			break;
 		case DOUBLE_HIT:
 			this.durability = DOUBLE_HIT;
 			break;
-		case TRIPPLE_HIT:
-			this.durability = TRIPPLE_HIT;
+		case TRIPLE_HIT:
+			this.durability = TRIPLE_HIT;
 			break;
 		default:
-			this.durability = ONE_HIT;
+			this.durability = SINGLE_HIT;
 		}
 	}
 	private void decreaseDurability() {
 		switch(durability) {
-		case TRIPPLE_HIT:
+		case TRIPLE_HIT:
 			durability = DOUBLE_HIT;
 			break;
 		case DOUBLE_HIT:
-			durability = ONE_HIT;
+			durability = SINGLE_HIT;
 			break;
 		default:
-			durability = ONE_HIT;
+			durability = SINGLE_HIT;
 		}
 		
 	}

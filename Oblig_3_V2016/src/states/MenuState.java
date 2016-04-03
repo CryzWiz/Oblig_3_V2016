@@ -31,8 +31,8 @@ public class MenuState extends GameState {
 				((MenuButton)buttons.get(0)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 					Level.reset();
-					ball.reset();
-					game.play(ball);
+					ballManager.reset();
+					game.play(ballManager.get(0));
 					brickManager.reset();
 					timer.reset();
 				}
@@ -40,8 +40,8 @@ public class MenuState extends GameState {
 			else if(y < buttons.get(2).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(1)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
-					ball.reset();
-					game.play(ball);
+					ballManager.reset();
+					game.play(ballManager.get(0));
 					brickManager.reset();
 					timer.reset();
 				}
@@ -49,7 +49,7 @@ public class MenuState extends GameState {
 			else if(y < buttons.get(3).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(2)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
-					game.toggleSpeed(ball);
+					ballManager.toggleSpeed();
 			}
 			else if(y < buttons.get(4).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(3)).hover();
@@ -68,8 +68,8 @@ public class MenuState extends GameState {
 	public void onEnterPress(){
 		brickManager.reset();
 		timer.reset();
-		ball.reset();
-		game.play(ball);
+		ballManager.reset();
+		game.play();
 	}
 	
 	@Override
