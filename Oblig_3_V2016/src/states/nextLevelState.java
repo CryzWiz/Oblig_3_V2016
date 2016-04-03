@@ -13,9 +13,9 @@ public class nextLevelState extends GameState {
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {} //Should never be interrupted
+			/*try {
+				//Thread.sleep(1000);
+			} catch (InterruptedException e) {} //Should never be interrupted*/
 			timer.reset();
 			ballManager.reset();
 			brickManager.reset();

@@ -1,7 +1,6 @@
 package states;
 
 import breakout.Highscore;
-import breakout.Level;
 import javafx.scene.input.MouseEvent;
 
 public class VictoryState extends GameState {

@@ -91,7 +91,7 @@ public class ScreenManager implements Settings {
 		
 		//Game Pane + pause and victory
 		nextLevelLayer = new StackPane(nextLevelText);
-		playLayer = new Pane();
+		playLayer = new Pane(lvls);
 		timerLayer = new BorderPane();
 		timerLayer.setBottom(timerText);
 		Rectangle shadow = new Rectangle(WIDTH, HEIGHT); 
@@ -101,7 +101,7 @@ public class ScreenManager implements Settings {
 		victoryLayer = new StackPane();
 		//Victoryscreen
 		Highscore.drawScores(victoryLayer);
-		gameScreen = new StackPane(playLayer, shadowLayer, timerLayer, pauseLayer, victoryLayer, lvls, nextLevelLayer);
+		gameScreen = new StackPane(playLayer, shadowLayer, timerLayer, pauseLayer, victoryLayer, nextLevelLayer);
 		gameScreen.setBackground(BACKGROUND);
 
 		

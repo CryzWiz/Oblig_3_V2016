@@ -40,12 +40,10 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
     	try {
 			Scanner input = new Scanner(file);
 			while (input.hasNext()) {
-				String[] inputs = new String[3];
-				inputs[0] = input.next();
-				inputs[1] = input.next();
-				inputs[2] = input.next();
-				String name = inputs[0] + " " + inputs[1];
-				Timer scoreValue = Timer.parse(inputs[2]);
+				String line = input.nextLine();
+				String[] inputs = line.split("\\s", 2);
+				Timer scoreValue = Timer.parse(inputs[0]);
+				String name = inputs[1];
 				new Highscore(scoreValue, name);
 			}
 			input.close();
@@ -74,8 +72,9 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
     		nameText.setFill(TEXT_COLOR);
         	scoreText.setFont(FONT_TEXT);
         	scoreText.setFill(TEXT_COLOR);
-    		scoreList.addRow(i, nameText, scoreText);
+    		scoreList.addRow(i, scoreText, nameText);
     	}
+		scoreList.setHgap(10);
     	ScrollPane scoreholder = new ScrollPane();
     	/*scoreholder.setOnScroll(new EventHandler<ScrollEvent>() {
     		@Override
@@ -108,7 +107,7 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
     }
     
     public String toString(){
-    	return name + " " + scoreValue.toString();
+    	return scoreValue.toString() + " " + name;
     }
 
 	@Override

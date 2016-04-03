@@ -39,7 +39,7 @@ public class Timer implements Comparable<Timer>{
 		int minutes = (int)(totalMillis / (1000 * 60));
 		int millis = (int)(totalMillis % 1000);
 
-		return String.format("%02d:%02d:%d", minutes, seconds, millis);
+		return String.format("%02d:%02d:%03d", minutes, seconds, millis);
 	}
 	
 	public static Timer parse(String dateString) throws ParseException{

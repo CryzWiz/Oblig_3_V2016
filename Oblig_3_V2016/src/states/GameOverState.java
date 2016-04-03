@@ -24,8 +24,4 @@ public class GameOverState extends GameState {
 	public void onEscPress(){
 		gameManager.menu();
 	}
-
-	@Override
-	public void tick(){
-	}
 }
