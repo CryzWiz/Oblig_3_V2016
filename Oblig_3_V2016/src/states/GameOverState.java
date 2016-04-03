@@ -20,7 +20,6 @@ public class GameOverState extends GameState {
 	public void onSpacePress() {
 		gameManager.menu();
 	}
-	
 	@Override
 	public void onEscPress(){
 		gameManager.menu();

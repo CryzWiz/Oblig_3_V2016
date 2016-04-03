@@ -11,12 +11,10 @@ public class PauseState extends GameState {
 	public void onSpacePress(){
 		gameManager.play();
 	}
-	
 	@Override
 	public void onEnterPress(){
 		gameManager.play();
 	}
-	
 	@Override
 	public void onEscPress(){
 		gameManager.menu();

@@ -1,5 +1,6 @@
 package breakout;
 import static breakout.BrickManager.*;
+import static breakout.Brick.BrickType.*;
 
 import javafx.scene.paint.Color;
 
@@ -11,7 +12,6 @@ public enum Level {
 	int value;
 	int removePercentage;
 	Color[] brickColors;
-    Color UNBREAKABLE_BRICK_COLOR = Color.GRAY;
     
 	Level(int value, int removePercentage, Color[] brickColors) {
 		this.value = value;
@@ -45,21 +45,20 @@ public enum Level {
 	public int percentage() {
 		return removePercentage;
 	}
-	public void brickColor(Brick brick, int row, int col) {
-
-		switch (this) {
+	public static Brick.BrickType brickColor(Brick brick, int row, int col) {
+		Color[] brickColors = level.brickColors;
+		switch (level) {
 		case ONE:
-			if (row < 3) {
+			if (row < 3)
 				brick.setFill(brickColors[0]);
-			} else if (row < 6) {
+			else if (row < 6)
 				brick.setFill(brickColors[1]);
-			} else if (row < 9) {
+			else if (row < 9)
 				brick.setFill(brickColors[2]);
-			} else {
+			else
 				brick.setFill(brickColors[3]);
-			}
 			break;
-			
+
 		case TWO:
 			if (col < BRICK_COLUMNS / 2) {
 				if (row == col) {
@@ -67,30 +66,34 @@ public enum Level {
 					brick.setFill(brickColors[0]);
 					protectBricks(brick);
 					brick.setDurability(DOUBLE_HIT);
+					return DURABLE;
 				} else if (col - row == 1 || row - col == 1) {
 					brick.setFill(brickColors[1]);
 					protectBricks(brick);
+					return PROTECTED;
 				} else if (col - row == 2 || row - col == 2) {
 					brick.setFill(brickColors[2]);
 					protectBricks(brick);
-				} else {
+					return PROTECTED;
+				} else
 					brick.setFill(brickColors[3]);
-				}
 			} else {
 				if (row + col == BRICK_COLUMNS - 1) {
 					// Durable bricks
 					brick.setFill(brickColors[0]);
 					protectBricks(brick);
 					brick.setDurability(DOUBLE_HIT);
+					return DURABLE;
 				} else if (row + col == 13 || row + col == 15) {
 					brick.setFill(brickColors[1]);
 					protectBricks(brick);
+					return PROTECTED;
 				} else if (row + col == 12 || row + col == 16) {
 					brick.setFill(brickColors[2]);
 					protectBricks(brick);
-				} else {
+					return PROTECTED;
+				} else
 					brick.setFill(brickColors[3]);
-				}
 			}
 			break;
 			
@@ -100,17 +103,17 @@ public enum Level {
 				if(col < 6 || col > 8) {
 					brick.setFill(UNBREAKABLE_BRICK_COLOR);
 					setUnbreakableBrick(brick);
-				} else {
+					return UNBREAKABLE;
+				} else
 					brick.setFill(brickColors[1]);
-				}
 			}
 			else if(row == 9) {
 				if(col < 10 && col > 4) {
 					brick.setFill(UNBREAKABLE_BRICK_COLOR);
 					setUnbreakableBrick(brick);
-				} else {
+					return UNBREAKABLE;
+				} else
 					brick.setFill(brickColors[1]);
-				}
 			}
 			// Pattern
 			else if(row == 2 || row == 6) {
@@ -118,9 +121,9 @@ public enum Level {
 					brick.setFill(brickColors[0]);
 					protectBricks(brick);
 					brick.setDurability(DOUBLE_HIT);
-				} else {
+					return DURABLE;
+				} else
 					brick.setFill(brickColors[1]);
-				}
 			} else if(row == 3 || row == 5) {
 				
 				if(col == 2 || col == 4 || col == 6 || col == 8 || col == 10 || col == 12) {
@@ -128,28 +131,26 @@ public enum Level {
 					brick.setFill(brickColors[0]);
 					protectBricks(brick);
 					brick.setDurability(DOUBLE_HIT); 
-				} else {
+					return DURABLE;
+				} else
 					brick.setFill(brickColors[1]);
-				}
 			} else if(row == 4) {
 				if(col == 1 || col == 5 || col == 9 || col == 13) {
 					// Durable bricks
 					brick.setFill(brickColors[0]);
 					protectBricks(brick);
 					brick.setDurability(DOUBLE_HIT);
-				} else {
+					return DURABLE;
+				} else
 					brick.setFill(brickColors[1]);
-				}
 			// Surrounding bricks
-			} else {
+			} else
 				brick.setFill(brickColors[1]);
-			}
 			break;
-			
-		case VICTORY:
-			reset();
-			break;
+		default:
+			brick.setFill(Color.BLACK);
 		}
+		return NORMAL;
 
 	}
 	public static void reset(){
