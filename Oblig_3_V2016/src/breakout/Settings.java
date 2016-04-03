@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 
 public interface Settings {
 	boolean BALL_GRAVITY_ON = true;
-	boolean BOUNCE_ON_BOT = true;
+	boolean BOUNCE_ON_BOT = false;
 	boolean ALLOW_TILT = true;
 
 	int MILLIS_PER_FRAME = 10; //Lower speed + higher frame rate = same look, more precision, higher CPU load

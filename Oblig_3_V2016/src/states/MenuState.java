@@ -31,7 +31,7 @@ public class MenuState extends GameState {
 				((MenuButton)buttons.get(0)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 					Level.reset();
-					ball.reset(); //Doesn't reset to toggled speed
+					ball.reset();
 					game.play(ball);
 					brickManager.reset();
 					timer.reset();
@@ -40,7 +40,7 @@ public class MenuState extends GameState {
 			else if(y < buttons.get(2).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(1)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
-					ball.reset(); //Doesn't reset to toggled speed
+					ball.reset();
 					game.play(ball);
 					brickManager.reset();
 					timer.reset();

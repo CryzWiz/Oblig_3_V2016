@@ -53,7 +53,7 @@ public class BrickManager implements Settings {
 		for (Brick[] col : bricks) {
 			for (Brick brick : col) {
 				brick.reset();
-				}
+			}
 		}
 		bricksLeft = numberOfRows * numberOfCols;
 		// setLevel(currentLevel);
@@ -122,7 +122,7 @@ public class BrickManager implements Settings {
 		collision(ball);
 		if (levelComplete()) {
 			setNextLevel();
-			gManager.levelCleared();
+			gManager.nextLevel();
 		}
 	}
 }

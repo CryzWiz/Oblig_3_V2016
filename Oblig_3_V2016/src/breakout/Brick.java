@@ -496,9 +496,9 @@ public class Brick implements Settings {
 	}
 	public COLLISION_TYPE collision(Ball ball){
 		COLLISION_TYPE type = collision_mixed(ball);
-		if(type != DONE && type != NO_RANGE){
+		/*if(type != DONE && type != NO_RANGE){ //Debugging purposes
 			System.out.println(type);
-		}
+		}*/
 		return type;
 	}
 }
