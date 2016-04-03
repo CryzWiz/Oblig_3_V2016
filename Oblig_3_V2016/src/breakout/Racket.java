@@ -14,7 +14,12 @@ public class Racket implements Settings{
 		public int value(){ return code; }
 		public Color color(){ return color; }
 	};
-	
+	private static boolean frictionOn = true;
+
+	public static void toggleFriction(){
+		frictionOn = !frictionOn;
+		MenuButton.setText(3, "Friction: " + (frictionOn ? "ON" : "OFF"));
+	}
 	private Rectangle pad;
 	private Direction direction;
 	private boolean isSlippery;
@@ -28,7 +33,7 @@ public class Racket implements Settings{
 		pane.getChildren().add(pad);
 		dx = 0;
 		direction = STILL;
-		setSlippery(true);
+		isSlippery = true;
 	}
 
 	public Rectangle getpad(){
@@ -59,6 +64,10 @@ public class Racket implements Settings{
 	public double getTiltAngleDegrees(){
 		return getTiltAngleRads() * 180 / Math.PI;
 	}
+
+	public boolean isFriction(){
+		return frictionOn;
+	}
 	
 	public void move(double x){
 		pad.setTranslateX(getBoundsLeft() + x);
@@ -75,21 +84,9 @@ public class Racket implements Settings{
 			pad.setRotate(getTiltAngleDegrees());
 		}
 	}
-	public int getDirection(){
-		switch(direction){
-		case LEFT:
-			return -1;
-		case STILL:
-			return 0;
-		case RIGHT:
-			return 1;
-		default:
-			return 0;
-		}
-	}
 	public void setSlippery(boolean value){
 		isSlippery = value;
-		pad.setStroke(value ? Color.BLUE : Color.BLACK);
+		pad.setStroke(value ? Color.BLUE : null);
 	}
 	
 	public void collision(Ball ball){

@@ -6,7 +6,6 @@ import states.*;
 
 public class GameManager implements Settings {
 	private GameState state;
-	private boolean friction;
 
 	public GameManager(ScreenManager sm) {
 		GameState.setStatics(this, sm);
@@ -49,16 +48,9 @@ public class GameManager implements Settings {
 	public boolean constrictMouse(){
 		return state instanceof PlayState;
 	}
-	public boolean isFriction(){
-		return friction;
-	}
 
 	public void tick(){
 		state.tick();
-	}
-	public void toggleFriction(){
-		friction = !friction;
-		MenuButton.setText(3, "Friction: " + (friction ? "ON" : "OFF"));
 	}
 	public void exit(){
 		System.exit(0);
@@ -66,9 +58,6 @@ public class GameManager implements Settings {
 
 	//State changes
 	public void play(){
-		state = new PlayState();
-	}
-	public void play(Ball ball) {
 		state = new PlayState();
 	}
 	public void pause() {

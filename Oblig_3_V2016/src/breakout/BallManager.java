@@ -1,6 +1,7 @@
 package breakout;
 
 import static breakout.BallManager.Speed.*;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -69,11 +70,11 @@ public class BallManager implements Settings {
 	}
 	
 	public void reset(){
-		Iterator<Ball> bIterator = balls.iterator();
-		while(bIterator.hasNext()){
-			Ball ball = bIterator.next();
+		Iterator<Ball> ballIterator = balls.iterator();
+		while(ballIterator.hasNext()){
+			Ball ball = ballIterator.next();
 			pane.getChildren().remove(ball.getCircle());
-			bIterator.remove();
+			ballIterator.remove();
 		}
 		balls.add(new Ball(pane));
 		balls.get(0).setSpeedCoords(BALL_START_DX * speed.getValue(), BALL_START_DY * speed.getValue());
@@ -83,7 +84,7 @@ public class BallManager implements Settings {
 		MenuButton.setText(2, "Ball Speed: " + speed.toString());
 	}
 	public boolean collision(Ball ball){ //true if ball falls into void
-		brickManager.tick(gameManager, ball);
+		brickManager.collision(ball);
 		racket.collision(ball);
 		if(room.collision(ball)){
 			return true;
@@ -91,16 +92,15 @@ public class BallManager implements Settings {
 		return false;
 	}
 	public void tick(){
-		Iterator<Ball> bIterator = balls.iterator();
-		while(bIterator.hasNext()) {
-			Ball ball = bIterator.next();
+		Iterator<Ball> ballIterator = balls.iterator();
+		while(ballIterator.hasNext()) {
+			Ball ball = ballIterator.next();
 			ball.tick();
 			if(collision(ball)){
 				pane.getChildren().remove(ball.getCircle());
-				bIterator.remove();
+				ballIterator.remove();
 				if(balls.isEmpty()){
 					gameManager.gameOver();
-					break;
 				}
 			}
 		}
