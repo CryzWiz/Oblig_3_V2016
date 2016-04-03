@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -61,13 +63,14 @@ public class Highscore extends StackPane implements Settings {
 			e.printStackTrace();
 		}
     }	
-    public static void drawScores(Pane pane){
-    	VBox scoreList = new VBox();
+    public static void drawScores(ScrollPane pane){
+    	TextArea scoreList = new TextArea();
     	for(Highscore highscore : scores){
     		Text text = new Text(highscore.toString());
         	text.setFont(FONT_TEXT);
         	text.setFill(TEXT_COLOR);
-        	scoreList.getChildren().add(text);
+        	scoreList.appendText(text.toString());
+
     	}
     	VBox newScore = new VBox();
     	Label PlayerMessage = new Label("Enter your name to be added to the Highscore list.");
@@ -75,8 +78,9 @@ public class Highscore extends StackPane implements Settings {
     	newScore.getChildren().add(PlayerMessage);
     	newScore.getChildren().add(new TextField());
     	newScore.setAlignment(Pos.BOTTOM_CENTER);
-    	pane.getChildren().addAll(scoreList, newScore);
-    	scoreList.setAlignment(Pos.CENTER);
+    	ScrollPane scrollPane = new ScrollPane(scoreList);
+    	//pane.getChildren().addAll(scoreList, newScore);
+    	//scoreList.setAlignment(Pos.CENTER);
     	//pane = new BorderPane(scoreList, new Text("Scores:"), null, null, null);
     }
     
