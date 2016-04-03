@@ -5,9 +5,9 @@ import javafx.scene.paint.Color;
 
 
 public enum Level {
-	ONE(1, 20, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 5, BRICK_COLORS_LVL3), VICTORY(4, 0,BRICK_COLORS_LVL1);
-
-	private static Level level = TWO;
+//	ONE(1, 20, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 5, BRICK_COLORS_LVL3), VICTORY(4, 0,BRICK_COLORS_LVL1);
+	ONE(1, 99, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 5, BRICK_COLORS_LVL3), VICTORY(4, 0,BRICK_COLORS_LVL1);  // SET FOR TESTING
+	private static Level level = ONE;
 	int value;
 	int removePercentage;
 	Color[] brickColors;

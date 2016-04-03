@@ -95,7 +95,7 @@ public class BrickManager implements Settings {
 	}
 	public void setNextLevel() {
 		nextLevel();
-		reset();
+//		reset();
 	}
 	public void collision(Ball ball) {
 		int firstCol = getColumn(ball.getBoundsLeft());
