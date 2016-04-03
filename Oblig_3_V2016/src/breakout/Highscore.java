@@ -10,6 +10,7 @@ import java.util.Scanner;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -64,12 +65,15 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
 		}
     }	
     public static void drawScores(Pane pane){
-    	VBox scoreList = new VBox();
-    	for(Highscore highscore : scores){
-    		Text text = new Text(highscore.toString());
-        	text.setFont(FONT_TEXT);
-        	text.setFill(TEXT_COLOR);
-        	scoreList.getChildren().add(text);
+    	GridPane scoreList = new GridPane();
+    	for(int i = 0; i < scores.size(); i++){
+    		Text nameText = new Text(scores.get(i).name);
+    		Text scoreText = new Text(scores.get(i).scoreValue.toString());
+    		nameText.setFont(FONT_TEXT);
+    		nameText.setFill(TEXT_COLOR);
+        	scoreText.setFont(FONT_TEXT);
+        	scoreText.setFill(TEXT_COLOR);
+    		scoreList.addRow(i, nameText, scoreText);
     	}
     	VBox newScore = new VBox();
     	Label PlayerMessage = new Label("Enter your name to be added to the Highscore list.");

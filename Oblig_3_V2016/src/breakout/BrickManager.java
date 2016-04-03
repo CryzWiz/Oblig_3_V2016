@@ -66,7 +66,6 @@ public class BrickManager implements Settings {
 	public void reset() {
 		unbreakableBricks = 0;
 		protectedBricks = 0;
-		resetBricks();
 		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
 		destroyRandomBricks(Level.getLevel().percentage());
 	}

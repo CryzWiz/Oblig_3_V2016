@@ -77,7 +77,7 @@ public class BallManager implements Settings {
 			ballIterator.remove();
 		}
 		balls.add(new Ball(pane));
-		if(breakout.Level.getLevel() == breakout.Level.THREE)
+		if(breakout.Level.getLevel() == breakout.Level.THREE) //Extra ball on level Three
 			add(200, 30, Settings.BALL_START_DX, Settings.BALL_START_DY);
 		balls.get(0).setSpeedCoords(BALL_START_DX * speed.getValue(), BALL_START_DY * speed.getValue());
 	}
