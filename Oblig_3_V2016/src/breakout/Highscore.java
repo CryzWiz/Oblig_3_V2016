@@ -9,11 +9,14 @@ import java.util.Scanner;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class Highscore extends StackPane implements Settings, Comparable<Highscore> {
@@ -65,6 +68,7 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
 		}
     }	
     public static void drawScores(Pane pane){
+    	GridPane holderLarge = new GridPane();
     	GridPane scoreList = new GridPane();
     	for(int i = 0; i < scores.size(); i++){
     		Text nameText = new Text(scores.get(i).name);
@@ -75,14 +79,27 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
         	scoreText.setFill(TEXT_COLOR);
     		scoreList.addRow(i, nameText, scoreText);
     	}
+    	ScrollPane scoreholder = new ScrollPane();
+    	/*scoreholder.setOnScroll(s -> {
+    		if(s.getDeltaY() > 0){
+    			scoreholder.
+    		}
+    	});*/
+    	scoreholder.setPrefSize(WIDTH, HEIGHT);
+    	scoreholder.setContent(scoreList);
+    	scoreList.setBackground(BACKGROUND);
+    	scoreholder.setBackground(BACKGROUND);
+    	
     	VBox newScore = new VBox();
+    	//newScore.setBackground(BACKGROUND);
     	Label PlayerMessage = new Label("Enter your name to be added to the Highscore list.");
     	PlayerMessage.setTextFill(TEXT_COLOR);
     	newScore.getChildren().add(PlayerMessage);
     	newScore.getChildren().add(new TextField());
     	newScore.setAlignment(Pos.BOTTOM_CENTER);
-    	pane.getChildren().addAll(scoreList, newScore);
-    	scoreList.setAlignment(Pos.CENTER);
+    	holderLarge.getChildren().addAll(scoreholder, newScore);
+    	pane.getChildren().addAll(holderLarge);
+    	//scoreList.setAlignment(Pos.CENTER);
     	//pane = new BorderPane(scoreList, new Text("Scores:"), null, null, null);
     }
     

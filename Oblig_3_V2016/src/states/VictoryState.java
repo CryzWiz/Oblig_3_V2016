@@ -32,7 +32,7 @@ public class VictoryState extends GameState {
 	}
 	
 	public void onEnterPress(){
-		Highscore.saveScores("highscores.txt");
+		Highscore.saveScores(breakout.Settings.HIGHSCORE_FILE);
 	};
 	
 	@Override
