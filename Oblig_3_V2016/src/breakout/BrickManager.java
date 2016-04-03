@@ -1,7 +1,5 @@
 package breakout;
 
-import static breakout.Level.*;
-
 import breakout.Brick.CollisionType;
 import javafx.scene.layout.Pane;
 
@@ -31,7 +29,7 @@ public class BrickManager implements Settings {
 				Brick brick = new Brick(setX(col), setY(row), BRICK_WIDTH, BRICK_HEIGHT);
 				bricks[row][col] = brick;
 				pane.getChildren().add(brick.getRectangle());
-				getLevel().brickColor(brick, row, col);
+				Level.getLevel().brickColor(brick, row, col);
 				if(col > 0)
 					bricks[row][col-1].setCloseBrick(0, brick);
 				if(row > 0)
@@ -39,7 +37,6 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
-
 	public void destroyRandomBricks(int percentBricksToRemove) {
 		int numberOfBricksToRemove = (int) (((numberOfRows * numberOfCols) / 100.0) * percentBricksToRemove);
 		numberOfBricksToRemove = ((numberOfBricksToRemove > numberOfRows * numberOfCols - protectedBricks) ? numberOfRows * numberOfCols - protectedBricks: numberOfBricksToRemove);
@@ -69,13 +66,13 @@ public class BrickManager implements Settings {
 		protectedBricks = 0;
 		resetBricks();
 		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
-		destroyRandomBricks(getLevel().percentage());
+		destroyRandomBricks(Level.getLevel().percentage());
 	}
 	public void resetBricks() {
 		for(int row = 0; row < BRICK_ROWS; row++){
 			for(int col = 0; col < BRICK_COLUMNS; col++){
 				bricks[row][col].reset();
-				getLevel().brickColor(bricks[row][col], row, col);
+				Level.getLevel().brickColor(bricks[row][col], row, col);
 				
 			}
 		}
@@ -105,7 +102,7 @@ public class BrickManager implements Settings {
 		return ((bricksLeft > 0) ? false : true);
 	}
 	public void setNextLevel() {
-		nextLevel();
+		Level.nextLevel();
 		resetBricks();
 	}
 	public void collision(Ball ball) {
@@ -134,15 +131,4 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
-	public void tick(GameManager gameManager, Ball ball) {
-		collision(ball);
-		if (levelCleared()) {
-			setNextLevel();
-			if(getLevel() == VICTORY)
-				gameManager.victory();
-			else
-				gameManager.nextLevel();
-		}
-	}
-
 }

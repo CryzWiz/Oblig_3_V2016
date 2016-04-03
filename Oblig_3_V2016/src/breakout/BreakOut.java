@@ -26,8 +26,8 @@ public class BreakOut extends Application implements Settings{
 			@Override
 			public void handle(MouseEvent mouseEvent) {
 				if(gameManager.constrictMouse()){
-					int x = (int) Math.min(Math.max(mouseEvent.getScreenX(), scene.getX() + primaryStage.getX()), scene.getX() + primaryStage.getX() + WIDTH);
-					int y = (int) Math.min(Math.max(mouseEvent.getScreenY(), scene.getY() + primaryStage.getY()), scene.getY() + primaryStage.getY() + HEIGHT);
+					int x = (int) Math.min(Math.max(mouseEvent.getScreenX(), scene.getX() + primaryStage.getX() + PADDLE_WIDTH / 2), scene.getX() + primaryStage.getX() + WIDTH - PADDLE_WIDTH / 2);
+					int y = (int) Math.min(Math.max(mouseEvent.getScreenY(), scene.getY() + primaryStage.getY() + 10), scene.getY() + primaryStage.getY() + HEIGHT - 10);
 					robot.mouseMove(x, y);
 				}
 				gameManager.onMouseEvent(mouseEvent);

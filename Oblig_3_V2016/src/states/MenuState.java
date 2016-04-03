@@ -4,6 +4,7 @@ import java.util.List;
 
 import breakout.Level;
 import breakout.MenuButton;
+import breakout.Racket;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -32,18 +33,18 @@ public class MenuState extends GameState {
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 					Level.reset();
 					ballManager.reset();
-					game.play(ballManager.get(0));
 					brickManager.reset();
 					timer.reset();
+					gameManager.play();
 				}
 			}
 			else if(y < buttons.get(2).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(1)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 					ballManager.reset();
-					game.play(ballManager.get(0));
 					brickManager.reset();
 					timer.reset();
+					gameManager.play();
 				}
 			}
 			else if(y < buttons.get(3).localToParent(0, 0).getY()){
@@ -54,18 +55,18 @@ public class MenuState extends GameState {
 			else if(y < buttons.get(4).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(3)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
-					game.toggleFriction(); //Doesn't set friction yet
+					Racket.toggleFriction(); //Doesn't set friction yet
 			}
 			else{
 				((MenuButton)buttons.get(4)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
-					game.exit();
+					gameManager.exit();
 			}
 		}
 	}
 	
 	@Override
 	public void onEscPress(){
-		game.exit();
+		gameManager.exit();
 	}
 }
