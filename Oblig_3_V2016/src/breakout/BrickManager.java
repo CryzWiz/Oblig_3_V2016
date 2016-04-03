@@ -1,8 +1,6 @@
 package breakout;
 
-import static breakout.Level.*;
-
-import breakout.Brick.COLLISION_TYPE;
+import breakout.Brick.CollisionType;
 import javafx.scene.layout.Pane;
 
 public class BrickManager implements Settings {
@@ -10,15 +8,18 @@ public class BrickManager implements Settings {
 	private int numberOfRows;
 	private int numberOfCols;
 	private int bricksLeft;
-
+	private static int unbreakableBricks = 0;
+	private static int protectedBricks = 0;
+	
 	public BrickManager(Pane pane) {
 		this(pane, BRICK_ROWS, BRICK_COLUMNS);
 	}
 	public BrickManager(Pane pane, int numberOfRows, int numberOfCols) {
 		createBricks(pane, numberOfRows, numberOfCols);
+		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
 		this.numberOfRows = numberOfRows;
 		this.numberOfCols = numberOfCols;
-		bricksLeft = numberOfRows * numberOfCols;
+		
 	}
 
 	public void createBricks(Pane pane, int numberOfRows, int numberOfCols) {
@@ -28,7 +29,7 @@ public class BrickManager implements Settings {
 				Brick brick = new Brick(setX(col), setY(row), BRICK_WIDTH, BRICK_HEIGHT);
 				bricks[row][col] = brick;
 				pane.getChildren().add(brick.getRectangle());
-				getLevel().brickColor(brick, row, col);
+				Level.getLevel().brickColor(brick, row, col);
 				if(col > 0)
 					bricks[row][col-1].setCloseBrick(0, brick);
 				if(row > 0)
@@ -38,7 +39,8 @@ public class BrickManager implements Settings {
 	}
 	public void destroyRandomBricks(int percentBricksToRemove) {
 		int numberOfBricksToRemove = (int) (((numberOfRows * numberOfCols) / 100.0) * percentBricksToRemove);
-
+		numberOfBricksToRemove = ((numberOfBricksToRemove > numberOfRows * numberOfCols - protectedBricks) ? numberOfRows * numberOfCols - protectedBricks: numberOfBricksToRemove);
+		
 		while (numberOfBricksToRemove > 0) {
 			int randomRow = (int) (Math.random() * numberOfRows);
 			int randomCol = (int) (Math.random() * numberOfCols);
@@ -49,15 +51,31 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
+	public static void setUnbreakableBrick(Brick brick) {
+		protectBricks(brick);
+		brick.setUnbreakable(true);
+		unbreakableBricks++;
+	}
+	public static void protectBricks(Brick brick){
+		brick.setProtection(true);
+		protectedBricks++;
+	}
+	
 	public void reset() {
-		for (Brick[] col : bricks) {
-			for (Brick brick : col) {
-				brick.reset();
-				}
+		unbreakableBricks = 0;
+		protectedBricks = 0;
+		resetBricks();
+		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
+		destroyRandomBricks(Level.getLevel().percentage());
+	}
+	public void resetBricks() {
+		for(int row = 0; row < BRICK_ROWS; row++){
+			for(int col = 0; col < BRICK_COLUMNS; col++){
+				bricks[row][col].reset();
+				Level.getLevel().brickColor(bricks[row][col], row, col);
+				
+			}
 		}
-		bricksLeft = numberOfRows * numberOfCols;
-		// setLevel(currentLevel);
-		destroyRandomBricks(getLevel().percentage());
 	}
 
 	public Brick[][] getBricks() {
@@ -66,7 +84,7 @@ public class BrickManager implements Settings {
 	public Brick getBrick(int row, int col) {
 		return bricks[row][col];
 	}
-	
+
 	public int getRow(double y) {
 		return (int) ((y - WALL_PADDING_TOP) / (BRICK_HEIGHT + BRICK_PADDING_V));
 	}
@@ -80,17 +98,12 @@ public class BrickManager implements Settings {
 		return row * (BRICK_HEIGHT + BRICK_PADDING_V) + WALL_PADDING_TOP;
 	}
 
-	public boolean levelComplete() {
+	public boolean levelCleared() {
 		return ((bricksLeft > 0) ? false : true);
 	}
 	public void setNextLevel() {
-		nextLevel();
-		for(int row = 0; row < BRICK_ROWS; row++){
-			for(int col = 0; col < BRICK_COLUMNS; col++){
-				bricks[row][col].reset();
-				getLevel().brickColor(bricks[row][col], row, col);
-			}
-		}
+		Level.nextLevel();
+		resetBricks();
 	}
 	public void collision(Ball ball) {
 		int firstCol = getColumn(ball.getBoundsLeft());
@@ -108,21 +121,14 @@ public class BrickManager implements Settings {
 				for (int col = firstCol; col <= lastCol; col++) {
 					Brick brick = bricks[row][col];
 					if (!brick.isDestroyed()) {
-						COLLISION_TYPE type = brick.collision(ball);
+						CollisionType type = brick.collision(ball);
 						if (brick.isDestroyed())
 							bricksLeft--;
-						if(type == COLLISION_TYPE.EDGE_DOUBLE)
+						if(type == CollisionType.EDGE_DOUBLE)
 							break;
 					}
 				}
 			}
-		}
-	}
-	public void tick(GameManager gManager, Ball ball) {
-		collision(ball);
-		if (levelComplete()) {
-			setNextLevel();
-			gManager.levelCleared();
 		}
 	}
 }

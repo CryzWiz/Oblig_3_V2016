@@ -2,7 +2,11 @@ package states;
 
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+
 import static breakout.Racket.Direction.*;
+
+import breakout.Level;
+import breakout.Settings;
 
 public class PlayState extends GameState {
 
@@ -11,22 +15,22 @@ public class PlayState extends GameState {
 		timer.play();
 	}
 
+	public void onUpPress(){
+		ballManager.add(200, 30, Settings.BALL_START_DX, Settings.BALL_START_DY);
+	};
 	@Override
 	public void onEnterPress(){
-		game.pause();
+		gameManager.pause();
 	}
-	
 	@Override
 	public void onEscPress(){
-		game.menu();
+		gameManager.menu();
 	}
-	
 	@Override
 	public void onSpacePress(){
-		if(game.isFriction())
+		if(racket.isFriction())
 			racket.setSlippery(false);
 	}
-
 	@Override
 	public void onSpaceRelease(){
 		racket.setSlippery(true);
@@ -48,16 +52,17 @@ public class PlayState extends GameState {
 		if(m.getEventType() == MouseEvent.MOUSE_MOVED || m.getEventType() == MouseEvent.MOUSE_DRAGGED){
 			racket.mouseMove(m.getX());
 		}
-		
 	}
 
 	@Override
 	public void tick(){
-		ball.tick();
-		brickManager.tick(game, ball);
-		racket.collision(ball);
-		if(room.collision(ball)){
-			game.gameOver();
+		ballManager.tick();
+		if (brickManager.levelCleared()) {
+			brickManager.setNextLevel();
+			if(Level.getLevel() == Level.VICTORY)
+				gameManager.victory();
+			else
+				gameManager.nextLevel();
 		}
 	}
 }

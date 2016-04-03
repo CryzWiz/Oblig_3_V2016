@@ -5,15 +5,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Ball implements Settings {
+	private static boolean gravityOn;
 	private Circle circle;
-	double dx, dy;
-	boolean gravityOn;
+	public double dx, dy;
 
 	public Ball(Pane pane){
 		this(pane, BALL_START_DX, BALL_START_DY, BALL_RADIUS, BALL_COLOR);
 	}
 	public Ball(Pane pane, int dx, int dy, int r, Color c){
 		this(pane, BALL_START_X, BALL_START_Y, BALL_START_DX, BALL_START_DY, BALL_RADIUS, BALL_COLOR);
+	}
+	public Ball(Pane pane, int x, int y, int dx, int dy){
+		this(pane, x, y, dx, dy, BALL_RADIUS, BALL_COLOR);
 	}
 	public Ball(Pane pane, int x, int y, int dx, int dy, int r, Color c){
 		this.dx = dx;

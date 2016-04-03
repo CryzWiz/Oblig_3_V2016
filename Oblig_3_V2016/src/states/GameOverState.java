@@ -12,18 +12,18 @@ public class GameOverState extends GameState {
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_PRESSED){
-			game.menu();
+			gameManager.menu();
 		}
 	}
 	
 	@Override
 	public void onSpacePress() {
-		game.menu();
+		gameManager.menu();
 	}
 	
 	@Override
 	public void onEscPress(){
-		game.menu();
+		gameManager.menu();
 	}
 
 	@Override

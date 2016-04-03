@@ -4,6 +4,7 @@ import java.util.List;
 
 import breakout.Level;
 import breakout.MenuButton;
+import breakout.Racket;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -31,49 +32,41 @@ public class MenuState extends GameState {
 				((MenuButton)buttons.get(0)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 					Level.reset();
-					ball.reset(); //Doesn't reset to toggled speed
-					game.play(ball);
+					ballManager.reset();
 					brickManager.reset();
 					timer.reset();
+					gameManager.play();
 				}
 			}
 			else if(y < buttons.get(2).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(1)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
-					ball.reset(); //Doesn't reset to toggled speed
-					game.play(ball);
+					ballManager.reset();
 					brickManager.reset();
 					timer.reset();
+					gameManager.play();
 				}
 			}
 			else if(y < buttons.get(3).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(2)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
-					game.toggleSpeed(ball);
+					ballManager.toggleSpeed();
 			}
 			else if(y < buttons.get(4).localToParent(0, 0).getY()){
 				((MenuButton)buttons.get(3)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
-					game.toggleFriction(); //Doesn't set friction yet
+					Racket.toggleFriction(); //Doesn't set friction yet
 			}
 			else{
 				((MenuButton)buttons.get(4)).hover();
 				if(m.getEventType() == MouseEvent.MOUSE_CLICKED)
-					game.exit();
+					gameManager.exit();
 			}
 		}
-	}
-
-	@Override
-	public void onEnterPress(){
-		brickManager.reset();
-		timer.reset();
-		ball.reset();
-		game.play(ball);
 	}
 	
 	@Override
 	public void onEscPress(){
-		game.exit();
+		gameManager.exit();
 	}
 }

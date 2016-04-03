@@ -21,21 +21,30 @@ public interface Settings {
 	Font FONT_TEXT = Font.font(48);
 	Font FONT_TIMER = Font.font(30);
 	Font FONT_BUTTON = Font.font(20);
+	Font FONT_LVL_BUTTON = Font.font(20);
     
     Color[] BRICK_COLORS_LVL1 = {Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
 //    Color[] BRICK_COLORS_LVL3 = {Color.DEEPSKYBLUE, Color.PALETURQUOISE, Color.PURPLE, Color.AQUA};
     Color[] BRICK_COLORS_LVL2 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
     Color[] BRICK_COLORS_LVL3 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
-
+    
     Color BACKGROUND_COLOR = Color.BLACK;
 	Color BALL_COLOR = Color.YELLOWGREEN;
 	Color PADDLE_COLOR = Color.GRAY;
 	Color TEXT_COLOR = Color.GREEN;
 	Color BUTTON_TEXT_COLOR = Color.WHITE;
+	Color BUTTON_LVL_TEXT_COLOR = Color.BLACK;
 	Background BACKGROUND = new Background(new BackgroundFill(BACKGROUND_COLOR, null, null));
 
 	int BUTTON_WIDTH = 200;
 	int BUTTON_HEIGHT = 50;
+	
+	int LEVELICONS_WIDTH = 70;
+	int LEVELICONS_HEIGHT = 30;
+	double LEVELICONS_OPACITY_ON = 0.2;
+	double LEVELICONS_OPACITY_OFF = 1.0;
+
+	double SHADOW_OPACITY = 0.7;
 	
 	String HIGHSCORE_FILE = "highscores.txt";
 	
@@ -60,7 +69,9 @@ public interface Settings {
 	int BRICK_PADDING_V = 3;
 	int BRICK_ROWS = 10;
 	int BRICK_COLUMNS = 15;
-
+	// Durability on bricks:
+	int SINGLE_HIT = 0, DOUBLE_HIT = 1, TRIPLE_HIT = 2;
+	
 	int WALL_PADDING_LEFT = BRICK_WIDTH;
 	int WALL_PADDING_RIGHT = BRICK_WIDTH;
 	int WALL_PADDING_TOP = BRICK_WIDTH; //Or BRICK_HEIGHT???
@@ -72,7 +83,4 @@ public interface Settings {
 	int HEIGHT = //581
 			WALL_PADDING_TOP + WALL_PADDING_BOTTOM +
 			BRICK_ROWS * (BRICK_HEIGHT + BRICK_PADDING_V) - BRICK_PADDING_V;
-	
-	double OPACITY_LEVELICONS_ON = 0.2;
-	double OPACITY_LEVELICONS_OFF = 1.0;
 }

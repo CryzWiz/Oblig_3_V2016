@@ -9,7 +9,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import static breakout.Level.*;
@@ -65,30 +64,30 @@ public class ScreenManager implements Settings {
 	
 		//lvl Icons
 		//Icon 1
-		lvl1Box = new Rectangle(0, 0, 65, 25);
+		lvl1Box = new Rectangle(LEVELICONS_WIDTH, LEVELICONS_HEIGHT);
 		lvl1Box.setFill(Color.RED);
 		lvl1Text = new Text(); 
 		lvl1Text.setText("Level 1");
-		lvl1Text.setFont(Font.font(20));
-		lvl1Text.setFill(Color.BLACK);
+		lvl1Text.setFont(FONT_LVL_BUTTON);
+		lvl1Text.setFill(BUTTON_LVL_TEXT_COLOR);
 		levelIcon1 = new StackPane(lvl1Box,lvl1Text);
 		levelIcon1.setAlignment(Pos.TOP_RIGHT);
 		//Icon 2
-		lvl2Box = new Rectangle(0, 0, 65, 25);
+		lvl2Box = new Rectangle(LEVELICONS_WIDTH, LEVELICONS_HEIGHT);
 		lvl2Box.setFill(Color.PURPLE);
 		lvl2Text = new Text();
 		lvl2Text.setText("Level 2");
-		lvl2Text.setFont(Font.font(20));
-		lvl2Text.setFill(Color.BLACK);
+		lvl2Text.setFont(FONT_LVL_BUTTON);
+		lvl2Text.setFill(BUTTON_LVL_TEXT_COLOR);
 		levelIcon2 = new StackPane(lvl2Box,lvl2Text);
 		levelIcon2.setAlignment(Pos.TOP_RIGHT);
 		//Icon 3
-		lvl3Box = new Rectangle(0, 0, 65, 25);
+		lvl3Box = new Rectangle(LEVELICONS_WIDTH, LEVELICONS_HEIGHT);
 		lvl3Box.setFill(Color.BLUE);
 		lvl3Text = new Text();
 		lvl3Text.setText("Level 3");
-		lvl3Text.setFont(Font.font(20));
-		lvl3Text.setFill(Color.BLACK);
+		lvl3Text.setFont(FONT_LVL_BUTTON);
+		lvl3Text.setFill(BUTTON_LVL_TEXT_COLOR);
 		levelIcon3 = new StackPane(lvl3Box,lvl3Text);
 		levelIcon3.setAlignment(Pos.TOP_RIGHT);
 		lvls = new HBox(levelIcon1, levelIcon2, levelIcon3);
@@ -102,15 +101,13 @@ public class ScreenManager implements Settings {
 		playLayer = new Pane();
 		timerLayer = new BorderPane();
 		timerLayer.setBottom(timerText);
-		Rectangle shadow = new Rectangle(0, 0, WIDTH, HEIGHT); 
-		shadowLayer = new Pane(shadow);
-		shadowLayer.setOpacity(0.7);
+		Rectangle shadow = new Rectangle(WIDTH, HEIGHT); 
+		shadowLayer = new StackPane(shadow);
+		shadowLayer.setOpacity(SHADOW_OPACITY);
 		pauseLayer = new StackPane(pauseText);
 		victoryLayer = new StackPane(victoryText);
-		//gameScreen = new StackPane(playLayer, shadowLayer, pauseLayer, victoryLayer, timerLayer);
-		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer, lvls, nextLevelLayer);
+		gameScreen = new StackPane(playLayer, shadowLayer, timerLayer, pauseLayer, victoryLayer, lvls, nextLevelLayer);
 		gameScreen.setBackground(BACKGROUND);
-	
 		
 		//GameOver Pane
 		endScreen = new StackPane(endText);
@@ -121,15 +118,13 @@ public class ScreenManager implements Settings {
 				new MenuButton("New Game!", Colors.GREEN),
 				new MenuButton("Continue...", Colors.GREEN),
 				new MenuButton("Ball Speed: Normal", Colors.YELLOW),
-				new MenuButton("Friction: OFF", Colors.BLUE),
+				new MenuButton("Friction: ON", Colors.BLUE),
 				new MenuButton("Exit Game", Colors.RED)
 				);
-		//buttons.getChildren().get(0)
 		//((MenuButton)buttons.getChildren().get(0)).setAlignment(Pos.CENTER);
 		menuScreen = new BorderPane(buttons, menuText, null, null, null);
 		menuScreen.setBackground(BACKGROUND);
-		//menuText.setTextAlignment(TextAlignment.CENTER);
-		buttons.setMaxSize(BUTTON_WIDTH, 3*BUTTON_HEIGHT);
+		buttons.setMaxSize(BUTTON_WIDTH, 5*BUTTON_HEIGHT);
 		buttons.setAlignment(Pos.CENTER);
 
 		scene = new Scene(menuScreen, WIDTH, HEIGHT);
@@ -164,19 +159,19 @@ public class ScreenManager implements Settings {
 	public void updateLevel(){
 		switch(getLevel()) {
 		case ONE:
-			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			lvl2Box.setOpacity(OPACITY_LEVELICONS_ON);
-			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl1Box.setOpacity(LEVELICONS_OPACITY_OFF);
+			lvl2Box.setOpacity(LEVELICONS_OPACITY_ON);
+			lvl3Box.setOpacity(LEVELICONS_OPACITY_ON);
 			break;
 		case TWO:
-			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			lvl3Box.setOpacity(OPACITY_LEVELICONS_ON);
+			lvl1Box.setOpacity(LEVELICONS_OPACITY_OFF);
+			lvl2Box.setOpacity(LEVELICONS_OPACITY_OFF);
+			lvl3Box.setOpacity(LEVELICONS_OPACITY_ON);
 			break;
 		case THREE:
-			lvl1Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			lvl2Box.setOpacity(OPACITY_LEVELICONS_OFF);
-			lvl3Box.setOpacity(OPACITY_LEVELICONS_OFF);
+			lvl1Box.setOpacity(LEVELICONS_OPACITY_OFF);
+			lvl2Box.setOpacity(LEVELICONS_OPACITY_OFF);
+			lvl3Box.setOpacity(LEVELICONS_OPACITY_OFF);
 			break;
 		case VICTORY:
 			break;
@@ -209,7 +204,7 @@ public class ScreenManager implements Settings {
 		setShadowOpacity(0.7);
 		setPauseOpacity(1);
 		setVictoryOpacity(0);
-		//BorderPane.setAlignment(timerText, Pos.CENTER);
+		BorderPane.setAlignment(timerText, Pos.CENTER);
 	}
 	public void setVictoryScreen(){
 		scene.setRoot(gameScreen);

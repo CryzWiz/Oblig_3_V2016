@@ -25,9 +25,11 @@ public class BreakOut extends Application implements Settings{
 		scene.addEventFilter(MouseEvent.ANY, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent mouseEvent) {
-				int x = (int) Math.min(Math.max(mouseEvent.getScreenX(), scene.getX() + primaryStage.getX()), scene.getX() + primaryStage.getX() + WIDTH);
-				int y = (int) Math.min(Math.max(mouseEvent.getScreenY(), scene.getY() + primaryStage.getY()), scene.getY() + primaryStage.getY() + HEIGHT);
-				robot.mouseMove(x, y);
+				if(gameManager.constrictMouse()){
+					int x = (int) Math.min(Math.max(mouseEvent.getScreenX(), scene.getX() + primaryStage.getX() + PADDLE_WIDTH / 2), scene.getX() + primaryStage.getX() + WIDTH - PADDLE_WIDTH / 2);
+					int y = (int) Math.min(Math.max(mouseEvent.getScreenY(), scene.getY() + primaryStage.getY() + 10), scene.getY() + primaryStage.getY() + HEIGHT - 10);
+					robot.mouseMove(x, y);
+				}
 				gameManager.onMouseEvent(mouseEvent);
 			}
 		});
@@ -48,6 +50,7 @@ public class BreakOut extends Application implements Settings{
 
 		primaryStage.setTitle("BreakOut"); 
 		primaryStage.setResizable(false);
+		primaryStage.sizeToScene();
 		primaryStage.setScene(scene);
 		primaryStage.show(); 
 	}
