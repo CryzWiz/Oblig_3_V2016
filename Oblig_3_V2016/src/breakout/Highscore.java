@@ -70,7 +70,9 @@ public class Highscore extends StackPane implements Settings {
         	scoreList.getChildren().add(text);
     	}
     	VBox newScore = new VBox();
-    	newScore.getChildren().add(new Label("Legg inn navnet ditt på listen under for å komme på HighScore listen."));
+    	Label PlayerMessage = new Label("Enter your name to be added to the Highscore list.");
+    	PlayerMessage.setTextFill(TEXT_COLOR);
+    	newScore.getChildren().add(PlayerMessage);
     	newScore.getChildren().add(new TextField());
     	newScore.setAlignment(Pos.BOTTOM_CENTER);
     	pane.getChildren().addAll(scoreList, newScore);
