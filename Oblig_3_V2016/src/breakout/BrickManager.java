@@ -4,7 +4,6 @@ import static breakout.Level.*;
 
 import breakout.Brick.COLLISION_TYPE;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 public class BrickManager implements Settings {
 	private Brick[][] bricks;
@@ -68,6 +67,11 @@ public class BrickManager implements Settings {
 	}
 	public void reset() {
 //		resetBrickColors();
+		/*for (Brick[] col : bricks) {
+			for (Brick brick : col) {
+				brick.reset();
+			}
+		}*/
 		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
 		destroyRandomBricks(getLevel().percentage());
 	}
@@ -129,7 +133,7 @@ public class BrickManager implements Settings {
 		collision(ball);
 		if (levelCleared()) {
 			setNextLevel();
-			gManager.levelCleared();
+			gManager.nextLevel();
 		}
 	}
 
