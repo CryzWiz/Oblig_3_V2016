@@ -33,7 +33,7 @@ public class PlayState extends GameState {
 	}
 
 	@Override
-	public void onEnterPress(){
+	public void onTabPress(){
 		gameManager.pause();
 	}
 	@Override

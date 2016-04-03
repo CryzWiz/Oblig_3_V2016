@@ -12,7 +12,7 @@ public class PauseState extends GameState {
 		gameManager.play();
 	}
 	@Override
-	public void onEnterPress(){
+	public void onTabPress(){
 		gameManager.play();
 	}
 	@Override

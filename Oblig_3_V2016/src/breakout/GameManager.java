@@ -24,11 +24,8 @@ public class GameManager implements Settings {
 				case ESCAPE:
 					state.onEscPress();
 					break;
-				case ENTER:
-					state.onEnterPress();
-					break;
-				case UP:
-					state.onUpPress();
+				case TAB:
+					state.onTabPress();
 					break;
 			default:
 				break;
