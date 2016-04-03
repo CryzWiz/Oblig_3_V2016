@@ -2,8 +2,10 @@ package states;
 
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+
 import static breakout.Racket.Direction.*;
 
+import breakout.Level;
 import breakout.Settings;
 
 public class PlayState extends GameState {
@@ -18,15 +20,15 @@ public class PlayState extends GameState {
 	};
 	@Override
 	public void onEnterPress(){
-		game.pause();
+		gameManager.pause();
 	}
 	@Override
 	public void onEscPress(){
-		game.menu();
+		gameManager.menu();
 	}
 	@Override
 	public void onSpacePress(){
-		if(game.isFriction())
+		if(racket.isFriction())
 			racket.setSlippery(false);
 	}
 	@Override
@@ -55,5 +57,12 @@ public class PlayState extends GameState {
 	@Override
 	public void tick(){
 		ballManager.tick();
+		if (brickManager.levelCleared()) {
+			brickManager.setNextLevel();
+			if(Level.getLevel() == Level.VICTORY)
+				gameManager.victory();
+			else
+				gameManager.nextLevel();
+		}
 	}
 }

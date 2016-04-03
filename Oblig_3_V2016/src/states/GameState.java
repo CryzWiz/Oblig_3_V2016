@@ -10,7 +10,7 @@ import breakout.Timer;
 import javafx.scene.input.MouseEvent;
 
 public abstract class GameState {
-	protected static GameManager game;
+	protected static GameManager gameManager;
 	protected static ScreenManager screenManager;
 	protected static BrickManager brickManager;
 	protected static BallManager ballManager;
@@ -22,13 +22,13 @@ public abstract class GameState {
 	public GameState() {}
 
 	public static void setStatics(GameManager root, ScreenManager sm){
-		GameState.game = root;
+		GameState.gameManager = root;
 		screenManager = sm;
 		brickManager = new BrickManager(sm.getPlayLayer());
 		racket = new Racket(sm.getPlayLayer());
 		room = new Room(sm.getScene());
 		timer = new Timer(sm.getTimerText());
-		ballManager = new BallManager(game, brickManager, racket, room, sm.getPlayLayer());
+		ballManager = new BallManager(gameManager, brickManager, racket, room, sm.getPlayLayer());
 	}
 	
 	public void onUpPress(){}

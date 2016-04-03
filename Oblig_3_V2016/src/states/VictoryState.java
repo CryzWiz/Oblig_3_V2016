@@ -1,5 +1,6 @@
 package states;
 
+import breakout.Level;
 import javafx.scene.input.MouseEvent;
 
 public class VictoryState extends GameState {
@@ -12,10 +13,11 @@ public class VictoryState extends GameState {
 	@Override
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
+			Level.reset();
 			timer.reset();
-			game.play();
 			ballManager.reset();
 			brickManager.reset();
+			gameManager.play();
 		}
 	}
 	
@@ -23,9 +25,4 @@ public class VictoryState extends GameState {
 	public void onEscPress(){
 		System.exit(0);
 	};
-
-	@Override
-	public void tick(){
-		//root.newState(new PlayState());
-	}
 }
