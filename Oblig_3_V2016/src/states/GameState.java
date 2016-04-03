@@ -1,6 +1,5 @@
 package states;
 
-import breakout.Ball;
 import breakout.BallManager;
 import breakout.BrickManager;
 import breakout.GameManager;
@@ -27,7 +26,6 @@ public abstract class GameState {
 		screenManager = sm;
 		brickManager = new BrickManager(sm.getPlayLayer());
 		racket = new Racket(sm.getPlayLayer());
-		//ball = new Ball(sm.getPlayLayer());
 		room = new Room(sm.getScene());
 		timer = new Timer(sm.getTimerText());
 		ballManager = new BallManager(game, brickManager, racket, room, sm.getPlayLayer());
