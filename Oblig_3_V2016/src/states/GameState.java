@@ -15,7 +15,6 @@ public abstract class GameState {
 	protected static BrickManager brickManager;
 	protected static BallManager ballManager;
 	protected static Racket racket;
-	//protected static Ball ball;
 	protected static Room room;
 	protected static Timer timer;
 
@@ -30,6 +29,9 @@ public abstract class GameState {
 		timer = new Timer(sm.getTimerText());
 		ballManager = new BallManager(gameManager, brickManager, racket, room, sm.getPlayLayer());
 	}
+
+	public void onMouseEvent(MouseEvent m){
+	}
 	
 	public void onUpPress(){}
 	public void onEscPress(){}
@@ -37,9 +39,6 @@ public abstract class GameState {
 	public void onEnterPress(){}
 	
 	public void onSpaceRelease(){}
-
-	public void onMouseEvent(MouseEvent m){
-	}
 
 	public void tick(){}
 }

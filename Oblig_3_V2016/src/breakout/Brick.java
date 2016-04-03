@@ -10,7 +10,7 @@ import javafx.util.Duration;
 public class Brick implements Settings {
 	public enum CollisionType{EDGE, EDGE_DOUBLE, CORNER_ANGLE, CORNER_SIMPLE, INSIDE_CORNER, INSIDE, DONE, NOTHING, NO_RANGE};
 	public enum Zone{TOP_LEFT, TOP, TOP_RIGHT, LEFT, MIDDLE, RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT};
-	public enum BrickType{NORMAL, DURABLE, PROTECTED};
+	public enum BrickType{NORMAL, DURABLE, PROTECTED, UNBREAKABLE};
 
 	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
