@@ -1,9 +1,8 @@
 package breakout;
 
-import static breakout.BrickManager.protectBricks;
 import static breakout.Level.*;
 
-import breakout.Brick.COLLISION_TYPE;
+import breakout.Brick.CollisionType;
 import javafx.scene.layout.Pane;
 
 public class BrickManager implements Settings {
@@ -125,21 +124,24 @@ public class BrickManager implements Settings {
 				for (int col = firstCol; col <= lastCol; col++) {
 					Brick brick = bricks[row][col];
 					if (!brick.isDestroyed()) {
-						COLLISION_TYPE type = brick.collision(ball);
+						CollisionType type = brick.collision(ball);
 						if (brick.isDestroyed())
 							bricksLeft--;
-						if(type == COLLISION_TYPE.EDGE_DOUBLE)
+						if(type == CollisionType.EDGE_DOUBLE)
 							break;
 					}
 				}
 			}
 		}
 	}
-	public void tick(GameManager gManager, Ball ball) {
+	public void tick(GameManager gameManager, Ball ball) {
 		collision(ball);
 		if (levelCleared()) {
 			setNextLevel();
-			gManager.nextLevel();
+			if(getLevel() == VICTORY)
+				gameManager.victory();
+			else
+				gameManager.nextLevel();
 		}
 	}
 

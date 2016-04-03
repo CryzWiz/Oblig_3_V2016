@@ -63,14 +63,6 @@ public class MenuState extends GameState {
 			}
 		}
 	}
-
-	@Override
-	public void onEnterPress(){
-		brickManager.reset();
-		timer.reset();
-		ballManager.reset();
-		game.play();
-	}
 	
 	@Override
 	public void onEscPress(){

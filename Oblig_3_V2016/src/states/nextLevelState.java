@@ -14,7 +14,7 @@ public class nextLevelState extends GameState {
 	public void onMouseEvent(MouseEvent m){
 		if(m.getEventType() == MouseEvent.MOUSE_CLICKED){
 			timer.reset();
-			//ball.reset();
+			ballManager.reset();
 			game.play();
 			brickManager.reset();
 		}
@@ -24,9 +24,4 @@ public class nextLevelState extends GameState {
 	public void onEscPress(){
 		game.menu();
 	};
-
-	@Override
-	public void tick(){
-		//root.newState(new PlayState());
-	}
 }

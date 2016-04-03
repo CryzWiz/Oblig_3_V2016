@@ -1,15 +1,15 @@
 package breakout;
 
-import static breakout.Brick.COLLISION_TYPE.*;
-import static breakout.Brick.ZONE.*;
+import static breakout.Brick.CollisionType.*;
+import static breakout.Brick.Zone.*;
 import javafx.animation.FadeTransition;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class Brick implements Settings {
-	public enum COLLISION_TYPE{EDGE, EDGE_DOUBLE, CORNER_ANGLE, CORNER_SIMPLE, INSIDE_CORNER, INSIDE, DONE, NOTHING, NO_RANGE};
-	public enum ZONE{TOP_LEFT, TOP, TOP_RIGHT, LEFT, MIDDLE, RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT};
+	public enum CollisionType{EDGE, EDGE_DOUBLE, CORNER_ANGLE, CORNER_SIMPLE, INSIDE_CORNER, INSIDE, DONE, NOTHING, NO_RANGE};
+	public enum Zone{TOP_LEFT, TOP, TOP_RIGHT, LEFT, MIDDLE, RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT};
 
 	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
@@ -91,7 +91,7 @@ public class Brick implements Settings {
 		return !(closeBricks[1] == null || closeBricks[1].isDestroyed());
 	}
 
-	public ZONE getPointZone(double x, double y){
+	public Zone getPointZone(double x, double y){
 		int hPosition = 1;
 		int vPosition = 1;
 		if(x < getBoundsLeft())
@@ -102,13 +102,13 @@ public class Brick implements Settings {
 			vPosition = 0;
 		else if(y > getBoundsBottom())
 			vPosition = 2;
-		return ZONE.values()[3 * vPosition + hPosition];
+		return Zone.values()[3 * vPosition + hPosition];
 	}
-	public ZONE getBallZone(Ball ball){
+	public Zone getBallZone(Ball ball){
 
 		return getPointZone(ball.getX(), ball.getY());
 	}
-	public ZONE getBallPrevZone(Ball ball){
+	public Zone getBallPrevZone(Ball ball){
 		return getPointZone(ball.getPrevX(), ball.getPrevY());
 	}
 
@@ -392,7 +392,7 @@ public class Brick implements Settings {
 			}
 		}
 	}
-	private COLLISION_TYPE collision_mixed(Ball ball){
+	private CollisionType collision_mixed(Ball ball){
 		if(!isInMaxRange(ball)){
 			return NO_RANGE;
 		}
@@ -444,7 +444,7 @@ public class Brick implements Settings {
 		}
 	}
 
-	private COLLISION_TYPE collisionSwitch(Ball ball, ZONE collisionCase){
+	private CollisionType collisionSwitch(Ball ball, Zone collisionCase){
 		switch(collisionCase){
 		case TOP:
 			if(ball.dy < 0)
@@ -527,8 +527,8 @@ public class Brick implements Settings {
 			break;
 		}
 	}
-	public COLLISION_TYPE collision(Ball ball){
-		COLLISION_TYPE type = collision_mixed(ball);
+	public CollisionType collision(Ball ball){
+		CollisionType type = collision_mixed(ball);
 		/*if(type != DONE && type != NO_RANGE){ //Debugging purposes
 			System.out.println(type);
 		}*/
