@@ -103,6 +103,7 @@ public enum Level {
 				if(col < 6 || col > 8) {
 					brick.setFill(UNBREAKABLE_BRICK_COLOR);
 					brick.setUnbreakable(true);
+					brick.setProtection(true);
 					return UNBREAKABLE;
 				} else
 					brick.setFill(brickColors[1]);
@@ -111,6 +112,7 @@ public enum Level {
 				if(col < 10 && col > 4) {
 					brick.setFill(UNBREAKABLE_BRICK_COLOR);
 					brick.setUnbreakable(true);
+					brick.setProtection(true);
 					return UNBREAKABLE;
 				} else
 					brick.setFill(brickColors[1]);
