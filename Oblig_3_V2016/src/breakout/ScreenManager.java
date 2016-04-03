@@ -92,10 +92,6 @@ public class ScreenManager implements Settings {
 		levelIcon3.setAlignment(Pos.TOP_RIGHT);
 		lvls = new HBox(levelIcon1, levelIcon2, levelIcon3);
 		
-		//Victoryscreen
-		Highscore.loadScores();
-		
-		
 		//Game Pane + pause and victory
 		nextLevelLayer = new StackPane(nextLevelText);
 		playLayer = new Pane();
@@ -106,8 +102,12 @@ public class ScreenManager implements Settings {
 		shadowLayer.setOpacity(SHADOW_OPACITY);
 		pauseLayer = new StackPane(pauseText);
 		victoryLayer = new StackPane(victoryText);
+		//Victoryscreen
+		Highscore.loadScores();
+		Highscore.drawScores(victoryLayer);
 		gameScreen = new StackPane(playLayer, shadowLayer, timerLayer, pauseLayer, victoryLayer, lvls, nextLevelLayer);
 		gameScreen.setBackground(BACKGROUND);
+
 		
 		//GameOver Pane
 		endScreen = new StackPane(endText);

@@ -4,13 +4,18 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javafx.geometry.Pos;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 public class Highscore extends StackPane implements Settings {
-	static String[][] players;
+	static String[][] players = new String[3][3];
 	static ArrayList<Highscore> scores = new ArrayList<>();
-	static String name;
-    static String scoreValue;
+	String name;
+    String scoreValue;
+    //static Pane pane;
 	
 	
 	
@@ -28,8 +33,8 @@ public class Highscore extends StackPane implements Settings {
 				players[i][0] = input.next();
 				players[i][1] = input.next();
 				players[i][2] = input.next();
-				name = players[i][0] + " " + players[i][1];
-				scoreValue = players[i][2];
+				String name = players[i][0] + " " + players[i][1];
+				String scoreValue = players[i][2];
 				scores.add(new Highscore(scoreValue, name));
 				i++;
 			}
@@ -47,4 +52,20 @@ public class Highscore extends StackPane implements Settings {
     	
     }	
     
+    public static void drawScores(Pane pane){
+    	VBox scoreList = new VBox();
+    	for(Highscore highscore : scores){
+    		Text text = new Text(highscore.toString());
+        	text.setFont(FONT_TEXT);
+        	text.setFill(TEXT_COLOR);
+        	scoreList.getChildren().add(text);
+    	}
+    	pane.getChildren().add(scoreList);
+    	scoreList.setAlignment(Pos.CENTER);
+    	//pane = new BorderPane(scoreList, new Text("Scores:"), null, null, null);
+    }
+    
+    public String toString(){
+    	return name + " " + scoreValue;
+    }
 }
