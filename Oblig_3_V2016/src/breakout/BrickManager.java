@@ -60,14 +60,18 @@ public class BrickManager implements Settings {
 	}
 	public void reset() {
 		unbreakableBricks = 0;
+		resetBricks();
+		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
+		destroyRandomBricks(getLevel().percentage());
+	}
+	public void resetBricks() {
 		for(int row = 0; row < BRICK_ROWS; row++){
 			for(int col = 0; col < BRICK_COLUMNS; col++){
 				bricks[row][col].reset();
 				getLevel().brickColor(bricks[row][col], row, col);
+				
 			}
 		}
-		bricksLeft = numberOfRows * numberOfCols - unbreakableBricks;
-		destroyRandomBricks(getLevel().percentage());
 	}
 
 	public Brick[][] getBricks() {
@@ -95,7 +99,7 @@ public class BrickManager implements Settings {
 	}
 	public void setNextLevel() {
 		nextLevel();
-//		reset();
+		resetBricks();
 	}
 	public void collision(Ball ball) {
 		int firstCol = getColumn(ball.getBoundsLeft());
