@@ -2,9 +2,12 @@ package breakout;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -60,7 +63,11 @@ public class Highscore extends StackPane implements Settings {
         	text.setFill(TEXT_COLOR);
         	scoreList.getChildren().add(text);
     	}
-    	pane.getChildren().add(scoreList);
+    	VBox newScore = new VBox();
+    	newScore.getChildren().add(new Label("Legg inn navnet ditt på listen under for å komme på HighScore listen."));
+    	newScore.getChildren().add(new TextField());
+    	newScore.setAlignment(Pos.BOTTOM_CENTER);
+    	pane.getChildren().addAll(scoreList, newScore);
     	scoreList.setAlignment(Pos.CENTER);
     	//pane = new BorderPane(scoreList, new Text("Scores:"), null, null, null);
     }
