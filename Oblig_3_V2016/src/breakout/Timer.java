@@ -7,7 +7,7 @@ import javafx.animation.Timeline;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class Timer {
+public class Timer implements Comparable<Timer>{
 	private Timeline timer;
 	private long totalSeconds;
 	private Text text;
@@ -50,5 +50,14 @@ public class Timer {
 		//Date date = sdf.parse(dateString);
 		//timer.totalSeconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
 		return timer;
+	}
+
+	@Override
+	public int compareTo(Timer timer) {
+		if(totalSeconds < timer.totalSeconds)
+			return -1;
+		else if(totalSeconds > timer.totalSeconds)
+			return 1;
+		return 0;
 	}
 }
