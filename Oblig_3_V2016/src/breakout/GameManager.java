@@ -8,7 +8,6 @@ public class GameManager implements Settings {
 	private GameState state;
 
 	public GameManager(ScreenManager sm) {
-		Highscore.loadScores();
 		GameState.setStatics(this, sm);
 		//state = new MenuState();
 		state = new VictoryState();

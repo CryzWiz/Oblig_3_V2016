@@ -31,7 +31,7 @@ public class Highscore extends StackPane implements Settings {
     	java.io.File file = new java.io.File(HIGHSCORE_FILE);
     	try {
 			Scanner input = new Scanner(file);
-			while (input.hasNextLine()) {
+			while (input.hasNext()) {
 				String[] inputs = new String[3];
 				inputs[0] = input.next();
 				inputs[1] = input.next();
@@ -39,6 +39,7 @@ public class Highscore extends StackPane implements Settings {
 				String name = inputs[0] + " " + inputs[1];
 				String scoreValue = inputs[2];
 				scores.add(new Highscore(scoreValue, name));
+				System.out.println(scores.get(0));
 			}
 			input.close();
 		} catch (FileNotFoundException e) {
@@ -66,6 +67,7 @@ public class Highscore extends StackPane implements Settings {
         	text.setFill(TEXT_COLOR);
         	scoreList.getChildren().add(text);
     	}
+    	//pane = new StackPane(scoreList);
     	pane.getChildren().add(scoreList);
     	scoreList.setAlignment(Pos.CENTER);
     	//pane = new BorderPane(scoreList, new Text("Scores:"), null, null, null);
