@@ -2,6 +2,7 @@ package breakout;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.text.ParseException;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,8 +16,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class BreakOut extends Application implements Settings{
-	@Override 
-	public void start(Stage primaryStage) throws AWTException {
+	@Override
+	public void start(Stage primaryStage) throws AWTException, ParseException {
 		Highscore.loadScores();
 		ScreenManager screenManager = new ScreenManager();
 		Scene scene = screenManager.getScene();

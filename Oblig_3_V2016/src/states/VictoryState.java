@@ -1,7 +1,10 @@
 package states;
 
+import java.text.ParseException;
+
 import breakout.Highscore;
 import breakout.Level;
+import breakout.Timer;
 import javafx.scene.input.MouseEvent;
 
 public class VictoryState extends GameState {
@@ -9,7 +12,12 @@ public class VictoryState extends GameState {
 	public VictoryState(){
 		screenManager.setVictoryScreen();
 		timer.pause();
-		new Highscore("00:01:34", "Kenneth K");
+		try {
+			new Highscore(Timer.parse("02:00:34"), "Kenneth K");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

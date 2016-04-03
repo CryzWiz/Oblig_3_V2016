@@ -2,7 +2,9 @@ package breakout;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import javafx.geometry.Pos;
@@ -13,23 +15,24 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class Highscore extends StackPane implements Settings {
+public class Highscore extends StackPane implements Settings, Comparable<Highscore> {
 	static ArrayList<Highscore> scores = new ArrayList<>();
 	String name;
-    String scoreValue;
+    Timer scoreValue;
     //static Pane pane;
 	
-    public Highscore(String scoreValue, String name) {
+    public Highscore(Timer scoreValue, String name) {
     	this.scoreValue = scoreValue;
     	this.name = name;
     	scores.add(this);
+    	Collections.sort(scores);
 	}
     
 	public static ArrayList<Highscore> getScores(){
 		return scores;
 	}
 
-	public static void loadScores(){
+	public static void loadScores() throws ParseException{
     	java.io.File file = new java.io.File(HIGHSCORE_FILE);
     	try {
 			Scanner input = new Scanner(file);
@@ -39,9 +42,8 @@ public class Highscore extends StackPane implements Settings {
 				inputs[1] = input.next();
 				inputs[2] = input.next();
 				String name = inputs[0] + " " + inputs[1];
-				String scoreValue = inputs[2];
+				Timer scoreValue = Timer.parse(inputs[2]);
 				new Highscore(scoreValue, name);
-				System.out.println(scores.get(0));
 			}
 			input.close();
 		} catch (FileNotFoundException e) {
@@ -79,6 +81,11 @@ public class Highscore extends StackPane implements Settings {
     }
     
     public String toString(){
-    	return name + " " + scoreValue;
+    	return name + " " + scoreValue.toString();
     }
+
+	@Override
+	public int compareTo(Highscore score) {
+		return scoreValue.compareTo(score.scoreValue);
+	}
 }
