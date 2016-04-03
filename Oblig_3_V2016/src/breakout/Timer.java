@@ -20,7 +20,6 @@ public class Timer implements Comparable<Timer>{
 
 	public void update() {
 		totalMillis++;
-		//screenManager.setTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
 		if(text != null)
 			text.setText(toString());
 	}
@@ -47,9 +46,7 @@ public class Timer implements Comparable<Timer>{
 		Timer timer = new Timer(null);
 		timer.pause();
 		String[] stringParts = dateString.split(":");
-		timer.totalSeconds = Integer.parseInt(stringParts[0]) * 3600 + Integer.parseInt(stringParts[1]) * 60 + Integer.parseInt(stringParts[2]);
-		//Date date = sdf.parse(dateString);
-		//timer.totalSeconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
+		timer.totalMillis = Integer.parseInt(stringParts[0]) * 60000 + Integer.parseInt(stringParts[1]) * 1000 + Integer.parseInt(stringParts[2]);
 		return timer;
 	}
 
