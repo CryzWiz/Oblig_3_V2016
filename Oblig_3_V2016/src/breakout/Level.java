@@ -12,7 +12,6 @@ public enum Level {
 	int value;
 	int removePercentage;
 	Color[] brickColors;
-    Color UNBREAKABLE_BRICK_COLOR = Color.GRAY;
     
 	Level(int value, int removePercentage, Color[] brickColors) {
 		this.value = value;
@@ -46,8 +45,9 @@ public enum Level {
 	public int percentage() {
 		return removePercentage;
 	}
-	public Brick.BrickType brickColor(Brick brick, int row, int col) {
-		switch (this) {
+	public static Brick.BrickType brickColor(Brick brick, int row, int col) {
+		Color[] brickColors = level.brickColors;
+		switch (level) {
 		case ONE:
 			if (row < 3)
 				brick.setFill(brickColors[0]);
@@ -57,6 +57,7 @@ public enum Level {
 				brick.setFill(brickColors[2]);
 			else
 				brick.setFill(brickColors[3]);
+			break;
 
 		case TWO:
 			if (col < BRICK_COLUMNS / 2) {
@@ -94,6 +95,7 @@ public enum Level {
 				} else
 					brick.setFill(brickColors[3]);
 			}
+			break;
 			
 		case THREE:
 			// Unbreakable bricks:
@@ -144,6 +146,9 @@ public enum Level {
 			// Surrounding bricks
 			} else
 				brick.setFill(brickColors[1]);
+			break;
+		default:
+			brick.setFill(Color.BLACK);
 		}
 		return NORMAL;
 
