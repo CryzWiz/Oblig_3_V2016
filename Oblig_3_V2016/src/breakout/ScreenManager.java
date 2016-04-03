@@ -193,6 +193,7 @@ public class ScreenManager implements Settings {
 		setPauseOpacity(0);
 		setVictoryOpacity(0);
 		setnextLevelOpacity(0);
+		timerLayer.setOpacity(1);
 		BorderPane.setAlignment(timerText, Pos.BOTTOM_LEFT);
 	}
 	public void setPauseScreen(){
@@ -204,10 +205,11 @@ public class ScreenManager implements Settings {
 	}
 	public void setVictoryScreen(){
 		scene.setRoot(gameScreen);
-		setShadowOpacity(0.7);
+		setShadowOpacity(1);
 		setPauseOpacity(0);
 		setVictoryOpacity(1);
 		setnextLevelOpacity(0);
+		timerLayer.setOpacity(0);
 		BorderPane.setAlignment(timerText, Pos.TOP_CENTER);
 	}
 	public void setNextLevelScreen(){

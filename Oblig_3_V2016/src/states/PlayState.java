@@ -6,7 +6,6 @@ import javafx.scene.input.MouseEvent;
 import static breakout.Racket.Direction.*;
 
 import breakout.Level;
-import breakout.Settings;
 
 public class PlayState extends GameState {
 
@@ -33,9 +32,6 @@ public class PlayState extends GameState {
 		}
 	}
 
-	public void onUpPress(){
-		ballManager.add(200, 30, Settings.BALL_START_DX, Settings.BALL_START_DY); //Only for testing
-	};
 	@Override
 	public void onEnterPress(){
 		gameManager.pause();

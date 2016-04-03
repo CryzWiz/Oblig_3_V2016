@@ -9,8 +9,7 @@ public class GameManager implements Settings {
 
 	public GameManager(ScreenManager sm) {
 		GameState.setStatics(this, sm);
-		//state = new MenuState();
-		state = new VictoryState();
+		state = new MenuState();
 	}
 
 	public void onMouseEvent(MouseEvent m){

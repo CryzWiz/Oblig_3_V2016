@@ -63,7 +63,7 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
 		}
     }	
     public static void drawScores(Pane pane){
-    	GridPane holderLarge = new GridPane();
+    	VBox holderLarge = new VBox();
     	GridPane scoreList = new GridPane();
     	for(int i = 0; i < scores.size(); i++){
     		Text nameText = new Text(scores.get(i).name);
@@ -75,6 +75,7 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
     		scoreList.addRow(i, scoreText, nameText);
     	}
 		scoreList.setHgap(10);
+		scoreList.setAlignment(Pos.TOP_CENTER);
     	ScrollPane scoreholder = new ScrollPane();
     	/*scoreholder.setOnScroll(new EventHandler<ScrollEvent>() {
     		@Override
@@ -90,6 +91,7 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
     	//newScore.setBackground(BACKGROUND);
     	Label PlayerMessage = new Label("Enter your name to be added to the Highscore list.");
     	PlayerMessage.setTextFill(TEXT_COLOR);
+    	PlayerMessage.setFont(FONT_TIMER);
     	newScore.getChildren().add(PlayerMessage);
     	nameField.setOnAction(null);
     	newScore.getChildren().add(nameField);
