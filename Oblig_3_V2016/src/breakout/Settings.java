@@ -37,6 +37,8 @@ public interface Settings {
 	int BUTTON_WIDTH = 200;
 	int BUTTON_HEIGHT = 50;
 	
+	String HIGHSCORE_FILE = "highscores.txt";
+	
 	int PADDLE_HEIGHT = 10;
 	int PADDLE_WIDTH = 200;
 	int PADDLE_Y_OFFSET = 500;

@@ -93,6 +93,10 @@ public class ScreenManager implements Settings {
 		levelIcon3.setAlignment(Pos.TOP_RIGHT);
 		lvls = new HBox(levelIcon1, levelIcon2, levelIcon3);
 		
+		//Victoryscreen
+		Highscore.loadScores();
+		
+		
 		//Game Pane + pause and victory
 		nextLevelLayer = new StackPane(nextLevelText);
 		playLayer = new Pane();
