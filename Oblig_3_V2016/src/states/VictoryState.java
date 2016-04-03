@@ -23,6 +23,6 @@ public class VictoryState extends GameState {
 	
 	@Override
 	public void onEscPress(){
-		System.exit(0);
+		gameManager.menu();
 	};
 }

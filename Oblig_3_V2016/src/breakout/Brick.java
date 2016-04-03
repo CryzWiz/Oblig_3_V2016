@@ -8,8 +8,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class Brick implements Settings {
+	public enum CollisionModel{OLD, SIMPLE, FULL, MIXED};
 	public enum CollisionType{EDGE, EDGE_DOUBLE, CORNER_ANGLE, CORNER_SIMPLE, INSIDE_CORNER, INSIDE, DONE, NOTHING, NO_RANGE};
 	public enum Zone{TOP_LEFT, TOP, TOP_RIGHT, LEFT, MIDDLE, RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT};
+	public enum BrickType{NORMAL, DURABLE, PROTECTED, UNBREAKABLE};
 
 	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
@@ -511,18 +513,18 @@ public class Brick implements Settings {
 		}
 	}
 	
-	public void collision(Ball ball, int version){
-		switch(version){
-		case COLLISION_MODEL_OLD:
+	public void collision(Ball ball, CollisionModel model){
+		switch(model){
+		case OLD:
 			collision_old(ball);
 			break;
-		case COLLISION_MODEL_SIMPLE:
+		case SIMPLE:
 			collision_simple(ball);
 			break;
-		case COLLISION_MODEL_MIXED:
+		case MIXED:
 			collision_mixed(ball);
 			break;
-		case COLLISION_MODEL_FULL:
+		case FULL:
 			collision_full(ball);
 			break;
 		}
