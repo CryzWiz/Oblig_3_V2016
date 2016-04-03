@@ -69,7 +69,12 @@ public class BallManager implements Settings {
 	}
 	
 	public void reset(){
-		balls.removeAll(balls);
+		Iterator<Ball> bIterator = balls.iterator();
+		while(bIterator.hasNext()){
+			Ball ball = bIterator.next();
+			pane.getChildren().remove(ball.getCircle());
+			bIterator.remove();
+		}
 		balls.add(new Ball(pane));
 		balls.get(0).setSpeedCoords(BALL_START_DX * speed.getValue(), BALL_START_DY * speed.getValue());
 	}
@@ -91,6 +96,7 @@ public class BallManager implements Settings {
 			Ball ball = bIterator.next();
 			ball.tick();
 			if(collision(ball)){
+				pane.getChildren().remove(ball.getCircle());
 				bIterator.remove();
 				if(balls.isEmpty()){
 					gameManager.gameOver();
