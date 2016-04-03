@@ -79,7 +79,7 @@ public class BallManager implements Settings {
 		Ball ball = new Ball(pane, BALL_START_X, BALL_START_Y, BALL_START_DX, BALL_START_DY);
 		add(ball);
 		if(breakout.Level.getLevel() == breakout.Level.THREE) //Extra ball on level Three
-			add(200, 30, Settings.BALL_START_DX, Settings.BALL_START_DY);
+			add(487, 182, 1, 0);
 		ball.setSpeedCoords(BALL_START_DX * speed.getValue(), BALL_START_DY * speed.getValue());
 	}
 	public void toggleSpeed(){
