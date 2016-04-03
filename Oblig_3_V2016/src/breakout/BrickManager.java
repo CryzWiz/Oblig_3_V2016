@@ -4,7 +4,6 @@ import static breakout.Level.*;
 
 import breakout.Brick.COLLISION_TYPE;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 public class BrickManager implements Settings {
 	private Brick[][] bricks;

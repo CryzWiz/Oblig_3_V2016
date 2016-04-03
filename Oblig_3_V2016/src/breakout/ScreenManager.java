@@ -99,14 +99,12 @@ public class ScreenManager implements Settings {
 		timerLayer = new BorderPane();
 		timerLayer.setBottom(timerText);
 		Rectangle shadow = new Rectangle(0, 0, WIDTH, HEIGHT); 
-		shadowLayer = new Pane(shadow);
+		shadowLayer = new StackPane(shadow);
 		shadowLayer.setOpacity(0.7);
 		pauseLayer = new StackPane(pauseText);
 		victoryLayer = new StackPane(victoryText);
-		//gameScreen = new StackPane(playLayer, shadowLayer, pauseLayer, victoryLayer, timerLayer);
-		gameScreen = new StackPane(playLayer, timerLayer, shadowLayer, pauseLayer, victoryLayer, lvls, nextLevelLayer);
+		gameScreen = new StackPane(playLayer, shadowLayer, timerLayer, pauseLayer, victoryLayer, lvls, nextLevelLayer);
 		gameScreen.setBackground(BACKGROUND);
-	
 		
 		//GameOver Pane
 		endScreen = new StackPane(endText);
@@ -120,12 +118,11 @@ public class ScreenManager implements Settings {
 				new MenuButton("Friction: OFF", Colors.BLUE),
 				new MenuButton("Exit Game", Colors.RED)
 				);
-		//buttons.getChildren().get(0)
 		//((MenuButton)buttons.getChildren().get(0)).setAlignment(Pos.CENTER);
 		menuScreen = new BorderPane(buttons, menuText, null, null, null);
 		menuScreen.setBackground(BACKGROUND);
 		//menuText.setTextAlignment(TextAlignment.CENTER);
-		buttons.setMaxSize(BUTTON_WIDTH, 3*BUTTON_HEIGHT);
+		buttons.setMaxSize(BUTTON_WIDTH, 5*BUTTON_HEIGHT);
 		buttons.setAlignment(Pos.CENTER);
 
 		scene = new Scene(menuScreen, WIDTH, HEIGHT);
@@ -205,7 +202,7 @@ public class ScreenManager implements Settings {
 		setShadowOpacity(0.7);
 		setPauseOpacity(1);
 		setVictoryOpacity(0);
-		//BorderPane.setAlignment(timerText, Pos.CENTER);
+		BorderPane.setAlignment(timerText, Pos.CENTER);
 	}
 	public void setVictoryScreen(){
 		scene.setRoot(gameScreen);

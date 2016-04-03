@@ -48,6 +48,9 @@ public class GameManager implements Settings {
 		}
 	}
 
+	public boolean constrictMouse(){
+		return state instanceof PlayState;
+	}
 	public boolean isFriction(){
 		return friction;
 	}
@@ -55,7 +58,32 @@ public class GameManager implements Settings {
 	public void tick(){
 		state.tick();
 	}
-	
+	public void toggleSpeed(Ball ball){
+		speed++;
+		speed %= 3;
+		String speedText = "";
+		switch(speed){
+		case 0:
+			speedText = "Slow";
+			break;
+		case 1:
+			speedText = "Normal";
+			break;
+		case 2:
+			speedText = "Fast";
+			break;
+		}
+		MenuButton.setText(2, "Ball Speed: " + speedText);
+	}
+	public void toggleFriction(){
+		friction = !friction;
+		MenuButton.setText(3, "Friction: " + (friction ? "ON" : "OFF"));
+	}
+	public void exit(){
+		System.exit(0);
+	}
+
+	//State changes
 	public void play(){
 		state = new PlayState();
 	}
@@ -87,38 +115,10 @@ public class GameManager implements Settings {
 	public void menu() {
 		state = new MenuState();
 	}
-
-	public void toggleSpeed(Ball ball){
-		speed++;
-		speed %= 3;
-		String speedText = "";
-		switch(speed){
-		case 0:
-			speedText = "Slow";
-			break;
-		case 1:
-			speedText = "Normal";
-			break;
-		case 2:
-			speedText = "Fast";
-			break;
-		}
-		MenuButton.setText(2, "Ball Speed: " + speedText);
-	}
-	public void toggleFriction(){
-		friction = !friction;
-		MenuButton.setText(3, "Friction: " + (friction ? "ON" : "OFF"));
-	}
 	public void nextLevel() {
 		state = new nextLevelState();
 	}
 	public void victory() {
 		state = new VictoryState();
-	}
-	public void levelCleared() {
-		state = new nextLevelState();
-	}
-	public void exit(){
-		System.exit(0);
 	}
 }
