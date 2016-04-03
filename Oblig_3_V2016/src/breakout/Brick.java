@@ -129,15 +129,17 @@ public class Brick implements Settings {
 	}
 
 	public void reset(){
+		setUnbreakable(false);
+		setDurability(ONE_HIT);
+		setProtection(false);
+		destroyed = false;
 		bricks = new FadeTransition(Duration.millis(100), rectangle);
 		bricks.setFromValue(0.0);
 		bricks.setToValue(1.0);
 		bricks.play();
 		rectangle.setDisable(false);
 		//rectangle.setVisible(true);
-		setUnbreakable(false);
-		setDurability(ONE_HIT);
-		setProtection(false);
+
 	}
 
 	/**
