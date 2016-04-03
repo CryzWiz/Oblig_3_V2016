@@ -14,7 +14,7 @@ public class Brick implements Settings {
 	private Brick[] closeBricks = new Brick[2];
 	private Rectangle rectangle;
 	private FadeTransition fader;
-	private boolean isDestroyed = false, isProtected = false, unbreakable = false;
+	private boolean destroyed = false, protection = false, unbreakable = false;
 	private int durability = SINGLE_HIT;
 
 	public Brick(int posX, int posY) {
@@ -81,7 +81,7 @@ public class Brick implements Settings {
 		return isInMaxRangeX(ball) && isInMaxRangeY(ball);
 	}
 	public boolean isDestroyed() {
-		return isDestroyed;
+		return destroyed;
 	}
 	
 	private boolean hasBrickOnRight(){
@@ -131,7 +131,7 @@ public class Brick implements Settings {
 				fader.play();
 				//rectangle.setDisable(true);
 				//rectangle.setVisible(false);
-				isDestroyed = true;
+				destroyed = true;
 			}
 		} else {
 			decreaseDurability();
@@ -139,23 +139,25 @@ public class Brick implements Settings {
 	}
 
 	public void reset(){
+		setUnbreakable(false);
+		setDurability(SINGLE_HIT);
+		setProtection(false);
+		destroyed = false;
 		fader = new FadeTransition(Duration.millis(100), rectangle);
 		fader.setFromValue(0.0);
 		fader.setToValue(1.0);
 		fader.play();
 		rectangle.setDisable(false);
-		//rectangle.setVisible(true);
-		isDestroyed = false;
 	}
 
 	/**
 	 * Protection from random destruction
 	 */
 	public void setProtection(boolean protection) {
-		isProtected = protection;
+		this.protection = protection;
 	}
 	public boolean isProtected() {
-		return isProtected;
+		return protection;
 	}
 	
 	public void setUnbreakable(boolean unbreakable) {
