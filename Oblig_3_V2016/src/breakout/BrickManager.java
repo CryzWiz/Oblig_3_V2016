@@ -130,7 +130,7 @@ public class BrickManager implements Settings {
 		collision(ball);
 		if (levelCleared()) {
 			setNextLevel();
-			gManager.levelCleared();
+			gManager.nextLevel();
 		}
 	}
 
