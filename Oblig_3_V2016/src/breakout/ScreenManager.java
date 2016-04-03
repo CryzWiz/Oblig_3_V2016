@@ -102,8 +102,12 @@ public class ScreenManager implements Settings {
 		shadowLayer.setOpacity(SHADOW_OPACITY);
 		pauseLayer = new StackPane(pauseText);
 		victoryLayer = new StackPane(victoryText);
+		//Victoryscreen
+		Highscore.loadScores();
+		Highscore.drawScores(victoryLayer);
 		gameScreen = new StackPane(playLayer, shadowLayer, timerLayer, pauseLayer, victoryLayer, lvls, nextLevelLayer);
 		gameScreen.setBackground(BACKGROUND);
+
 		
 		//GameOver Pane
 		endScreen = new StackPane(endText);

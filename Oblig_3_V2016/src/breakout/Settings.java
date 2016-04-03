@@ -20,6 +20,7 @@ public interface Settings {
 
 	Font FONT_TEXT = Font.font(48);
 	Font FONT_TIMER = Font.font(30);
+	Font FONT_SCORES = Font.font(28);
 	Font FONT_BUTTON = Font.font(20);
 	Font FONT_LVL_BUTTON = Font.font(20);
     
@@ -45,6 +46,8 @@ public interface Settings {
 	double LEVELICONS_OPACITY_OFF = 1.0;
 
 	double SHADOW_OPACITY = 0.7;
+	
+	String HIGHSCORE_FILE = "highscores.txt";
 	
 	int PADDLE_HEIGHT = 10;
 	int PADDLE_WIDTH = 200;
