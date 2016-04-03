@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 public enum Level {
 	ONE(1, 20, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 5, BRICK_COLORS_LVL3), VICTORY(4, 0,BRICK_COLORS_LVL1);
 
-	private static Level level = ONE;
+	private static Level level = TWO;
 	int value;
 	int removePercentage;
 	Color[] brickColors;
@@ -63,8 +63,10 @@ public enum Level {
 		case TWO:
 			if (col < BRICK_COLUMNS / 2) {
 				if (row == col) {
+					// Durable bricks
 					brick.setFill(brickColors[0]);
 					brick.setProtection(true);
+					brick.setDurability(DOUBLE_HIT);
 				} else if (col - row == 1 || row - col == 1) {
 					brick.setFill(brickColors[1]);
 					brick.setProtection(true);
@@ -76,8 +78,10 @@ public enum Level {
 				}
 			} else {
 				if (row + col == BRICK_COLUMNS - 1) {
+					// Durable bricks
 					brick.setFill(brickColors[0]);
 					brick.setProtection(true);
+					brick.setDurability(DOUBLE_HIT);
 				} else if (row + col == 13 || row + col == 15) {
 					brick.setFill(brickColors[1]);
 					brick.setProtection(true);
