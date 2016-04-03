@@ -52,9 +52,6 @@ public class ScreenManager implements Settings {
 		Text menuText = new Text("Breakout - The Game");
 		menuText.setFill(TEXT_COLOR);
 		menuText.setFont(FONT_TEXT);
-		Text victoryText = new Text("Victory!");
-		victoryText.setFill(TEXT_COLOR);
-		victoryText.setFont(FONT_TEXT);
 		Text nextLevelText = new Text("Congratulations - Level cleared!");
 		nextLevelText.setFill(TEXT_COLOR);
 		nextLevelText.setFont(FONT_TEXT);
@@ -101,7 +98,7 @@ public class ScreenManager implements Settings {
 		shadowLayer = new StackPane(shadow);
 		shadowLayer.setOpacity(SHADOW_OPACITY);
 		pauseLayer = new StackPane(pauseText);
-		victoryLayer = new StackPane(victoryText);
+		victoryLayer = new StackPane();
 		//Victoryscreen
 		Highscore.loadScores();
 		Highscore.drawScores(victoryLayer);
