@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 
 public interface Settings {
 	boolean BALL_GRAVITY_ON = true;
-	boolean BOUNCE_ON_BOT = true;
+	boolean BOUNCE_ON_BOT = false;
 	boolean ALLOW_TILT = true;
 
 	int MILLIS_PER_FRAME = 10; //Lower speed + higher frame rate = same look, more precision, higher CPU load
@@ -24,9 +24,8 @@ public interface Settings {
 	Font FONT_LVL_BUTTON = Font.font(20);
     
     Color[] BRICK_COLORS_LVL1 = {Color.BLUE, Color.GREEN, Color.YELLOW, Color.RED};
-//    Color[] BRICK_COLORS_LVL3 = {Color.DEEPSKYBLUE, Color.PALETURQUOISE, Color.PURPLE, Color.AQUA};
     Color[] BRICK_COLORS_LVL2 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
-    Color[] BRICK_COLORS_LVL3 = {Color.BLUE, Color.ALICEBLUE, Color.CORNFLOWERBLUE, Color.PALETURQUOISE};
+    Color[] BRICK_COLORS_LVL3 = {Color.PURPLE, Color.ALICEBLUE};
     Color UNBREAKABLE_BRICK_COLOR = Color.GRAY;
 
     Color BACKGROUND_COLOR = Color.BLACK;

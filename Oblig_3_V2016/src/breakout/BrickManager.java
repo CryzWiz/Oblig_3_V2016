@@ -76,7 +76,6 @@ public class BrickManager implements Settings {
 			for(int col = 0; col < BRICK_COLUMNS; col++){
 				bricks[row][col].reset();
 				setBrickColor(bricks[row][col], row, col);
-				
 			}
 		}
 	}
