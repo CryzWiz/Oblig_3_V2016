@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 
 public enum Level {
 	ONE(1, 20, BRICK_COLORS_LVL1), TWO(2, 15, BRICK_COLORS_LVL2), THREE(3, 99, BRICK_COLORS_LVL3), VICTORY(4, 0,BRICK_COLORS_LVL1);
-	private static Level level = THREE;
+	private static Level level = ONE;
 	int value;
 	int removePercentage;
 	Color[] brickColors;
