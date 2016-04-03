@@ -9,18 +9,17 @@ import javafx.util.Duration;
 
 public class Timer implements Comparable<Timer>{
 	private Timeline timer;
-	private long totalSeconds;
+	private long totalMillis;
 	private Text text;
 
 	public Timer(Text timerText) {
 		text = timerText;
-		timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> update()));
+		timer = new Timeline(new KeyFrame(Duration.millis(1), e -> update()));
 		timer.setCycleCount(Timeline.INDEFINITE);
 	}
 
 	public void update() {
-		totalSeconds++;
-		//screenManager.setTimerText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+		totalMillis++;
 		if(text != null)
 			text.setText(toString());
 	}
@@ -31,32 +30,31 @@ public class Timer implements Comparable<Timer>{
 		timer.pause();
 	}
 	public void reset() {
-		totalSeconds = 0;
+		totalMillis = 0;
 		update();
 	}
 	
 	public String toString(){
-		long hours = totalSeconds / 3600;
-		long minutes = (totalSeconds % 3600) / 60;
-		long seconds = totalSeconds % 60;
-		return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+		int seconds = (int)(totalMillis / 1000) % 60;
+		int minutes = (int)(totalMillis / (1000 * 60));
+		int millis = (int)(totalMillis % 1000);
+
+		return String.format("%02d:%02d:%d", minutes, seconds, millis);
 	}
 	
 	public static Timer parse(String dateString) throws ParseException{
 		Timer timer = new Timer(null);
 		timer.pause();
 		String[] stringParts = dateString.split(":");
-		timer.totalSeconds = Integer.parseInt(stringParts[0]) * 3600 + Integer.parseInt(stringParts[1]) * 60 + Integer.parseInt(stringParts[2]);
-		//Date date = sdf.parse(dateString);
-		//timer.totalSeconds = date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
+		timer.totalMillis = Integer.parseInt(stringParts[0]) * 60000 + Integer.parseInt(stringParts[1]) * 1000 + Integer.parseInt(stringParts[2]);
 		return timer;
 	}
 
 	@Override
 	public int compareTo(Timer timer) {
-		if(totalSeconds < timer.totalSeconds)
+		if(totalMillis < timer.totalMillis)
 			return -1;
-		else if(totalSeconds > timer.totalSeconds)
+		else if(totalMillis > timer.totalMillis)
 			return 1;
 		return 0;
 	}
