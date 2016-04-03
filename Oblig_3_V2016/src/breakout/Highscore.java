@@ -84,11 +84,9 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
        			scoreholder.setVvalue(50);
     		}
     	});*/
-    	scoreholder.setPrefSize(WIDTH, HEIGHT);
+    	scoreList.setPrefSize(WIDTH, HEIGHT);
     	scoreholder.setContent(scoreList);
-    	scoreList.setBackground(BACKGROUND);
-    	scoreholder.setBackground(BACKGROUND);
-    	
+  
     	VBox newScore = new VBox();
     	//newScore.setBackground(BACKGROUND);
     	Label PlayerMessage = new Label("Enter your name to be added to the Highscore list.");
@@ -97,7 +95,10 @@ public class Highscore extends StackPane implements Settings, Comparable<Highsco
     	nameField.setOnAction(null);
     	newScore.getChildren().add(nameField);
     	newScore.setAlignment(Pos.BOTTOM_CENTER);
-    	holderLarge.getChildren().addAll(scoreholder, newScore);
+    	scoreList.setBackground(BACKGROUND);
+    	scoreholder.setBackground(BACKGROUND);
+    	//newScore.setBackground(BACKGROUND);
+    	holderLarge.getChildren().addAll(scoreholder,newScore);
     	pane.getChildren().addAll(holderLarge);
     	//scoreList.setAlignment(Pos.CENTER);
     	//pane = new BorderPane(scoreList, new Text("Scores:"), null, null, null);
