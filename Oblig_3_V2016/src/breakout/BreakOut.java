@@ -14,6 +14,7 @@ import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 
 public class BreakOut extends Application implements Settings{
 	@Override
@@ -41,6 +42,9 @@ public class BreakOut extends Application implements Settings{
 				gameManager.onKeyEvent(k);
 			}
 		});
+		
+		/*scene.addEventFilter(ScrollEvent.ANY, new EventHandler<Event>() {
+		};*/
 
 		EventHandler<ActionEvent> eventHandler = e -> {
 			gameManager.tick();
