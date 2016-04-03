@@ -8,8 +8,8 @@ public class BrickManager implements Settings {
 	private int numberOfRows;
 	private int numberOfCols;
 	private int bricksLeft;
-	private static int unbreakableBricks = 0;
-	private static int protectedBricks = 0;
+	private int unbreakableBricks = 0;
+	private int protectedBricks = 0;
 	
 	public BrickManager(Pane pane) {
 		this(pane, BRICK_ROWS, BRICK_COLUMNS);
@@ -29,12 +29,23 @@ public class BrickManager implements Settings {
 				Brick brick = new Brick(setX(col), setY(row), BRICK_WIDTH, BRICK_HEIGHT);
 				bricks[row][col] = brick;
 				pane.getChildren().add(brick.getRectangle());
-				Level.getLevel().brickColor(brick, row, col);
+				setBrickColor(brick, row, col);
 				if(col > 0)
 					bricks[row][col-1].setCloseBrick(0, brick);
 				if(row > 0)
 					bricks[row-1][col].setCloseBrick(1, brick);
 			}
+		}
+	}
+	public void setBrickColor(Brick brick, int row, int col) {
+		switch(Level.brickColor(brick, row, col)) {
+		case UNBREAKABLE:
+			unbreakableBricks++;
+		case DURABLE:
+		case PROTECTED:
+			protectedBricks++;
+			break;
+		default:
 		}
 	}
 	public void destroyRandomBricks(int percentBricksToRemove) {
@@ -51,16 +62,7 @@ public class BrickManager implements Settings {
 			}
 		}
 	}
-	public static void setUnbreakableBrick(Brick brick) {
-		protectBricks(brick);
-		brick.setUnbreakable(true);
-		unbreakableBricks++;
-	}
-	public static void protectBricks(Brick brick){
-		brick.setProtection(true);
-		protectedBricks++;
-	}
-	
+
 	public void reset() {
 		unbreakableBricks = 0;
 		protectedBricks = 0;
@@ -72,8 +74,7 @@ public class BrickManager implements Settings {
 		for(int row = 0; row < BRICK_ROWS; row++){
 			for(int col = 0; col < BRICK_COLUMNS; col++){
 				bricks[row][col].reset();
-				Level.getLevel().brickColor(bricks[row][col], row, col);
-				
+				setBrickColor(bricks[row][col], row, col);
 			}
 		}
 	}
