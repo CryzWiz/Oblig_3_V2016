@@ -1,7 +1,6 @@
 package breakout;
 
 import breakout.Brick.CollisionType;
-import static breakout.Brick.BrickType.*;
 import javafx.scene.layout.Pane;
 
 public class BrickManager implements Settings {
