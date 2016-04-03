@@ -57,7 +57,7 @@ public class PlayState extends GameState {
 	@Override
 	public void tick(){
 		ballManager.tick();
-		if (brickManager.levelCleared()) {
+		if (brickManager.levelCleared()){
 			brickManager.setNextLevel();
 			if(Level.getLevel() == Level.VICTORY)
 				gameManager.victory();
