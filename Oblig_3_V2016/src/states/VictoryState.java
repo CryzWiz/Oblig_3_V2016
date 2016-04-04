@@ -10,7 +10,7 @@ public class VictoryState extends GameState {
 	}
 	
 	@Override
-	public void onTabPress(){
+	public void onEnterPress(){
 		Highscore.submit(timer);
 		Highscore.saveScores(breakout.Settings.HIGHSCORE_FILE);
 		gameManager.menu();

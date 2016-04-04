@@ -33,6 +33,7 @@ public abstract class GameState {
 	public void onMouseEvent(MouseEvent m){
 	}
 	
+	public void onEnterPress(){}
 	public void onEscPress(){}
 	public void onSpacePress(){}
 	public void onTabPress(){}

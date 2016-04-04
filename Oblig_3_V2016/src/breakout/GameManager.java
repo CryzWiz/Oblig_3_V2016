@@ -9,7 +9,8 @@ public class GameManager implements Settings {
 
 	public GameManager(ScreenManager sm) {
 		GameState.setStatics(this, sm);
-		state = new MenuState();
+		//state = new MenuState();
+		state = new VictoryState();
 	}
 
 	public void onMouseEvent(MouseEvent m){
@@ -26,6 +27,9 @@ public class GameManager implements Settings {
 					break;
 				case TAB:
 					state.onTabPress();
+					break;
+				case ENTER:
+					state.onEnterPress();
 					break;
 			default:
 				break;
