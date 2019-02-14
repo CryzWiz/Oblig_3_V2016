@@ -1,3 +1,3 @@
 # Oblig_3_V2016
 
-Class exercise
+Class exercise - Breakout the game.
